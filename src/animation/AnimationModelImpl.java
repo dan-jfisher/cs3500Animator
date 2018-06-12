@@ -15,6 +15,10 @@ public class AnimationModelImpl implements AnimationModel {
   HashMap<String, AnimatedShape> shapes;
   List<Change> changes;
 
+  public static final class Builder implements TweenModelBuilder<AnimationModel> {
+
+  }
+
   public AnimationModelImpl() {
     changes = new ArrayList<>();
     shapes = new HashMap<>();
