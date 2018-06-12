@@ -13,61 +13,61 @@ public class AnimationModelTest {
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest1() {
     AnimationModel model = new AnimationModelImpl();
-    model.addRectangle(0,0,-1, 1, 0, 10, new Color(10,10,10));
+    model.addRectangle("s",0,0,-1, 1, 0, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest2() {
     AnimationModel model = new AnimationModelImpl();
-    model.addRectangle(0,0,6, 1, 10, 5, new Color(10,10,10));
+    model.addRectangle("s",0,0,6, 1, 10, 5, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest3() {
     AnimationModel model = new AnimationModelImpl();
-    model.addRectangle(0,0,3, 2, -1, 10, new Color(10,10,10));
+    model.addRectangle("s",0,0,3, 2, -1, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest4() {
     AnimationModel model = new AnimationModelImpl();
-    model.addRectangle(0,0,4, 4, 0, 10, null);
+    model.addRectangle("s",0,0,4, 4, 0, 10, null);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest1() {
     AnimationModel model = new AnimationModelImpl();
-    model.addEllipse(0,0,1, -1, 0, 10, new Color(10,10,10));
+    model.addEllipse("s",0,0,1, -1, 0, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest2() {
     AnimationModel model = new AnimationModelImpl();
-    model.addEllipse(0,0,6, 1, 10, 5, new Color(10,10,10));
+    model.addEllipse("s",0,0,6, 1, 10, 5, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest3() {
     AnimationModel model = new AnimationModelImpl();
-    model.addEllipse(0,0,3, 2, -1, 10, new Color(10,10,10));
+    model.addEllipse("s",0,0,3, 2, -1, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest4() {
     AnimationModel model = new AnimationModelImpl();
-    model.addEllipse(0,0,4, 4, 0, 10, null);
+    model.addEllipse("s",0,0,4, 4, 0, 10, null);
   }
 
   @Test
   public void ModelDescriptionTest1() {
     AnimationModel model = new AnimationModelImpl();
-    model.addEllipse(0,0,4,6,0,25, new Color(10,20,20));
-    model.addRectangle(7,9,10,25,50, 100, new Color(70, 50, 30));
-    model.storeMove(0, new Point2D(5,5), 5, 25);
-    model.storeMove(1, new Point2D(50,50), 65, 80);
-    model.storeColorChange(0, new Color(50, 50, 50), 0, 10);
+    model.addEllipse("s",0,0,4,6,0,25, new Color(10,20,20));
+    model.addRectangle("s",7,9,10,25,50, 100, new Color(70, 50, 30));
+    model.storeMove("s", new Point2D(5,5), 5, 25);
+    model.storeMove("s", new Point2D(50,50), 65, 80);
+    model.storeColorChange("s", new Color(50, 50, 50), 0, 10);
 
-    model.storeScale(1, 80, 100, 2, 4);
+    model.storeScale("s", 80, 100, 2, 4);
 
     assertEquals("Type: Oval\n" +
             "Center: (0.0, 0.0), xRadius: 4.0, yRadius: 6.0, Color: (10, 20, 20)\n" +

@@ -32,7 +32,7 @@ public interface AnimationModel {
    * @param startTime the start of the change.
    * @param endTime the end of the change.
    */
-  void storeMove(int id, Point2D end, int startTime, int endTime);
+  void storeMove(String id, Point2D end, int startTime, int endTime);
 
   /**
    * This function stores a Scale and applies it to the relevant shape.
@@ -41,7 +41,7 @@ public interface AnimationModel {
    * @param endTime the end of the change.
    * @param dims the dimensions to be changed to.
    */
-  void storeScale(int id, int startTime, int endTime, double ... dims);
+  void storeScale(String id, int startTime, int endTime, double ... dims);
 
   /**
    * This function stores a color change and applies it to the relevant shape.
@@ -50,7 +50,7 @@ public interface AnimationModel {
    * @param startTime the start of the change.
    * @param endTime the end of the change.
    */
-  void storeColorChange(int id, Color endColor, int startTime, int endTime);
+  void storeColorChange(String id, Color endColor, int startTime, int endTime);
 
   /**
    * Add a new Rectangle object to the model.
@@ -62,7 +62,8 @@ public interface AnimationModel {
    * @param endTime the time when it disappears.
    * @param color the color of the rectangle when it appears.
    */
-  void addRectangle(double x, double y,
+  void addRectangle(String id,
+                    double x, double y,
                     double width, double height,
                     int startTime, int endTime,
                     Color color);
@@ -77,7 +78,8 @@ public interface AnimationModel {
    * @param endTime the time when it disappears.
    * @param color the color of the ellipse when it appears.
    */
-  void addEllipse(double x, double y,
+  void addEllipse(String id,
+                  double x, double y,
                   double xRadius, double yRadius,
                   int startTime, int endTime,
                   Color color);

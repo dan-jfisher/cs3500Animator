@@ -29,7 +29,7 @@ public interface Change extends Comparable<Change> {
    * This returns the id of the shape that this change was applied to.
    * @return the id as an int.
    */
-  int getID();
+  String getID();
 
   /**
    * Return the type of change in enum format.

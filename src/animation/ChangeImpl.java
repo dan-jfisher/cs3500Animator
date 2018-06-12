@@ -8,7 +8,7 @@ public class ChangeImpl implements Change {
   private int startTime;
   private int endTime;
   private ChangeType type;
-  private int id;
+  private String id;
 
   private Shape startShape;
   private Shape endShape;
@@ -20,7 +20,7 @@ public class ChangeImpl implements Change {
    * @param end the time when the shape disappears.
    * @param type the type of change it represents.
    */
-  public ChangeImpl(int id, int start, int end, ChangeType type) {
+  public ChangeImpl(String id, int start, int end, ChangeType type) {
     startTime = start;
     endTime = end;
     this.type = type;
@@ -45,7 +45,7 @@ public class ChangeImpl implements Change {
   }
 
   @Override
-  public int getID() {
+  public String getID() {
     return this.id;
   }
 

@@ -3,6 +3,7 @@ package animation;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import shapes.Ellipse;
@@ -11,20 +12,20 @@ import shapes.Rectangle;
 import shapes.Shape;
 
 public class AnimationModelImpl implements AnimationModel {
-  List<AnimatedShape> shapes;
+  HashMap<String, AnimatedShape> shapes;
   List<Change> changes;
 
   public AnimationModelImpl() {
     changes = new ArrayList<>();
-    shapes = new ArrayList<>();
+    shapes = new HashMap<>();
   }
 
   @Override
   public String getAnimationDescription() {
     StringBuilder description = new StringBuilder();
 
-    for (AnimatedShape shape : shapes) {
-      description.append(shape.getDescription());
+    for (String key : shapes.keySet()) {
+      description.append(shapes.get(key).getDescription());
       description.append("\n");
     }
 
@@ -41,9 +42,9 @@ public class AnimationModelImpl implements AnimationModel {
   public List<Shape> getShapesAt(int time) {
     List<Shape> currentShapes = new ArrayList<>();
 
-    for (AnimatedShape shape : shapes) {
-      if (shape.getStartTime() <= time && shape.getEndTime() >= time) {
-        currentShapes.add(shape.getShapeAt(time));
+    for (String key : shapes.keySet()) {
+      if (shapes.get(key).getStartTime() <= time && shapes.get(key).getEndTime() >= time) {
+        currentShapes.add(shapes.get(key).getShapeAt(time));
       }
     }
 
@@ -51,55 +52,64 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void storeMove(int id, Point2D end, int startTime, int endTime) {
-    if (id < 0 || id >= shapes.size()) {
+  public void storeMove(String id, Point2D end, int startTime, int endTime) {
+    AnimatedShape s = shapes.get(id);
+
+    if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
+
     Change move = new ChangeImpl(id, startTime, endTime, Change.ChangeType.MOVE);
-    shapes.get(id).applyMove(move, end);
+    s.applyMove(move, end);
 
     changes.add(move);
   }
 
   @Override
-  public void storeScale(int id, int startTime, int endTime, double ... dims) {
-    if (id < 0 || id >= shapes.size()) {
+  public void storeScale(String id, int startTime, int endTime, double ... dims) {
+    AnimatedShape s = shapes.get(id);
+
+    if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
     Change scale = new ChangeImpl(id, startTime, endTime, Change.ChangeType.SCALE);
-    shapes.get(id).applyScale(scale, dims);
+    s.applyScale(scale, dims);
 
     changes.add(scale);
   }
 
   @Override
-  public void storeColorChange(int id, Color endColor, int startTime, int endTime) {
-    if (id < 0 || id >= shapes.size()) {
+  public void storeColorChange(String id, Color endColor, int startTime, int endTime) {
+    AnimatedShape s = shapes.get(id);
+
+    if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
     Change color = new ChangeImpl(id, startTime, endTime, Change.ChangeType.COLOR);
-    shapes.get(id).applyColorChange(color, endColor);
+    s.applyColorChange(color, endColor);
 
     changes.add(color);
   }
 
   @Override
-  public void addRectangle(double x, double y,
+  public void addRectangle(String id,
+                           double x, double y,
                            double width, double height,
                            int startTime, int endTime,
                            Color color) {
-    shapes.add(new AnimatedShapeImpl(new Rectangle(width, height, x, y, color),
+    shapes.put(id, new AnimatedShapeImpl(new Rectangle(width, height, x, y, color),
             startTime, endTime));
   }
 
   @Override
-  public void addEllipse(double x, double y,
+  public void addEllipse(String id,
+                         double x, double y,
                          double xRadius, double yRadius,
                          int startTime, int endTime,
                          Color color) {
-    shapes.add(new AnimatedShapeImpl(new Ellipse(xRadius, yRadius, x, y, color),
+    shapes.put(id, new AnimatedShapeImpl(new Ellipse(xRadius, yRadius, x, y, color),
             startTime, endTime));
   }
 }
