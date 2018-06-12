@@ -8,7 +8,7 @@ import shapes.Shape;
  * This interface represents a change that can be applied to an AnimatedShape.
  * These currently include move, color, and scale.
  */
-public interface Change extends Comparable<Change>, Serializable {
+public interface IChange extends Comparable<IChange>, Serializable {
 
   /**
    * This enum represents the type of change being represented.

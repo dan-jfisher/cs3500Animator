@@ -10,7 +10,6 @@ public class Ellipse extends AbstractShape {
   protected double xRadius;
   protected double yRadius;
 
-
   /**
    * This is the ellipse constructor.
    * @param xRad horizontal radius.
@@ -24,8 +23,9 @@ public class Ellipse extends AbstractShape {
     if (xRad < 0 || yRad < 0) {
       throw new IllegalArgumentException("Illegal Shape dimensions");
     }
-    xRadius = xRad;
-    yRadius = yRad;
+    this.xRadius = xRad;
+    this.yRadius = yRad;
+    this.shapeType = Shape.ELLIPSE;
   }
 
   /**
@@ -59,7 +59,7 @@ public class Ellipse extends AbstractShape {
   }
 
   @Override
-  public Shape clone() {
+  public IShape clone() {
     return new Ellipse(xRadius, yRadius, location.getX(), location.getY(), color);
   }
 

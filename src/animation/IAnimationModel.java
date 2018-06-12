@@ -10,7 +10,7 @@ import shapes.Shape;
 /**
  * This interface describes a model for animating shapes.  It accepts Ellipses and Rectangles.
  */
-public interface AnimationModel {
+public interface IAnimationModel {
 
   /**
    * This function describes the objects and moves that make up the animation.
