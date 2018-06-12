@@ -1,11 +1,12 @@
 package shapes;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * This interface defines a shape. It extends the Cloneable interface and contains a clone method
  */
-public interface Shape extends Cloneable {
+public interface Shape extends Cloneable, Serializable {
 
   /**
    * Sets the color of the shape.

@@ -1,6 +1,7 @@
 package animation;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import shapes.Shape;
  * this objects state at any given time.  It also has a List of the start and end time of
  * each move that has been applied to it.
  */
-public class AnimatedShapeImpl implements AnimatedShape {
+public class AnimatedShapeImpl implements AnimatedShape, Serializable {
 
   HashMap<Integer, Shape> timeline;
 

@@ -85,4 +85,19 @@ public class AnimationModelTest {
             " Height: 25.0 to Width: 2.0, Height: 4.0 from t=80 to t=100",
             model.getAnimationDescription());
   }
+
+  @Test
+  public void ModelBuilderTest1() {
+    AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
+    builder.addOval("oval", 0, 0, 1, 2, 0, 0, 0, 0, 300);
+
+    AnimationModel model = builder.build();
+
+    builder.addMove("oval", 0,0,25, 25, 0, 100);
+
+    assertEquals("Type: Oval\n" +
+            "Center: (0.0, 0.0), xRadius: 1.0, yRadius: 2.0, Color: (0, 0, 0)\n" +
+            "Appears at t=0\n" +
+            "Disappears at t=300\n", model.getAnimationDescription());
+  }
 }

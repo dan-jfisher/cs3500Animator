@@ -1,6 +1,11 @@
 package animation;
 
 import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,13 +15,65 @@ import shapes.Ellipse;
 import shapes.Point2D;
 import shapes.Rectangle;
 import shapes.Shape;
+import util.TweenModelBuilder;
 
-public class AnimationModelImpl implements AnimationModel {
+public class AnimationModelImpl implements AnimationModel, Serializable {
   HashMap<String, AnimatedShape> shapes;
   List<Change> changes;
 
   public static final class Builder implements TweenModelBuilder<AnimationModel> {
 
+    AnimationModel model = new AnimationModelImpl();
+
+    private static Object deepCopy(Object object) {
+      try {
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        ObjectOutputStream objOutStream = new ObjectOutputStream(outStream);
+        objOutStream.writeObject(object);
+        ByteArrayInputStream inStream = new ByteArrayInputStream(outStream.toByteArray());
+        ObjectInputStream objInStream = new ObjectInputStream(inStream);
+        return objInStream.readObject();
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+        return null;
+      }
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModel> addOval(String name, float cx, float cy, float xRadius, float yRadius, float red, float green, float blue, int startOfLife, int endOfLife) {
+      model.addEllipse(name, cx, cy, xRadius, yRadius, startOfLife, endOfLife, new Color(red, green, blue));
+      return this;
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModel> addRectangle(String name, float lx, float ly, float width, float height, float red, float green, float blue, int startOfLife, int endOfLife) {
+      model.addRectangle(name, lx, ly, width, height, startOfLife, endOfLife, new Color(red, green, blue));
+      return this;
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModel> addMove(String name, float moveFromX, float moveFromY, float moveToX, float moveToY, int startTime, int endTime) {
+      model.storeMove(name, new Point2D(moveToX, moveToY), startTime, endTime);
+      return this;
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModel> addColorChange(String name, float oldR, float oldG, float oldB, float newR, float newG, float newB, int startTime, int endTime) {
+      model.storeColorChange(name, new Color(newR, newG, newB), startTime, endTime);
+      return this;
+    }
+
+    @Override
+    public TweenModelBuilder<AnimationModel> addScaleToChange(String name, float fromSx, float fromSy, float toSx, float toSy, int startTime, int endTime) {
+      model.storeScale(name, startTime, endTime, toSx, toSy);
+      return this;
+    }
+
+    @Override
+    public AnimationModel build() {
+      return (AnimationModel) deepCopy(model);
+    }
   }
 
   public AnimationModelImpl() {

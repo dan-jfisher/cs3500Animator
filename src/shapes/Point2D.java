@@ -1,6 +1,8 @@
 package shapes;
 
-public final class Point2D {
+import java.io.Serializable;
+
+public final class Point2D implements Serializable {
   private double x;
   private double y;
 

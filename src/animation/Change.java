@@ -1,12 +1,14 @@
 package animation;
 
+import java.io.Serializable;
+
 import shapes.Shape;
 
 /**
  * This interface represents a change that can be applied to an AnimatedShape.
  * These currently include move, color, and scale.
  */
-public interface Change extends Comparable<Change> {
+public interface Change extends Comparable<Change>, Serializable {
 
   /**
    * This enum represents the type of change being represented.
