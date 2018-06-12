@@ -1,4 +1,4 @@
 package cs3500.animator.view;
 
-public class ViewText {
+public class ViewText extends TextBasedView {
 }
