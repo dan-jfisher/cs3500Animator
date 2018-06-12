@@ -3,42 +3,42 @@ package animation;
 import java.awt.Color;
 
 import shapes.Point2D;
-import shapes.Shape;
+import shapes.IShape;
 
 /**
  * This interface defines a shape that can be changed and animated.
  * It can be moved, its color can be changed, and it can be scaled.
  */
-public interface AnimatedShape {
+public interface IAnimatedShape {
 
   /**
-   * This returns a {@link Shape} object that represents it's state at the given time.
+   * This returns a {@link IShape} object that represents it's state at the given time.
    * @param time represents said time.
-   * @return the Shape's state at that time.
+   * @return the IShape's state at that time.
    */
-  Shape getShapeAt(int time);
+  IShape getShapeAt(int time);
 
   /**
    * Apply a move over the given time frame.
    * @param end the location being moved to.
-   * @param change {@link Change} change being applied
+   * @param change {@link IChange} change being applied
    */
-  void applyMove(Change change, Point2D end);
+  void applyMove(IChange change, Point2D end);
 
   /**
    * Apply a color change over the given time frame.
    * @param endColor the Color at the end of the change.
-   * @param change {@link Change} change being applied
+   * @param change {@link IChange} change being applied
    */
-  void applyColorChange(Change change, Color endColor);
+  void applyColorChange(IChange change, Color endColor);
 
   /**
    * Apply a scaling change over the given time frame.
-   * @param change {@link Change} change being applied
+   * @param change {@link IChange} change being applied
    * @param dims The dimensions for the shape to be changed to
    *             This is up to the implementation
    */
-  void applyScale(Change change, double ... dims);
+  void applyScale(IChange change, double ... dims);
 
   /**
    * Get the text description of the shape when it was first created.

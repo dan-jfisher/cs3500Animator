@@ -8,18 +8,18 @@ import java.util.List;
 
 import shapes.Point2D;
 import shapes.Rectangle;
-import shapes.Shape;
+import shapes.IShape;
 
 /**
- * This class implements Animated Shape.  It holds a timeline of shapes corresponding to
+ * This class implements Animated IShape.  It holds a timeline of shapes corresponding to
  * this objects state at any given time.  It also has a List of the start and end time of
  * each move that has been applied to it.
  */
-public class AnimatedShapeImpl implements AnimatedShape, Serializable {
+public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
-  HashMap<Integer, Shape> timeline;
+  HashMap<Integer, IShape> timeline;
 
-  private List<Change> changes;
+  private List<IChange> changes;
 
   int startOfAnimation;
   int endOfAnimation;
@@ -34,11 +34,11 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
 
   /**
    * Constructor that takes initial state and start/end times.
-   * @param startShape The initial state of the {@link Shape}.
+   * @param startShape The initial state of the {@link IShape}.
    * @param start the time the shape appears.
    * @param end the time the shape disappears.
    */
-  public AnimatedShapeImpl(Shape startShape, int start, int end) {
+  public AnimatedShapeImpl(IShape startShape, int start, int end) {
     if (start < 0 || end < start) {
       throw new IllegalArgumentException("Invalid time frame");
     }
@@ -71,18 +71,18 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
   }
 
   @Override
-  public Shape getShapeAt(int time) {
+  public IShape getShapeAt(int time) {
     return getLastValidShape(time);
   }
 
   @Override
-  public void applyMove(Change change, Point2D end) {
+  public void applyMove(IChange change, Point2D end) {
     int startTime = change.getStartTime();
     int endTime = change.getEndTime();
 
     checkTimeFrame(change);
-    Shape nextShape = null;
-    Shape currentShape = getLastValidShape(startTime);
+    IShape nextShape = null;
+    IShape currentShape = getLastValidShape(startTime);
     Point2D currentShapeLocation = currentShape.getLocation();
     double xStep = (end.getX() - currentShapeLocation.getX()) / (endTime - startTime);
     double yStep = (end.getY() - currentShapeLocation.getY()) / (endTime - startTime);
@@ -107,13 +107,13 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
   }
 
   @Override
-  public void applyColorChange(Change change, Color endColor) {
+  public void applyColorChange(IChange change, Color endColor) {
     int startTime = change.getStartTime();
     int endTime = change.getEndTime();
 
     checkTimeFrame(change);
-    Shape nextShape = null;
-    Shape currentShape = getLastValidShape(startTime);
+    IShape nextShape = null;
+    IShape currentShape = getLastValidShape(startTime);
     Color currentColor = currentShape.getColor();
 
     int currRed = currentColor.getRed();
@@ -152,21 +152,21 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
   }
 
   @Override
-  public void applyScale(Change change, double ... dims) {
+  public void applyScale(IChange change, double ... dims) {
     int startTime = change.getStartTime();
     int endTime = change.getEndTime();
 
     checkTimeFrame(change);
 
-    Shape nextShape = null;
-    Shape currentShape = getLastValidShape(startTime);
+    IShape nextShape = null;
+    IShape currentShape = getLastValidShape(startTime);
 
-    double[] dimChange = getShapeAt(startTime).getDifferenceInDimensions(dims);
-    double[] dimSteps = new double[dimChange.length];
-    double[] scaleDim = new double[dimChange.length];
+    double[] dimIChange = getShapeAt(startTime).getDifferenceInDimensions(dims);
+    double[] dimSteps = new double[dimIChange.length];
+    double[] scaleDim = new double[dimIChange.length];
     double[] currDim;
-    for (int i = 0; i < dimChange.length; i++) {
-      dimSteps[i] = dimChange[i] / (endTime - startTime);
+    for (int i = 0; i < dimIChange.length; i++) {
+      dimSteps[i] = dimIChange[i] / (endTime - startTime);
     }
 
     for (int j = startTime; j < endTime; j++) {
@@ -190,9 +190,9 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
   /**
    * This checks whether or not the startTime and endTime is valid
    * and if it overlaps with any other similar changes.
-   * @param change {@link Change} being applied
+   * @param change {@link IChange} being applied
    */
-  protected void checkTimeFrame(Change change) {
+  protected void checkTimeFrame(IChange change) {
     int startTime = change.getStartTime();
     int endTime = change.getEndTime();
 
@@ -215,7 +215,7 @@ public class AnimatedShapeImpl implements AnimatedShape, Serializable {
     }
   }
 
-  protected Shape getLastValidShape(int time) {
+  protected IShape getLastValidShape(int time) {
     if (timeline.get(time) == null) {
       timeline.put(time, getLastValidShape(time - 1));
     }

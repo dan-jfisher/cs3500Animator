@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * This interface defines a shape. It extends the Cloneable interface and contains a clone method
  */
-public interface Shape extends Cloneable, Serializable {
+public interface IShape extends Cloneable, Serializable {
 
   /**
    * Sets the color of the shape.
@@ -43,7 +43,7 @@ public interface Shape extends Cloneable, Serializable {
    * Creates a new copy of this shape.
    * @return The copy.
    */
-  Shape clone();
+  IShape clone();
 
   /**
    * This creates a string containing a description of the shapes fields.

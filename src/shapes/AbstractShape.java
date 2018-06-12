@@ -3,12 +3,13 @@ package shapes;
 import java.awt.Color;
 
 /**
- * This abstract class implements {@link Shape}
+ * This abstract class implements {@link IShape}
  * It has a location and a color, but no dimensions.
  */
-public abstract class AbstractShape implements Shape {
+public abstract class AbstractShape implements IShape {
   protected Point2D location;
   protected Color color;
+  protected ShapeType shapeType;
 
   /**
    * This is the constructor for an abstract shape.  It will be used by extensions of this class.
@@ -40,5 +41,5 @@ public abstract class AbstractShape implements Shape {
     return color;
   }
 
-  public abstract Shape clone();
+  public abstract IShape clone();
 }

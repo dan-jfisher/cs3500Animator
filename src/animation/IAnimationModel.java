@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.util.List;
 
 import shapes.Point2D;
-import shapes.Shape;
+import shapes.IShape;
 
 
 /**
  * This interface describes a model for animating shapes.  It accepts Ellipses and Rectangles.
  */
-public interface AnimationModel {
+public interface IAnimationModel {
 
   /**
    * This function describes the objects and moves that make up the animation.
@@ -19,11 +19,11 @@ public interface AnimationModel {
   String getAnimationDescription();
 
   /**
-   * This function returns the {@link Shape} available at the given time.
+   * This function returns the {@link IShape} available at the given time.
    * @param time The time in question.
    * @return a List of shapes.
    */
-  List<Shape> getShapesAt(int time);
+  List<IShape> getShapesAt(int time);
 
   /**
    * This function stores a Move and applies it to the relevant shape.

@@ -26,6 +26,7 @@ public class Rectangle extends AbstractShape {
     }
     this.width = width;
     this.height = height;
+    this.shapeType = ShapeType.RECTANGLE;
   }
 
   /**
@@ -59,7 +60,7 @@ public class Rectangle extends AbstractShape {
   }
 
   @Override
-  public Shape clone() {
+  public IShape clone() {
     return new Rectangle(width, height, location.getX(), location.getY(), color);
   }
 

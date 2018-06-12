@@ -2,16 +2,16 @@ package animation;
 
 import java.text.DecimalFormat;
 
-import shapes.Shape;
+import shapes.IShape;
 
-public class ChangeImpl implements Change {
+public class ChangeImpl implements IChange {
   private int startTime;
   private int endTime;
   private ChangeType type;
   private String id;
 
-  private Shape startShape;
-  private Shape endShape;
+  private IShape startShape;
+  private IShape endShape;
 
   /**
    * This is the constructor for the ChangeImpl class.
@@ -50,7 +50,7 @@ public class ChangeImpl implements Change {
   }
 
   @Override
-  public int compareTo(Change change) {
+  public int compareTo(IChange change) {
     if (this.startTime < change.getStartTime()) {
       return -1;
     } else if (this.startTime == change.getStartTime()) {
@@ -93,12 +93,12 @@ public class ChangeImpl implements Change {
   }
 
   @Override
-  public void setStartShape(Shape shape) {
+  public void setStartShape(IShape shape) {
     startShape = shape;
   }
 
   @Override
-  public void setEndShape(Shape shape) {
+  public void setEndShape(IShape shape) {
     endShape = shape;
   }
 }

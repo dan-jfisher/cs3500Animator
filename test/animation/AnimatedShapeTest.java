@@ -15,72 +15,72 @@ public class AnimatedShapeTest {
   @Test (expected = IllegalArgumentException.class)
   public void InvalidConstructorTest1() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 10, 0);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 10, 0);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidConstructorTest2() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), -1, 0);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), -1, 0);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidConstructorTest3() {
-    AnimatedShape s = new AnimatedShapeImpl(null, -1, 0);
+    IAnimatedShape s = new AnimatedShapeImpl(null, -1, 0);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidMoveTest1() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",5,5,Change.ChangeType.MOVE);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",5,5,IChange.ChangeType.MOVE);
     s.applyMove(ch, new Point2D(1,1));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidMoveTest2() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",-5,2,Change.ChangeType.MOVE);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",-5,2,IChange.ChangeType.MOVE);
     s.applyMove(ch, new Point2D(1,1));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void InvalidColorChange1() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",-5,10,Change.ChangeType.COLOR);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",-5,10,IChange.ChangeType.COLOR);
     s.applyColorChange(ch, new Color(10,10,10));
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void InvalidColorChange2() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",0,10,Change.ChangeType.COLOR);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",0,10,IChange.ChangeType.COLOR);
     s.applyColorChange(ch, new Color(10,-10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidScale1() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",1,3,Change.ChangeType.SCALE);
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",1,3,IChange.ChangeType.SCALE);
     s.applyScale(ch,3,3,3);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void InvalidScale2() {
     Color c = new Color(1);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(1,1,0,0, c), 0, 10);
-    Change ch = new ChangeImpl("s",-5,10,Change.ChangeType.SCALE);
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(1,1,0,0, c), 0, 10);
+    IChange ch = new ChangeImpl("s",-5,10,IChange.ChangeType.SCALE);
     s.applyScale(ch,-3,-1);
   }
 
   @Test
   public void validRectangleDescription() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,3,5.5, c), 0, 15);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,3,5.5, c), 0, 15);
     assertEquals("Type: Rectangle\n" +
             "Corner: (3.0, 5.5), Width: 5.0, Height: 4.0, Color: (10, 10, 10)\n" +
             "Appears at t=0\n" +
@@ -90,7 +90,7 @@ public class AnimatedShapeTest {
   @Test
   public void validEllipseDescription() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,3,5.5, c), 0, 15);
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,3,5.5, c), 0, 15);
     assertEquals("Type: Oval\n" +
             "Center: (3.0, 5.5), xRadius: 5.0, yRadius: 4.0, Color: (10, 10, 10)\n" +
             "Appears at t=0\n" +
@@ -100,8 +100,8 @@ public class AnimatedShapeTest {
   @Test
   public void validRectangleMove() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
-    s.applyMove(new ChangeImpl("s",0, 2, Change.ChangeType.MOVE), new Point2D(2,2));
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
+    s.applyMove(new ChangeImpl("s",0, 2, IChange.ChangeType.MOVE), new Point2D(2,2));
 
     assertEquals("Type: Rectangle\n" +
             "Corner: (4.0, 4.0), Width: 5.0, Height: 4.0, Color: (10, 10, 10)\n",
@@ -119,8 +119,8 @@ public class AnimatedShapeTest {
   @Test
   public void validRectangleColorChange() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
-    s.applyColorChange(new ChangeImpl("s",0, 2, Change.ChangeType.COLOR), new Color(20,0,30));
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
+    s.applyColorChange(new ChangeImpl("s",0, 2, IChange.ChangeType.COLOR), new Color(20,0,30));
 
     assertEquals("Type: Rectangle\n" +
             "Corner: (4.0, 4.0), Width: 5.0, Height: 4.0, Color: (10, 10, 10)\n",
@@ -138,8 +138,8 @@ public class AnimatedShapeTest {
   @Test
   public void validRectangleScale() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
-    s.applyScale(new ChangeImpl("s",0, 2, Change.ChangeType.SCALE), 3, 6);
+    IAnimatedShape s = new AnimatedShapeImpl(new Rectangle(5,4,4,4, c), 0, 15);
+    s.applyScale(new ChangeImpl("s",0, 2, IChange.ChangeType.SCALE), 3, 6);
 
     assertEquals("Type: Rectangle\n" +
             "Corner: (4.0, 4.0), Width: 5.0, Height: 4.0, Color: (10, 10, 10)\n",
@@ -157,8 +157,8 @@ public class AnimatedShapeTest {
   @Test
   public void validEllipseMove() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
-    s.applyMove(new ChangeImpl("s",0, 2, Change.ChangeType.MOVE), new Point2D(2,2));
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
+    s.applyMove(new ChangeImpl("s",0, 2, IChange.ChangeType.MOVE), new Point2D(2,2));
 
     assertEquals("Type: Oval\n" +
             "Center: (4.0, 4.0), xRadius: 5.0, yRadius: 4.0, Color: (10, 10, 10)\n",
@@ -176,8 +176,8 @@ public class AnimatedShapeTest {
   @Test
   public void validEllipseColorChange() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
-    s.applyColorChange(new ChangeImpl("s",0, 2, Change.ChangeType.COLOR), new Color(20,0,30));
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
+    s.applyColorChange(new ChangeImpl("s",0, 2, IChange.ChangeType.COLOR), new Color(20,0,30));
 
     assertEquals("Type: Oval\n" +
             "Center: (4.0, 4.0), xRadius: 5.0, yRadius: 4.0, Color: (10, 10, 10)\n"
@@ -195,8 +195,8 @@ public class AnimatedShapeTest {
   @Test
   public void validEllipseScale1() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
-    s.applyScale(new ChangeImpl("s",0, 2, Change.ChangeType.SCALE),3, 6);
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
+    s.applyScale(new ChangeImpl("s",0, 2, IChange.ChangeType.SCALE),3, 6);
 
     assertEquals("Type: Oval\n" +
             "Center: (4.0, 4.0), xRadius: 5.0, yRadius: 4.0, Color: (10, 10, 10)\n",
@@ -214,9 +214,9 @@ public class AnimatedShapeTest {
   @Test
   public void validEllipseScale2() {
     Color c = new Color(10,10,10);
-    AnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
-    s.applyScale(new ChangeImpl("s",0, 2, Change.ChangeType.SCALE), 3);
-    s.applyColorChange(new ChangeImpl("s",0,2,Change.ChangeType.COLOR), new Color(20,20,0));
+    IAnimatedShape s = new AnimatedShapeImpl(new Ellipse(5,4,4,4, c), 0, 15);
+    s.applyScale(new ChangeImpl("s",0, 2, IChange.ChangeType.SCALE), 3);
+    s.applyColorChange(new ChangeImpl("s",0,2,IChange.ChangeType.COLOR), new Color(20,20,0));
 
     assertEquals("Type: Oval\n" +
             "Center: (4.0, 4.0), xRadius: 5.0, yRadius: 4.0, Color: (10, 10, 10)\n",
