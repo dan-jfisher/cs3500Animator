@@ -9,7 +9,7 @@ import java.awt.Color;
 public abstract class AbstractShape implements IShape {
   protected Point2D location;
   protected Color color;
-  protected Shape shapeType;
+  protected ShapeType shapeType;
 
   /**
    * This is the constructor for an abstract shape.  It will be used by extensions of this class.

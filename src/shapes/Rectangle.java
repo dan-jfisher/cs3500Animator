@@ -26,7 +26,7 @@ public class Rectangle extends AbstractShape {
     }
     this.width = width;
     this.height = height;
-    this.shapeType = Shape.RECTANGLE;
+    this.shapeType = ShapeType.RECTANGLE;
   }
 
   /**

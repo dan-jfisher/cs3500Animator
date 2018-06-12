@@ -2,7 +2,7 @@ package animation;
 
 import java.text.DecimalFormat;
 
-import shapes.Shape;
+import shapes.IShape;
 
 public class ChangeImpl implements IChange {
   private int startTime;
@@ -10,8 +10,8 @@ public class ChangeImpl implements IChange {
   private ChangeType type;
   private String id;
 
-  private Shape startShape;
-  private Shape endShape;
+  private IShape startShape;
+  private IShape endShape;
 
   /**
    * This is the constructor for the ChangeImpl class.
@@ -93,12 +93,12 @@ public class ChangeImpl implements IChange {
   }
 
   @Override
-  public void setStartShape(Shape shape) {
+  public void setStartShape(IShape shape) {
     startShape = shape;
   }
 
   @Override
-  public void setEndShape(Shape shape) {
+  public void setEndShape(IShape shape) {
     endShape = shape;
   }
 }

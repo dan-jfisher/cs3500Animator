@@ -12,55 +12,55 @@ public class AnimationModelTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest1() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addRectangle("s",0,0,-1, 1, 0, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest2() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addRectangle("s",0,0,6, 1, 10, 5, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest3() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addRectangle("s",0,0,3, 2, -1, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalRectangleTest4() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addRectangle("s",0,0,4, 4, 0, 10, null);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest1() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addEllipse("s",0,0,1, -1, 0, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest2() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addEllipse("s",0,0,6, 1, 10, 5, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest3() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addEllipse("s",0,0,3, 2, -1, 10, new Color(10,10,10));
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void IllegalEllipseTest4() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addEllipse("s",0,0,4, 4, 0, 10, null);
   }
 
   @Test
   public void ModelDescriptionTest1() {
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
     model.addEllipse("s",0,0,4,6,0,25, new Color(10,20,20));
     model.addRectangle("s",7,9,10,25,50, 100, new Color(70, 50, 30));
     model.storeMove("s", new Point2D(5,5), 5, 25);
@@ -91,7 +91,7 @@ public class AnimationModelTest {
     AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
     builder.addOval("oval", 0, 0, 1, 2, 0, 0, 0, 0, 300);
 
-    AnimationModel model = builder.build();
+    IAnimationModel model = builder.build();
 
     builder.addMove("oval", 0,0,25, 25, 0, 100);
 

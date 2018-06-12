@@ -1,6 +1,6 @@
 package shapes;
 
-public enum Shape {
+public enum ShapeType {
   RECTANGLE, ELLIPSE
 }
 

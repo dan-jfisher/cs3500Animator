@@ -25,7 +25,7 @@ public class Ellipse extends AbstractShape {
     }
     this.xRadius = xRad;
     this.yRadius = yRad;
-    this.shapeType = Shape.ELLIPSE;
+    this.shapeType = ShapeType.ELLIPSE;
   }
 
   /**

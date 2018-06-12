@@ -1,12 +1,10 @@
-package Controller;
+package controller;
 
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Ellipse2D;
 import java.awt.Shape;
 
 import animation.IAnimatedShape;
 import animation.IAnimationModel;
-import animation.IView;
+import view.IView;
 
 /**
  *
@@ -20,7 +18,7 @@ public class ControllerGUI extends AbstractController {
    * @param frameRatePerSec
    */
   public ControllerGUI(IAnimationModel model, IView view, int frameRatePerSec) {
-    return null;
+    return;
   }
 
   @Override
@@ -28,7 +26,7 @@ public class ControllerGUI extends AbstractController {
     //EMPTY
   }
 
-  private Shape animatedShapeToAwtShape(IAnimatedShape) {
-    return null
+  private Shape animatedShapeToAwtShape(IAnimatedShape animatedShape) {
+    return null;
   }
 }
