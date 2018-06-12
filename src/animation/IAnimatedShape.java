@@ -3,7 +3,7 @@ package animation;
 import java.awt.Color;
 
 import shapes.Point2D;
-import shapes.Shape;
+import shapes.IShape;
 
 /**
  * This interface defines a shape that can be changed and animated.
@@ -12,11 +12,11 @@ import shapes.Shape;
 public interface IAnimatedShape {
 
   /**
-   * This returns a {@link Shape} object that represents it's state at the given time.
+   * This returns a {@link IShape} object that represents it's state at the given time.
    * @param time represents said time.
-   * @return the Shape's state at that time.
+   * @return the IShape's state at that time.
    */
-  Shape getShapeAt(int time);
+  IShape getShapeAt(int time);
 
   /**
    * Apply a move over the given time frame.

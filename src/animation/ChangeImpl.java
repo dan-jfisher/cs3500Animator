@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 import shapes.Shape;
 
-public class ChangeImpl implements Change {
+public class ChangeImpl implements IChange {
   private int startTime;
   private int endTime;
   private ChangeType type;
@@ -50,7 +50,7 @@ public class ChangeImpl implements Change {
   }
 
   @Override
-  public int compareTo(Change change) {
+  public int compareTo(IChange change) {
     if (this.startTime < change.getStartTime()) {
       return -1;
     } else if (this.startTime == change.getStartTime()) {

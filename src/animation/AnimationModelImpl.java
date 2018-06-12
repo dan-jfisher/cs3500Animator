@@ -14,16 +14,16 @@ import java.util.List;
 import shapes.Ellipse;
 import shapes.Point2D;
 import shapes.Rectangle;
-import shapes.Shape;
+import shapes.IShape;
 import util.TweenModelBuilder;
 
-public class AnimationModelImpl implements AnimationModel, Serializable {
-  HashMap<String, AnimatedShape> shapes;
-  List<Change> changes;
+public class AnimationModelImpl implements IAnimationModel, Serializable {
+  HashMap<String, IAnimatedShape> shapes;
+  List<IChange> changes;
 
-  public static final class Builder implements TweenModelBuilder<AnimationModel> {
+  public static final class Builder implements TweenModelBuilder<IAnimationModel> {
 
-    AnimationModel model = new AnimationModelImpl();
+    IAnimationModel model = new AnimationModelImpl();
 
     private static Object deepCopy(Object object) {
       try {
@@ -41,38 +41,38 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
     }
 
     @Override
-    public TweenModelBuilder<AnimationModel> addOval(String name, float cx, float cy, float xRadius, float yRadius, float red, float green, float blue, int startOfLife, int endOfLife) {
+    public TweenModelBuilder<IAnimationModel> addOval(String name, float cx, float cy, float xRadius, float yRadius, float red, float green, float blue, int startOfLife, int endOfLife) {
       model.addEllipse(name, cx, cy, xRadius, yRadius, startOfLife, endOfLife, new Color(red, green, blue));
       return this;
     }
 
     @Override
-    public TweenModelBuilder<AnimationModel> addRectangle(String name, float lx, float ly, float width, float height, float red, float green, float blue, int startOfLife, int endOfLife) {
+    public TweenModelBuilder<IAnimationModel> addRectangle(String name, float lx, float ly, float width, float height, float red, float green, float blue, int startOfLife, int endOfLife) {
       model.addRectangle(name, lx, ly, width, height, startOfLife, endOfLife, new Color(red, green, blue));
       return this;
     }
 
     @Override
-    public TweenModelBuilder<AnimationModel> addMove(String name, float moveFromX, float moveFromY, float moveToX, float moveToY, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addMove(String name, float moveFromX, float moveFromY, float moveToX, float moveToY, int startTime, int endTime) {
       model.storeMove(name, new Point2D(moveToX, moveToY), startTime, endTime);
       return this;
     }
 
     @Override
-    public TweenModelBuilder<AnimationModel> addColorChange(String name, float oldR, float oldG, float oldB, float newR, float newG, float newB, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addColorChange(String name, float oldR, float oldG, float oldB, float newR, float newG, float newB, int startTime, int endTime) {
       model.storeColorChange(name, new Color(newR, newG, newB), startTime, endTime);
       return this;
     }
 
     @Override
-    public TweenModelBuilder<AnimationModel> addScaleToChange(String name, float fromSx, float fromSy, float toSx, float toSy, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addScaleToChange(String name, float fromSx, float fromSy, float toSx, float toSy, int startTime, int endTime) {
       model.storeScale(name, startTime, endTime, toSx, toSy);
       return this;
     }
 
     @Override
-    public AnimationModel build() {
-      return (AnimationModel) deepCopy(model);
+    public IAnimationModel build() {
+      return (IAnimationModel) deepCopy(model);
     }
   }
 
@@ -92,7 +92,7 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
 
     Collections.sort(changes);
 
-    for (Change c : changes) {
+    for (IChange c : changes) {
       description.append("\n" + c.getDescription());
     }
 
@@ -100,8 +100,8 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
   }
 
   @Override
-  public List<Shape> getShapesAt(int time) {
-    List<Shape> currentShapes = new ArrayList<>();
+  public List<IShape> getShapesAt(int time) {
+    List<IShape> currentShapes = new ArrayList<>();
 
     for (String key : shapes.keySet()) {
       if (shapes.get(key).getStartTime() <= time && shapes.get(key).getEndTime() >= time) {
@@ -114,13 +114,13 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
 
   @Override
   public void storeMove(String id, Point2D end, int startTime, int endTime) {
-    AnimatedShape s = shapes.get(id);
+    IAnimatedShape s = shapes.get(id);
 
     if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
-    Change move = new ChangeImpl(id, startTime, endTime, Change.ChangeType.MOVE);
+    IChange move = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.MOVE);
     s.applyMove(move, end);
 
     changes.add(move);
@@ -128,13 +128,13 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
 
   @Override
   public void storeScale(String id, int startTime, int endTime, double ... dims) {
-    AnimatedShape s = shapes.get(id);
+    IAnimatedShape s = shapes.get(id);
 
     if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
-    Change scale = new ChangeImpl(id, startTime, endTime, Change.ChangeType.SCALE);
+    IChange scale = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.SCALE);
     s.applyScale(scale, dims);
 
     changes.add(scale);
@@ -142,13 +142,13 @@ public class AnimationModelImpl implements AnimationModel, Serializable {
 
   @Override
   public void storeColorChange(String id, Color endColor, int startTime, int endTime) {
-    AnimatedShape s = shapes.get(id);
+    IAnimatedShape s = shapes.get(id);
 
     if(s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
-    Change color = new ChangeImpl(id, startTime, endTime, Change.ChangeType.COLOR);
+    IChange color = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.COLOR);
     s.applyColorChange(color, endColor);
 
     changes.add(color);

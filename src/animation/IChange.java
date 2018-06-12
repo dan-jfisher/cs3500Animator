@@ -2,7 +2,7 @@ package animation;
 
 import java.io.Serializable;
 
-import shapes.Shape;
+import shapes.IShape;
 
 /**
  * This interface represents a change that can be applied to an AnimatedShape.
@@ -49,11 +49,11 @@ public interface IChange extends Comparable<IChange>, Serializable {
    * This function is used for describing the change via text.
    * @param shape the shape at the beginning of the move
    */
-  void setStartShape(Shape shape);
+  void setStartShape(IShape shape);
 
   /**
    * This function is used for describing the change via text.
    * @param shape the shape at the end of the move.
    */
-  void setEndShape(Shape shape);
+  void setEndShape(IShape shape);
 }
