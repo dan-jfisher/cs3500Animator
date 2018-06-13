@@ -13,6 +13,7 @@ public class ShapePanel extends JPanel {
   public ShapePanel() {
     super();
     shapes = new ArrayList<>();
+    this.setPreferredSize(new Dimension(1000, 1000));
   }
 
   @Override
