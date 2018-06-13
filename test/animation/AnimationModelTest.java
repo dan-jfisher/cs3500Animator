@@ -6,7 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 
-import shapes.Point2D;
+import cs3500.animator.model.animation.AnimationModelImpl;
+import cs3500.animator.model.animation.IAnimationModel;
+import cs3500.animator.model.shapes.Point2D;
 
 public class AnimationModelTest {
 

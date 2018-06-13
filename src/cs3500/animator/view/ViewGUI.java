@@ -1,12 +1,11 @@
 package cs3500.animator.view;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.*;
-import javax.swing.text.View;
+
+import cs3500.animator.util.DrawableShape;
 
 public class ViewGUI extends JFrame implements IView{
   private ShapePanel panel;
@@ -15,7 +14,7 @@ public class ViewGUI extends JFrame implements IView{
     super();
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setResizable(false);
+    this.setResizable(true);
     this.setLocationByPlatform(true);
     this.pack();
     this.setLayout(new BorderLayout());
@@ -23,7 +22,7 @@ public class ViewGUI extends JFrame implements IView{
     this.addPanel();
   }
 
-  public void setShapes(ArrayList<Shape> newShapes) {
+  public void setShapes(ArrayList<DrawableShape> newShapes) {
     panel.setShapes(newShapes);
   }
 
@@ -32,18 +31,18 @@ public class ViewGUI extends JFrame implements IView{
     this.add(panel);
   }
 
-  public static void main(String... args)
+  /*public static void cs3500.animator.main(String... args)
   {
     ViewGUI frame = new ViewGUI();
     frame.setSize(800, 800);
     frame.display();
 
-    ArrayList<Shape> shapes = new ArrayList<>();
-    shapes.add(new Ellipse2D.Double(300,300,300,500));
+    ArrayList<DrawableShape> shapes = new ArrayList<>();
+    shapes.add(new DrawableShape(new Ellipse2D.Double(200,200,300,500), Color.RED));
 
     frame.setShapes(shapes);
     frame.repaint();
-  }
+  }*/
 
   @Override
   public void display() {

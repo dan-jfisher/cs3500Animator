@@ -1,4 +1,4 @@
-package util;
+package cs3500.animator.util;
 
 import java.awt.Shape;
 import java.awt.Color;

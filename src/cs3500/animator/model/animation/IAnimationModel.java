@@ -1,10 +1,10 @@
-package animation;
+package cs3500.animator.model.animation;
 
 import java.awt.Color;
 import java.util.List;
 
-import shapes.Point2D;
-import shapes.IShape;
+import cs3500.animator.model.shapes.Point2D;
+import cs3500.animator.model.shapes.IShape;
 
 
 /**

@@ -1,7 +1,7 @@
-package controller;
+package cs3500.animator.controller;
 
-import animation.IAnimationModel;
-import view.IView;
+import cs3500.animator.model.animation.IAnimationModel;
+import cs3500.animator.view.IView;
 
 /**
  * Controller for views which output text (SVG, Text, etc.).

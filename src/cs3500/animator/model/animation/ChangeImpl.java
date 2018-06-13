@@ -1,8 +1,8 @@
-package animation;
+package cs3500.animator.model.animation;
 
 import java.text.DecimalFormat;
 
-import shapes.IShape;
+import cs3500.animator.model.shapes.IShape;
 
 public class ChangeImpl implements IChange {
   private int startTime;

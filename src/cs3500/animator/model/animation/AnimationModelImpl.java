@@ -1,4 +1,4 @@
-package animation;
+package cs3500.animator.model.animation;
 
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
@@ -11,11 +11,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import shapes.Ellipse;
-import shapes.Point2D;
-import shapes.Rectangle;
-import shapes.IShape;
-import util.TweenModelBuilder;
+import cs3500.animator.model.shapes.Ellipse;
+import cs3500.animator.model.shapes.Point2D;
+import cs3500.animator.model.shapes.Rectangle;
+import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.util.TweenModelBuilder;
 
 public class AnimationModelImpl implements IAnimationModel, Serializable {
   HashMap<String, IAnimatedShape> shapes;

@@ -1,4 +1,4 @@
-package shapes;
+package cs3500.animator.model.shapes;
 
 import java.awt.Color;
 import java.text.DecimalFormat;

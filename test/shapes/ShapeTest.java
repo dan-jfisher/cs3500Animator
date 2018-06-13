@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import java.awt.Color;
 
+import cs3500.animator.model.shapes.Ellipse;
+import cs3500.animator.model.shapes.IShape;
+import cs3500.animator.model.shapes.Rectangle;
+
 public class ShapeTest {
 
   @Test (expected = IllegalArgumentException.class)

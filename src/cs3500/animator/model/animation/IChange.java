@@ -1,8 +1,8 @@
-package animation;
+package cs3500.animator.model.animation;
 
 import java.io.Serializable;
 
-import shapes.IShape;
+import cs3500.animator.model.shapes.IShape;
 
 /**
  * This interface represents a change that can be applied to an AnimatedShape.

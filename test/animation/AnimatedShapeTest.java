@@ -6,9 +6,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 
-import shapes.Ellipse;
-import shapes.Point2D;
-import shapes.Rectangle;
+import cs3500.animator.model.animation.AnimatedShapeImpl;
+import cs3500.animator.model.animation.ChangeImpl;
+import cs3500.animator.model.animation.IAnimatedShape;
+import cs3500.animator.model.animation.IChange;
+import cs3500.animator.model.shapes.Ellipse;
+import cs3500.animator.model.shapes.Point2D;
+import cs3500.animator.model.shapes.Rectangle;
 
 public class AnimatedShapeTest {
 

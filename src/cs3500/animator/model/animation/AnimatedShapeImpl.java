@@ -1,4 +1,4 @@
-package animation;
+package cs3500.animator.model.animation;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import shapes.Point2D;
-import shapes.Rectangle;
-import shapes.IShape;
+import cs3500.animator.model.shapes.Point2D;
+import cs3500.animator.model.shapes.Rectangle;
+import cs3500.animator.model.shapes.IShape;
 
 /**
  * This class implements Animated IShape.  It holds a timeline of shapes corresponding to
