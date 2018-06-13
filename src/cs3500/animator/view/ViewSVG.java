@@ -8,20 +8,11 @@ import cs3500.animator.util.DrawableTextShape;
 import cs3500.animator.util.IDrawableShape;
 
 public class ViewSVG extends TextBasedView {
-  ArrayList<DrawableTextShape> shapes;
   String filename;
 
   public ViewSVG() {
-    shapes = new ArrayList<>();
+    super();
     filename = null;
-  }
-
-  public void setShapes(ArrayList<DrawableTextShape> shapes) {
-    if (shapes == null) {
-      throw new IllegalArgumentException("Invalid input");
-    } else {
-      this.shapes = shapes;
-    }
   }
 
   public void setFilename(String filename) {

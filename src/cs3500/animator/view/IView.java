@@ -1,5 +1,9 @@
 package cs3500.animator.view;
 
+import java.util.ArrayList;
+
+import cs3500.animator.util.IDrawableShape;
+
 /**
  * This is the view interface.
  */
