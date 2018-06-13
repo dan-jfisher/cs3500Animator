@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import cs3500.animator.util.DrawableTextShape;
+import cs3500.animator.util.DrawableGUIShape;
 
 public class ViewGUI extends JFrame implements IView{
   private ShapePanel panel;
@@ -24,7 +24,7 @@ public class ViewGUI extends JFrame implements IView{
     this.pack();
   }
 
-  public void setShapes(ArrayList<DrawableTextShape> newShapes) {
+  public void setShapes(ArrayList<DrawableGUIShape> newShapes) {
     panel.setShapes(newShapes);
   }
 
@@ -41,9 +41,9 @@ public class ViewGUI extends JFrame implements IView{
     frame.setSize(800, 800);
     frame.display();
 
-    ArrayList<DrawableTextShape> shapes = new ArrayList<>();
-    shapes.add(new DrawableTextShape(new Ellipse2D.Double(200,200,60,80), Color.RED));
-    shapes.add(new DrawableTextShape(new Rectangle(100,100,50,50), Color.GREEN));
+    ArrayList<DrawableGUIShape> shapes = new ArrayList<>();
+    shapes.add(new DrawableGUIShape(new Ellipse2D.Double(200,200,60,80), Color.RED));
+    shapes.add(new DrawableGUIShape(new Rectangle(100,100,50,50), Color.GREEN));
 
     frame.setShapes(shapes);
     frame.repaint();

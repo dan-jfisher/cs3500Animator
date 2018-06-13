@@ -1,5 +1,9 @@
 package cs3500.animator.view;
 
+import java.util.ArrayList;
+
+import cs3500.animator.util.IDrawableShape;
+
 /**
  * This is the view interface.
  */
@@ -10,4 +14,6 @@ public interface IView {
    * The means of displaying the data is up to the implementation.
    */
   void display();
+
+  enum ViewType { GUI, SVG, TEXT}
 }

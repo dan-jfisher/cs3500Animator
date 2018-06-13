@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HW6.iml" filepath="$PROJECT_DIR$/HW6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cs3500Animator.iml" filepath="$PROJECT_DIR$/cs3500Animator.iml" />
     </modules>
   </component>
 </project>
