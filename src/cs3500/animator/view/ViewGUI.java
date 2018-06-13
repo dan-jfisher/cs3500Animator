@@ -2,6 +2,7 @@ package cs3500.animator.view;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -20,9 +21,7 @@ public class ViewGUI extends JFrame implements IView{
     this.setLocationByPlatform(true);
     this.setLayout(new BorderLayout());
     this.setLocation(500, 500);
-    this.addPanel();
-    scrollPane = new JScrollPane(panel);
-    this.add(scrollPane);
+    this.addPanelWithScrollPane();
     this.pack();
   }
 
@@ -30,9 +29,11 @@ public class ViewGUI extends JFrame implements IView{
     panel.setShapes(newShapes);
   }
 
-  public void addPanel() {
+  public void addPanelWithScrollPane() {
     this.panel = new ShapePanel();
     this.add(panel);
+    scrollPane = new JScrollPane(panel);
+    this.add(scrollPane);
   }
 
   public static void main(String... args)
@@ -42,7 +43,8 @@ public class ViewGUI extends JFrame implements IView{
     frame.display();
 
     ArrayList<DrawableShape> shapes = new ArrayList<>();
-    shapes.add(new DrawableShape(new Ellipse2D.Double(200,200,300,500), Color.RED));
+    shapes.add(new DrawableShape(new Ellipse2D.Double(200,200,60,80), Color.RED));
+    shapes.add(new DrawableShape(new Rectangle(100,100,50,50), Color.GREEN));
 
     frame.setShapes(shapes);
     frame.repaint();
