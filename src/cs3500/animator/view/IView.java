@@ -10,4 +10,6 @@ public interface IView {
    * The means of displaying the data is up to the implementation.
    */
   void display();
+
+  enum ViewType { GUI, SVG, TEXT}
 }

@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import cs3500.animator.model.animation.IChange;
-import cs3500.animator.util.WritableShape;
+import cs3500.animator.util.DrawableTextShape;
+import cs3500.animator.util.IDrawableShape;
 
 public class ViewSVG extends TextBasedView {
-  ArrayList<WritableShape> shapes;
+  ArrayList<DrawableTextShape> shapes;
   String filename;
 
   public ViewSVG() {
@@ -15,7 +16,7 @@ public class ViewSVG extends TextBasedView {
     filename = null;
   }
 
-  public void setShapes(ArrayList<WritableShape> shapes) {
+  public void setShapes(ArrayList<DrawableTextShape> shapes) {
     if (shapes == null) {
       throw new IllegalArgumentException("Invalid input");
     } else {
@@ -56,16 +57,16 @@ public class ViewSVG extends TextBasedView {
             "     xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"\n" +
             "     xmlns:xlink=\"http://www.w3.org/1999/xlink\" >\n\n");
 
-    for (WritableShape s : shapes) {
-      if (s.getType().equals("ellipse")) {
-        strBuilder.append("   <ellipse " + getEllipseDescription(1,1,1,1,Color.RED));
+    for (DrawableTextShape s : shapes) {
+      if (s.getShapeType().equals("ellipse")) {
+        strBuilder.append("   <ellipse " + getEllipseDescription(s.getxLoc(), s.getyLoc(), s.getxDim(), s.getyDim(), s.getColor()));
         //if changes is empty
           //strBuilder.append("/>");
         //if changes is full
           //strBuilder.append(">");
           //add animations
-      } else if (s.getType().equals("ellipse")) {
-        strBuilder.append("<rect " + getRectDescription(1,1,1,1,Color.RED));
+      } else if (s.getShapeType().equals("ellipse")) {
+        strBuilder.append("<rect " + getRectDescription(s.getxLoc(), s.getyLoc(), s.getxDim(), s.getyDim(), s.getColor()));
       }
     }
 
@@ -76,8 +77,7 @@ public class ViewSVG extends TextBasedView {
   public static void main(String... args) {
     ViewSVG view = new ViewSVG();
 
-    ArrayList<WritableShape> shapes = new ArrayList<>();
-    shapes.add(new WritableShape("name", "ellipse", 1,1,1,1,Color.RED, new ArrayList<IChange>()));
+    ArrayList<DrawableTextShape> shapes = new ArrayList<>();
 
     view.setShapes(shapes);
     view.setFilename("~/Desktop/test");

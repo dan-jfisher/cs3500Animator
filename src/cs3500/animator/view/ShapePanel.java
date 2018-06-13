@@ -5,10 +5,11 @@ import java.util.ArrayList;;
 
 import javax.swing.*;
 
+import cs3500.animator.util.DrawableGUIShape;
 import cs3500.animator.util.DrawableTextShape;
 
 public class ShapePanel extends JPanel {
-  private ArrayList<DrawableTextShape> shapes;
+  private ArrayList<DrawableGUIShape> shapes;
 
   public ShapePanel() {
     super();
@@ -22,13 +23,13 @@ public class ShapePanel extends JPanel {
 
     Graphics2D g2D = (Graphics2D) g;
 
-    for (DrawableTextShape s : shapes) {
+    for (DrawableGUIShape s : shapes) {
       g2D.setColor(s.getColor());
       g2D.fill(s.getShape());
     }
   }
 
-  public void setShapes(ArrayList<DrawableTextShape> shapes) {
+  public void setShapes(ArrayList<DrawableGUIShape> shapes) {
     this.shapes.clear();
     this.shapes.addAll(shapes);
   }
