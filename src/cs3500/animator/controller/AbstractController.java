@@ -8,7 +8,6 @@ import cs3500.animator.view.IView;
  */
 public abstract class AbstractController implements IController {
 
-  protected IView view;
   protected IAnimationModel model;
   protected int frameRate;
 
