@@ -1,5 +1,6 @@
 package cs3500.animator.controller;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import cs3500.animator.model.animation.IAnimationModel;
@@ -13,9 +14,9 @@ public class ControllerText extends AbstractController {
 
   private IView view;
   /**
-   *
-   * @param model
-   * @param view
+   * Creates a controller for a text view output of an animation.
+   * @param model model representing animation.
+   * @param view view to be presenting animation.
    */
   public ControllerText(IAnimationModel model, IView view, int frameRate) {
     this.model = model;
@@ -23,11 +24,12 @@ public class ControllerText extends AbstractController {
     this.frameRate = frameRate;
   }
 
-
   @Override
   public void run() {
-    ArrayList<IShape> shapes = (ArrayList<IShape>)model.getAllShapes();
-    for (IShape shape: shapes) {
+
+    ArrayList<Shape> drawShapes = new ArrayList<>();
+    ArrayList<IShape> modelShapes = (ArrayList<IShape>)model.getAllShapes();
+    for (IShape shape: modelShapes) {
 
     }
   }

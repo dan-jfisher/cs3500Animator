@@ -7,7 +7,3 @@ changes include:
     geometry shape to create as a result.
     - Implemented Kevin's getShapes method to return array of shapes that will need to be viewed
     in the views
-    - Stored changes in AnimatedShapeImpl as ArrayList instead of List since it is only used as an
-    ArrayList and this class is not an abstraction of any other class.
-    - Added method to retrieve changes a shape is going to undergo in the animation in
-    AnimatedShapeImpl class.
