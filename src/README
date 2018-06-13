@@ -5,3 +5,5 @@ changes include:
     - Adopted shapeType from Kevin's model to label each shape object as a shape.
     This lets controller determine what kind of shape it is working with so it knows which
     geometry shape to create as a result.
+    - Implemented Kevin's getShapes method to return array of shapes that will need to be viewed
+    in the views

@@ -21,6 +21,11 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
   HashMap<String, IAnimatedShape> shapes;
   List<IChange> changes;
 
+  public AnimationModelImpl() {
+    changes = new ArrayList<>();
+    shapes = new HashMap<>();
+  }
+
   public static final class Builder implements TweenModelBuilder<IAnimationModel> {
 
     IAnimationModel model = new AnimationModelImpl();
@@ -41,31 +46,50 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
     }
 
     @Override
-    public TweenModelBuilder<IAnimationModel> addOval(String name, float cx, float cy, float xRadius, float yRadius, float red, float green, float blue, int startOfLife, int endOfLife) {
-      model.addEllipse(name, cx, cy, xRadius, yRadius, startOfLife, endOfLife, new Color(red, green, blue));
+    public TweenModelBuilder<IAnimationModel> addOval(String name, float cx, float cy,
+                                                      float xRadius, float yRadius, float red,
+                                                      float green, float blue, int startOfLife,
+                                                      int endOfLife) {
+
+      model.addEllipse(name, cx, cy, xRadius, yRadius, startOfLife, endOfLife,
+              new Color(red, green, blue));
+
       return this;
     }
 
     @Override
-    public TweenModelBuilder<IAnimationModel> addRectangle(String name, float lx, float ly, float width, float height, float red, float green, float blue, int startOfLife, int endOfLife) {
-      model.addRectangle(name, lx, ly, width, height, startOfLife, endOfLife, new Color(red, green, blue));
+    public TweenModelBuilder<IAnimationModel> addRectangle(String name, float lx, float ly,
+                                                           float width, float height, float red,
+                                                           float green, float blue,
+                                                           int startOfLife, int endOfLife) {
+
+      model.addRectangle(name, lx, ly, width, height, startOfLife, endOfLife,
+                          new Color(red, green, blue));
       return this;
     }
 
     @Override
-    public TweenModelBuilder<IAnimationModel> addMove(String name, float moveFromX, float moveFromY, float moveToX, float moveToY, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addMove(String name, float moveFromX,
+                                                      float moveFromY, float moveToX,
+                                                      float moveToY, int startTime, int endTime) {
       model.storeMove(name, new Point2D(moveToX, moveToY), startTime, endTime);
       return this;
     }
 
     @Override
-    public TweenModelBuilder<IAnimationModel> addColorChange(String name, float oldR, float oldG, float oldB, float newR, float newG, float newB, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addColorChange(String name, float oldR, float oldG,
+                                                             float oldB, float newR, float newG,
+                                                             float newB, int startTime,
+                                                             int endTime) {
       model.storeColorChange(name, new Color(newR, newG, newB), startTime, endTime);
       return this;
     }
 
     @Override
-    public TweenModelBuilder<IAnimationModel> addScaleToChange(String name, float fromSx, float fromSy, float toSx, float toSy, int startTime, int endTime) {
+    public TweenModelBuilder<IAnimationModel> addScaleToChange(String name, float fromSx,
+                                                               float fromSy, float toSx,
+                                                               float toSy, int startTime,
+                                                               int endTime) {
       model.storeScale(name, startTime, endTime, toSx, toSy);
       return this;
     }
@@ -74,11 +98,6 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
     public IAnimationModel build() {
       return (IAnimationModel) deepCopy(model);
     }
-  }
-
-  public AnimationModelImpl() {
-    changes = new ArrayList<>();
-    shapes = new HashMap<>();
   }
 
   @Override
@@ -172,6 +191,15 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
                          Color color) {
     shapes.put(id, new AnimatedShapeImpl(new Ellipse(xRadius, yRadius, x, y, color),
             startTime, endTime));
+  }
+
+  @Override
+  public List<IShape> getAllShapes() {
+    ArrayList<IShape>  returnShapes = new ArrayList<>();
+    for (String key: shapes.keySet()) {
+      returnShapes.add(shapes.get(key).getShapeAt(shapes.get(key).getStartTime()));
+    }
+    return returnShapes;
   }
 }
 

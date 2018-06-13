@@ -1,6 +1,7 @@
 package cs3500.animator.model.animation;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.animator.model.shapes.Point2D;
@@ -83,4 +84,10 @@ public interface IAnimationModel {
                   double xRadius, double yRadius,
                   int startTime, int endTime,
                   Color color);
+
+  /**
+   * Returns list of all shapes used in animation.
+   * @return list of IShapes.
+   */
+  List<IShape> getAllShapes();
 }
