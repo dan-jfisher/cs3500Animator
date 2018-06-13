@@ -2,12 +2,11 @@ package cs3500.animator.view;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-import cs3500.animator.util.DrawableShape;
+import cs3500.animator.util.DrawableTextShape;
 
 public class ViewGUI extends JFrame implements IView{
   private ShapePanel panel;
@@ -25,7 +24,7 @@ public class ViewGUI extends JFrame implements IView{
     this.pack();
   }
 
-  public void setShapes(ArrayList<DrawableShape> newShapes) {
+  public void setShapes(ArrayList<DrawableTextShape> newShapes) {
     panel.setShapes(newShapes);
   }
 
@@ -42,9 +41,9 @@ public class ViewGUI extends JFrame implements IView{
     frame.setSize(800, 800);
     frame.display();
 
-    ArrayList<DrawableShape> shapes = new ArrayList<>();
-    shapes.add(new DrawableShape(new Ellipse2D.Double(200,200,60,80), Color.RED));
-    shapes.add(new DrawableShape(new Rectangle(100,100,50,50), Color.GREEN));
+    ArrayList<DrawableTextShape> shapes = new ArrayList<>();
+    shapes.add(new DrawableTextShape(new Ellipse2D.Double(200,200,60,80), Color.RED));
+    shapes.add(new DrawableTextShape(new Rectangle(100,100,50,50), Color.GREEN));
 
     frame.setShapes(shapes);
     frame.repaint();

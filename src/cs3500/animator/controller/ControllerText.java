@@ -1,13 +1,17 @@
 package cs3500.animator.controller;
 
+import java.util.ArrayList;
+
 import cs3500.animator.model.animation.IAnimationModel;
 import cs3500.animator.view.IView;
+import cs3500.animator.model.shapes.IShape;
 
 /**
  * Controller for views which output text (SVG, Text, etc.).
  */
 public class ControllerText extends AbstractController {
 
+  private IView view;
   /**
    *
    * @param model
@@ -22,7 +26,9 @@ public class ControllerText extends AbstractController {
 
   @Override
   public void run() {
-    model.getAnimationDescription();
+    ArrayList<IShape> shapes = (ArrayList<IShape>)model.getAllShapes();
+    for (IShape shape: shapes) {
 
+    }
   }
 }
