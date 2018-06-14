@@ -13,14 +13,15 @@ public class Rectangle extends AbstractShape {
 
   /**
    * This is the Rectangle constructor.
+   * @param name name of rectangle.
    * @param width the width of the rectangle.
    * @param height height of the rectangle.
    * @param x x coordinate.
    * @param y y coordinate.
    * @param color Color of the shape
    */
-  public Rectangle(double width, double height, double x, double y, Color color) {
-    super(color, new Point2D(x,y));
+  public Rectangle(String name, double width, double height, double x, double y, Color color) {
+    super(name, color, new Point2D(x,y));
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException("Invalid Dimensions");
     }
@@ -61,7 +62,7 @@ public class Rectangle extends AbstractShape {
 
   @Override
   public IShape clone() {
-    return new Rectangle(width, height, location.getX(), location.getY(), color);
+    return new Rectangle(name, width, height, location.getX(), location.getY(), color);
   }
 
   @Override
@@ -87,15 +88,6 @@ public class Rectangle extends AbstractShape {
   }
 
   @Override
-  public String getType() {
-    StringBuilder output = new StringBuilder();
-
-    output.append("Type: Rectangle\n");
-
-    return output.toString();
-  }
-
-  @Override
   public double[] getDifferenceInDimensions(double ... dims) {
     if (dims.length > 2 || dims.length <= 0) {
       throw new IllegalArgumentException("Invalid number of dimensions");
@@ -111,6 +103,17 @@ public class Rectangle extends AbstractShape {
 
       return dimChange;
     }
+  }
+
+
+ @Override
+  public double getXDim() {
+    return width;
+  }
+
+  @Override
+  public double getYDim() {
+    return height;
   }
 
   public double[] getDimensionArray() {

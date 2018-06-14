@@ -11,3 +11,6 @@ changes include:
     ArrayList and this class is not an abstraction of any other class.
     - Added method to retrieve changes a shape is going to undergo in the animation in
     AnimatedShapeImpl class.
+    - Added name property in abstract shape class since each shape has a name.
+    Shape constructors now passes name as a parameter.
+    - Added getName function to shape class to use for text outputs.

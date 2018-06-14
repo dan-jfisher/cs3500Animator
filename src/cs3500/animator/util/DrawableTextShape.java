@@ -1,8 +1,12 @@
 package cs3500.animator.util;
 
 import java.awt.Color;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+
+import cs3500.animator.model.animation.TimeDomainChangeImpl;
+import cs3500.animator.model.shapes.ShapeType;
 
 import cs3500.animator.model.animation.IChange;
 
@@ -14,18 +18,18 @@ public class DrawableTextShape extends AbstractDrawableShape {
   private float startTime;
   private float endTime;
   private String name;
-  private String shapeType;
+  private ShapeType shapeType;
   private double xLoc;
   private double yLoc;
   private double xDim;
   private double yDim;
-  private ArrayList<IChange> changes;
+  private ArrayList<TimeDomainChangeImpl> changes;
 
   /**
    * Constructs drawable text shape. This shape contains all shape's animation information.
+   * @param name name of shape.
    * @param startTime time, in seconds, when shape's animation starts.
    * @param endTime time, in seconds, when shape's animation ends.
-   * @param name name of shape.
    * @param shapeType type of shape.
    * @param xLoc x-coordinate of shape.
    * @param yLoc y-coordinate of shape.
@@ -34,9 +38,9 @@ public class DrawableTextShape extends AbstractDrawableShape {
    * @param shapeColor color of shape
    * @param changes changes the shape undergoes in animation.
    */
-  public DrawableTextShape(float startTime, float endTime, String name, String shapeType,
+  public DrawableTextShape(String name, float startTime, float endTime, ShapeType shapeType,
                            double xLoc, double yLoc, double xDim, double yDim, Color shapeColor,
-                           List<IChange> changes) {
+                           List<TimeDomainChangeImpl> changes) {
 
     if (shapeColor.equals(null) || startTime < 0 || endTime < 0 || name.equals(null)
             || xDim < 0 || yDim < 0) {
@@ -52,7 +56,7 @@ public class DrawableTextShape extends AbstractDrawableShape {
     this.xDim = xDim;
     this.yDim = yDim;
     this.color = shapeColor;
-    this.changes = (ArrayList<IChange>) changes;
+    this.changes = (ArrayList<TimeDomainChangeImpl>) changes;
   }
 
   @Override
@@ -72,7 +76,7 @@ public class DrawableTextShape extends AbstractDrawableShape {
     return name;
   }
 
-  public String getShapeType() {
+  public ShapeType getShapeType() {
     return shapeType;
   }
 
@@ -92,7 +96,7 @@ public class DrawableTextShape extends AbstractDrawableShape {
     return yDim;
   }
 
-  public ArrayList<IChange> getChanges() {
+  public ArrayList<TimeDomainChangeImpl> getChanges() {
     return changes;
   }
 

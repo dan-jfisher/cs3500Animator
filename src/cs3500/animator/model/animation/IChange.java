@@ -16,16 +16,16 @@ public interface IChange extends Comparable<IChange>, Serializable {
   enum ChangeType { MOVE, COLOR, SCALE }
 
   /**
-   * Gets the start time of this change.
-   * @return the time as a int.
+   * Gets the start time/frame of this change depending on child's domain.
+   * @return the time/frame as a float.
    */
-  int getStartTime();
+  float getStart();
 
   /**
-   * Gets the end time of this change.
-   * @return the time as an int.
+   * Gets the end frame/time of this change depending on child's domain.
+   * @return the frame/time as a float.
    */
-  int getEndTime();
+  float getEnd();
 
   /**
    * This returns the id of the shape that this change was applied to.

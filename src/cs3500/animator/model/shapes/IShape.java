@@ -59,13 +59,19 @@ public interface IShape extends Cloneable, Serializable {
 
   /**
    * This returns the type of shape.
-   * @return the type as a string.
+   * @return the type as a shapeType.
    */
-  String getType();
+  ShapeType getType();
+
+  /**
+   * This returns the name of the shape.
+   * @return name of shape.
+   */
+  String getName();
 
   /**
    * This is a function used for scaling.  It determines the difference
-   * in dimensions between this object, and the diensions passed to it.
+   * in dimensions between this object, and the dimensions passed to it.
    * Throws an Illegal Argument Exception if too many fields are passed to it
    * @param dims The dimensions to be compared.
    * @return The difference between the dimensons as an array
@@ -73,8 +79,20 @@ public interface IShape extends Cloneable, Serializable {
   double[] getDifferenceInDimensions(double ... dims);
 
   /**
-   * This is a function used for scaling.  It returns the dimensions of the shape as an array.
-   * @return The array.
+   * Returns x-dimension of shape.
+   * @return The x-dimension as a double.
+   */
+  double getXDim();
+
+  /**
+   * Gets y-dimension of shape.
+   * @return The y-dimension as a double.
+   */
+  double getYDim();
+
+  /**
+   * Returns array with all dimensions of the shape as doubles.
+   * @return array of doubles representing shape's dimensions.
    */
   double[] getDimensionArray();
 }

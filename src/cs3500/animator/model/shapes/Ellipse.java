@@ -12,14 +12,15 @@ public class Ellipse extends AbstractShape {
 
   /**
    * This is the ellipse constructor.
+   * @param name name of ellipse.
    * @param xRad horizontal radius.
    * @param yRad vertical radius.
    * @param x x coordinate.
    * @param y y coordinate.
    * @param color color of the shape.
    */
-  public Ellipse(double xRad, double yRad, double x, double y, Color color) {
-    super(color, new Point2D(x,y));
+  public Ellipse(String name, double xRad, double yRad, double x, double y, Color color) {
+    super(name, color, new Point2D(x,y));
     if (xRad < 0 || yRad < 0) {
       throw new IllegalArgumentException("Illegal Shape dimensions");
     }
@@ -60,7 +61,7 @@ public class Ellipse extends AbstractShape {
 
   @Override
   public IShape clone() {
-    return new Ellipse(xRadius, yRadius, location.getX(), location.getY(), color);
+    return new Ellipse(name, xRadius, yRadius, location.getX(), location.getY(), color);
   }
 
   @Override
@@ -76,11 +77,6 @@ public class Ellipse extends AbstractShape {
             + ", " + color.getBlue() + ")\n");
 
     return description.toString();
-  }
-
-  @Override
-  public String getType() {
-    return "Type: Oval\n";
   }
 
   @Override
@@ -106,8 +102,19 @@ public class Ellipse extends AbstractShape {
     }
   }
 
+  @Override
   public double[] getDimensionArray() {
     double[] dimArray = {xRadius, yRadius};
     return dimArray;
+  }
+
+  @Override
+  public double getXDim() {
+    return xRadius;
+  }
+
+  @Override
+  public double getYDim() {
+    return yRadius;
   }
 }

@@ -31,7 +31,7 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
    * This is the default constructor.
    */
   public AnimatedShapeImpl() {
-    this(new Rectangle(1,1,0,0, new Color(10,10,10)), 0, 100);
+    this(new Rectangle("r",1,0,0, 0, new Color(10,10,10)), 0, 100);
   }
 
   /**
@@ -79,8 +79,8 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
   @Override
   public void applyMove(IChange change, Point2D end) {
-    int startTime = change.getStartTime();
-    int endTime = change.getEndTime();
+    int startTime = (int)change.getStart();
+    int endTime = (int)change.getEnd();
 
     checkTimeFrame(change);
     IShape nextShape = null;
@@ -110,8 +110,8 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
   @Override
   public void applyColorChange(IChange change, Color endColor) {
-    int startTime = change.getStartTime();
-    int endTime = change.getEndTime();
+    int startTime = (int)change.getStart();
+    int endTime = (int)change.getEnd();
 
     checkTimeFrame(change);
     IShape nextShape = null;
@@ -155,8 +155,8 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
   @Override
   public void applyScale(IChange change, double ... dims) {
-    int startTime = change.getStartTime();
-    int endTime = change.getEndTime();
+    int startTime = (int)change.getStart();
+    int endTime = (int)change.getEnd();
 
     checkTimeFrame(change);
 
@@ -200,8 +200,8 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
    * @param change {@link IChange} being applied
    */
   protected void checkTimeFrame(IChange change) {
-    int startTime = change.getStartTime();
-    int endTime = change.getEndTime();
+    int startTime = (int)change.getStart();
+    int endTime = (int)change.getEnd();
 
     if (startTime < startOfAnimation || endTime > endOfAnimation) {
       throw new IllegalArgumentException("Time frame out of bounds");
@@ -213,10 +213,10 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
     for (int i = 0; i < changes.size(); i++) {
       if (change.getType().equals(changes.get(i).getType())
-              && Math.max(endTime, changes.get(i).getEndTime())
-              - Math.min(startTime, changes.get(i).getStartTime())
-              < (endTime - startTime) + (changes.get(i).getEndTime()
-              - changes.get(i).getStartTime())) {
+              && Math.max(endTime, changes.get(i).getEnd())
+              - Math.min(startTime, changes.get(i).getStart())
+              < (endTime - startTime) + (changes.get(i).getEnd()
+              - changes.get(i).getStart())) {
         throw new IllegalArgumentException("Invalid timeframe");
       }
     }

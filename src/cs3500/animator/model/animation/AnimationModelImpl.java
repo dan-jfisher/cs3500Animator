@@ -179,7 +179,7 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
                            double width, double height,
                            int startTime, int endTime,
                            Color color) {
-    shapes.put(id, new AnimatedShapeImpl(new Rectangle(width, height, x, y, color),
+    shapes.put(id, new AnimatedShapeImpl(new Rectangle(id, width, height, x, y, color),
             startTime, endTime));
   }
 
@@ -189,7 +189,7 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
                          double xRadius, double yRadius,
                          int startTime, int endTime,
                          Color color) {
-    shapes.put(id, new AnimatedShapeImpl(new Ellipse(xRadius, yRadius, x, y, color),
+    shapes.put(id, new AnimatedShapeImpl(new Ellipse(id, xRadius, yRadius, x, y, color),
             startTime, endTime));
   }
 
