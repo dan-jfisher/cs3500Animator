@@ -8,7 +8,7 @@ import java.awt.Shape;
  * Converts an animatable shape into a shape that can be drawn by a view. Determines what
  * type of DrawableShape to create based on the type of view it is being passed into.
  */
-public class AnimatableToDrawableShapeConverter {
+public class ShapeToDrawableConverter {
 
   private IShape animShape;
   private IView.ViewType viewType;
@@ -18,7 +18,7 @@ public class AnimatableToDrawableShapeConverter {
    * @param animatableShape
    * @param view
    */
-  public AnimatableToDrawableShapeConverter(IShape animatableShape, IView view) {
+  public ShapeToDrawableConverter(IShape animatableShape, IView view) {
     viewType = view.getViewType;
     animShape = animatableShape;
   }
@@ -26,7 +26,7 @@ public class AnimatableToDrawableShapeConverter {
   public IDrawableShape convert() {
     switch(viewType) {
       IView.ViewType.SVG:
-          return new DrawableTextShape(animShape.get)
+          return new DrawableTextShape(animShape.)
           break;
 
       IView.ViewType.TEXT:
