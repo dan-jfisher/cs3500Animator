@@ -55,16 +55,15 @@ public class AnimatedShapeToDrawableConverter {
     ArrayList<TimeDomainChangeImpl> timeChanges = new ArrayList<>();
 
     switch(viewType) {
-      IView.ViewType.SVG:
+      case SVG:
         List<IChange> oldChanges = shape.getChanges();
         for (IChange changeInFrame: oldChanges) {
           timeChanges.add(new TimeDomainChangeImpl((ChangeImpl)changeInFrame, frameRate));
         }
         return new DrawableTextShape(baseShape.getName(), startTime, endTime, sType, xLoc, yLoc,
                                       xDim, yDim, color, timeChanges);
-        break;
 
-      IView.ViewType.TEXT:
+      case TEXT:
 
         oldChanges = shape.getChanges();
         for (IChange changeInFrame: oldChanges) {
@@ -72,9 +71,8 @@ public class AnimatedShapeToDrawableConverter {
         }
         return new DrawableTextShape(name, startTime, endTime, sType, xLoc, yLoc,
                                       xDim, yDim, color, timeChanges);
-        break;
 
-      IView.ViewType.GUI:
+      case GUI:
 
         if (sType == ShapeType.ELLIPSE) {
           drawShape = new Ellipse2D.Double(xLoc, yLoc, xDim, yDim);
@@ -85,7 +83,6 @@ public class AnimatedShapeToDrawableConverter {
         }
 
         return new DrawableGUIShape(drawShape, color);
-        break;
 
       default:
         throw new IllegalArgumentException("View type is not recognized");
