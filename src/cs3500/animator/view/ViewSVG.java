@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import cs3500.animator.model.animation.IChange;
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
 public class ViewSVG extends TextBasedView {
   String filename;
@@ -13,6 +12,7 @@ public class ViewSVG extends TextBasedView {
   public ViewSVG() {
     super();
     filename = null;
+    viewType = ViewType.SVG;
   }
 
   public void setFilename(String filename) {
@@ -39,29 +39,104 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
+  public String getStartEndTimeSVGAnimations (DrawableTextShape s) {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    if (s.getStartTime() != 0) {
+
+    }
+
+    return null;
+  }
+
+  /**
+   * This function loops through the shapes and converts them to SVG.
+   * It only accepts shapes of type ellipse and rectangle.  Otherwise it throws an
+   * Illegal Argument Exception.
+   * @return The SVG-style String.
+   */
+  public String getSVGFromShapeList() {
+    StringBuilder strBuilder = new StringBuilder();
+    String shapeType;
+
+    for (DrawableTextShape s : shapes) {
+      if (s.getShapeType().equals("ellipse")) {
+        shapeType = "ellipse";
+      } else if (s.getShapeType().equals("rect")) {
+        shapeType = "rect";
+      } else {
+        throw new IllegalArgumentException("Illegal shape type");
+      }
+
+      strBuilder.append("<" + shapeType +  " " + getEllipseDescription(s.getxLoc(), s.getyLoc(),
+              s.getxDim(), s.getyDim(), s.getColor()));
+
+      if (s.getChanges() == null || s.getChanges().size() == 0) {
+        strBuilder.append("/>");
+      } else {
+        strBuilder.append(">\n\n");
+        for (IChange c : s.getChanges()) {
+          if (c.getType().equals(IChange.ChangeType.SCALE)) {
+            double startXDim = c.getStartShape().getLocation().getX();
+            double startYDim = c.getStartShape().getLocation().getY();
+            double endXDim = c.getEndShape().getLocation().getX();
+            double endYDim = c.getEndShape().getLocation().getY();
+
+
+            //animateTransform tagline
+            strBuilder.append("animateTransform attributeName=\"transform\"\n");
+            strBuilder.append("type=\"scale\"\n");
+            strBuilder.append("from=\"" + startXDim + " " + startYDim + "\" ");
+            strBuilder.append("to=\"" + endXDim + " " + endYDim + "\"\n");
+            strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
+                    + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"\n");
+          } else {
+            //animate tagline
+            strBuilder.append("<animate attributeType=\"XML\"\n");
+
+            if (c.getType().equals(IChange.ChangeType.COLOR)) {
+              //animate color change
+              strBuilder.append("attributeName=\"fill\"\n");
+              strBuilder.append("from=\"" + c.getStartShape().getColor().getRGB()
+                      + "\" to=\"" + c.getEndShape().getColor().getRGB() + "\"\n");
+            } else if (c.getType().equals(IChange.ChangeType.MOVE)) {
+              //animate x
+              strBuilder.append("attributeName=\"x\"\n");
+              strBuilder.append("from=\"" + c.getStartShape().getLocation().getX()
+                      + "\" to=\"" + c.getEndShape().getLocation().getX() + "\'\n");
+              strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
+                      + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"/>\n");
+
+              //animate y
+              strBuilder.append("<animate attributeType=\"XML\"\n");
+              strBuilder.append("attributeName=\"y\"\n");
+              strBuilder.append("from=\"" + c.getStartShape().getLocation().getY()
+                      + "\" to=\"" + c.getEndShape().getLocation().getY() + "\'\n");
+            }
+          }
+
+          //end of animation block
+          strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
+                  + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"/>\n");
+        }
+      }
+
+      strBuilder.append("\n</" + shapeType + ">");
+    }
+
+    return strBuilder.toString();
+  }
+
   @Override
   public void display() {
     StringBuilder strBuilder = new StringBuilder();
 
-    strBuilder.append("<?xml version=\"1.0\"?>\n" +
-            "<svg width=\"120\" height=\"120\"  viewBox=\"0 0 120 120\"\n" +
-            "     xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\"\n" +
-            "     xmlns:xlink=\"http://www.w3.org/1999/xlink\" >\n\n");
+    strBuilder.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
+            "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
 
-    for (DrawableTextShape s : shapes) {
-      if (s.getShapeType().equals("ellipse")) {
-        strBuilder.append("   <ellipse " + getEllipseDescription(s.getxLoc(), s.getyLoc(), s.getxDim(), s.getyDim(), s.getColor()));
-        //if changes is empty
-          //strBuilder.append("/>");
-        //if changes is full
-          //strBuilder.append(">");
-          //add animations
-      } else if (s.getShapeType().equals("ellipse")) {
-        strBuilder.append("<rect " + getRectDescription(s.getxLoc(), s.getyLoc(), s.getxDim(), s.getyDim(), s.getColor()));
-      }
-    }
+    strBuilder.append(getSVGFromShapeList());
 
-    strBuilder.append("/>\n</svg>");
+    strBuilder.append("\n</svg>");
     System.out.println(strBuilder.toString());
   }
 
@@ -69,6 +144,7 @@ public class ViewSVG extends TextBasedView {
     ViewSVG view = new ViewSVG();
 
     ArrayList<DrawableTextShape> shapes = new ArrayList<>();
+    shapes.add(new DrawableTextShape(0,20,"shape", "ellipse", 50, 50, 100, 100, Color.RED, null));
 
     view.setShapes(shapes);
     view.setFilename("~/Desktop/test");

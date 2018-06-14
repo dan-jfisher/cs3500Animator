@@ -56,4 +56,16 @@ public interface IChange extends Comparable<IChange>, Serializable {
    * @param shape the shape at the end of the move.
    */
   void setEndShape(IShape shape);
+
+  /**
+   * Get a copy of the shape at the beginning of the move.
+   * @return The copy of the shape.
+   */
+  IShape getStartShape();
+
+  /**
+   * Get a copy of the shape at the end of the move.
+   * @return The copy of the shape.
+   */
+  IShape getEndShape();
 }
