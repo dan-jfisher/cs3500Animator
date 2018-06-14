@@ -96,4 +96,14 @@ public abstract class AbstractChange implements IChange {
   public void setEndShape(IShape shape) {
     endShape = shape;
   }
+
+  @Override
+  public IShape getStartShape() {
+    return startShape.clone();
+  }
+
+  @Override
+  public IShape getEndShape() {
+    return endShape.clone();
+  }
 }

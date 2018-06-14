@@ -12,10 +12,11 @@ public class ChangeImpl extends AbstractChange {
 
   /**
    * This is the constructor for the ChangeImpl class.
-   * @param id the id of the shape.
+   *
+   * @param id    the id of the shape.
    * @param start the frame when the shape appears.
-   * @param end the frame when the shape disappears.
-   * @param type the type of change it represents.
+   * @param end   the frame when the shape disappears.
+   * @param type  the type of change it represents.
    */
   public ChangeImpl(String id, int start, int end, ChangeType type) {
     super(id, type);
@@ -51,16 +52,16 @@ public class ChangeImpl extends AbstractChange {
   @Override
   public String getDescription() {
     StringBuilder description = new StringBuilder();
-    DecimalFormat decForm =  new DecimalFormat("0.0");
+    DecimalFormat decForm = new DecimalFormat("0.0");
 
     description.append("Shape " + id + " ");
 
     switch (type) {
       case MOVE:
         description.append("moves from (" + decForm.format(startShape.getLocation().getX())
-                          + ", " + decForm.format(startShape.getLocation().getY()) + ") "
-                          + "to (" + decForm.format(endShape.getLocation().getX())
-                          + ", " + decForm.format(endShape.getLocation().getY()) + ")");
+                + ", " + decForm.format(startShape.getLocation().getY()) + ") "
+                + "to (" + decForm.format(endShape.getLocation().getX())
+                + ", " + decForm.format(endShape.getLocation().getY()) + ")");
         break;
       case COLOR:
         description.append("changes color from (" + startShape.getColor().getRed()
@@ -78,25 +79,5 @@ public class ChangeImpl extends AbstractChange {
     description.append(" from t=" + start + " to t=" + end);
 
     return description.toString();
-  }
-
-  @Override
-  public void setStartShape(IShape shape) {
-    startShape = shape;
-  }
-
-  @Override
-  public void setEndShape(IShape shape) {
-    endShape = shape;
-  }
-
-  @Override
-  public IShape getStartShape() {
-    return startShape.clone();
-  }
-
-  @Override
-  public IShape getEndShape() {
-    return endShape.clone();
   }
 }
