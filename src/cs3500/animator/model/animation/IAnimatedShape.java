@@ -1,6 +1,7 @@
 package cs3500.animator.model.animation;
 
 import java.awt.Color;
+import java.util.List;
 
 import cs3500.animator.model.shapes.Point2D;
 import cs3500.animator.model.shapes.IShape;
@@ -57,4 +58,10 @@ public interface IAnimatedShape {
    * @return the time as an int.
    */
   int getEndTime();
+
+  /**
+   * return the changes the shape being animated undergoes.
+   * @return changes undergone by the stored shape.
+   */
+  List<IChange> getChanges();
 }

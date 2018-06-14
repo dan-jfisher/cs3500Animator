@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.*;
+
 import cs3500.animator.model.shapes.Point2D;
 import cs3500.animator.model.shapes.Rectangle;
 import cs3500.animator.model.shapes.IShape;
@@ -19,7 +21,7 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
 
   HashMap<Integer, IShape> timeline;
 
-  private List<IChange> changes;
+  private ArrayList<IChange> changes;
 
   int startOfAnimation;
   int endOfAnimation;
@@ -185,6 +187,11 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
     }
     change.setStartShape(timeline.get(startTime));
     change.setEndShape(timeline.get(endTime));
+  }
+
+  @Override
+  public List<IChange> getChanges() {
+    return (ArrayList<IChange>)changes.clone();
   }
 
   /**
