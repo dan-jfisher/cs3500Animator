@@ -8,10 +8,13 @@ import cs3500.animator.util.DrawableTextShape;
 
 public class ViewText extends TextBasedView {
   ArrayList<IChange> aggroChanges;
+  String filename;
 
   public ViewText() {
     super();
     aggroChanges = new ArrayList<>();
+    filename = null;
+    viewType = ViewType.TEXT;
   }
 
   @Override

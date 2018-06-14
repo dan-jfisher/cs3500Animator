@@ -11,9 +11,11 @@ import cs3500.animator.util.DrawableGUIShape;
 public class ViewGUI extends JFrame implements IView{
   private ShapePanel panel;
   private JScrollPane scrollPane;
+  private ViewType viewType;
 
   public ViewGUI() {
     super();
+    viewType = ViewType.GUI;
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setResizable(true);
@@ -52,5 +54,10 @@ public class ViewGUI extends JFrame implements IView{
   @Override
   public void display() {
     this.setVisible(true);
+  }
+
+  @Override
+  public ViewType getViewType() {
+    return viewType;
   }
 }

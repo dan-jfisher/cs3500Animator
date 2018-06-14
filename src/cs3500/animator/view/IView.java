@@ -15,5 +15,7 @@ public interface IView {
    */
   void display();
 
+  ViewType getViewType();
+
   enum ViewType { GUI, SVG, TEXT}
 }

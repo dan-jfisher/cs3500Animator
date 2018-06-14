@@ -10,6 +10,7 @@ import cs3500.animator.util.IDrawableShape;
  */
 public abstract class TextBasedView implements IView{
   ArrayList<DrawableTextShape> shapes;
+  ViewType viewType;
 
   public TextBasedView() {
     shapes = new ArrayList<>();
@@ -21,5 +22,10 @@ public abstract class TextBasedView implements IView{
     } else {
       this.shapes = shapes;
     }
+  }
+
+  @Override
+  public ViewType getViewType() {
+    return viewType;
   }
 }
