@@ -88,8 +88,8 @@ public class ViewSVG extends TextBasedView {
             strBuilder.append("type=\"scale\"\n");
             strBuilder.append("from=\"" + startXDim + " " + startYDim + "\" ");
             strBuilder.append("to=\"" + endXDim + " " + endYDim + "\"\n");
-            strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
-                    + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"\n");
+            strBuilder.append("begin=\"" + c.getStart() + "s\" "
+                    + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"\n");
           } else {
             //animate tagline
             strBuilder.append("<animate attributeType=\"XML\"\n");
@@ -104,8 +104,8 @@ public class ViewSVG extends TextBasedView {
               strBuilder.append("attributeName=\"x\"\n");
               strBuilder.append("from=\"" + c.getStartShape().getLocation().getX()
                       + "\" to=\"" + c.getEndShape().getLocation().getX() + "\'\n");
-              strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
-                      + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"/>\n");
+              strBuilder.append("begin=\"" + c.getStart() + "s\" "
+                      + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"/>\n");
 
               //animate y
               strBuilder.append("<animate attributeType=\"XML\"\n");
@@ -116,8 +116,8 @@ public class ViewSVG extends TextBasedView {
           }
 
           //end of animation block
-          strBuilder.append("begin=\"" + c.getStartTime() + "s\" "
-                  + "dur=\"" + (c.getEndTime() - c.getStartTime()) + "s\"/>\n");
+          strBuilder.append("begin=\"" + c.getStart() + "s\" "
+                  + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"/>\n");
         }
       }
 
@@ -144,7 +144,7 @@ public class ViewSVG extends TextBasedView {
     ViewSVG view = new ViewSVG();
 
     ArrayList<DrawableTextShape> shapes = new ArrayList<>();
-    shapes.add(new DrawableTextShape(0,20,"shape", "ellipse", 50, 50, 100, 100, Color.RED, null));
+    shapes.add(new DrawableTextShape("shape",0,"shape", "ellipse", 50, 50, 100, 100, Color.RED, null));
 
     view.setShapes(shapes);
     view.setFilename("~/Desktop/test");
