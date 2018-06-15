@@ -3,7 +3,9 @@ package cs3500.animator.view;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import cs3500.animator.model.animation.ChangeImpl;
 import cs3500.animator.model.animation.IChange;
+import cs3500.animator.model.shapes.Ellipse;
 import cs3500.animator.util.DrawableTextShape;
 
 public class ViewSVG extends TextBasedView {
@@ -25,7 +27,9 @@ public class ViewSVG extends TextBasedView {
     StringBuilder strBuilder = new StringBuilder();
 
     strBuilder.append("x=\"" + x + "\" y=\"" + y + "\" height=\"" + height
-            + "\" width=\"" + width + "\" style=\"fill: #" + color.getRGB() + "\"");
+            + "\" width=\"" + width + "\" fill=\"#"
+            + Integer.toHexString(color.getRGB()).substring(2) + "\""
+            + " fill-opacity=\"0\">");
 
     return strBuilder.toString();
   }
@@ -34,19 +38,23 @@ public class ViewSVG extends TextBasedView {
     StringBuilder strBuilder = new StringBuilder();
 
     strBuilder.append("cx=\"" + x + "\" cy=\"" + y + "\" rx=\"" + xRadius
-            + "\" ry=\"" + yRadius + "\" style=\"fill: #" + color.getRGB() + "\"");
+            + "\" ry=\"" + yRadius + "\" fill=\"#"
+            + Integer.toHexString(color.getRGB()).substring(2) + "\""
+            + " fill-opacity=\"0\">");
 
     return strBuilder.toString();
   }
 
-  public String getStartEndTimeSVGAnimations (DrawableTextShape s) {
+  public String printStartEndTimeSVGAnimations (DrawableTextShape s) {
     StringBuilder stringBuilder = new StringBuilder();
 
-    if (s.getStartTime() != 0) {
+    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
+    stringBuilder.append("to=\"1\"\nbegin=\"" + s.getStartTime() + "\"/>\n");
 
-    }
+    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
+    stringBuilder.append("to=\"0\"\nbegin=\"" + s.getEndTime() + "\"/>");
 
-    return null;
+    return stringBuilder.toString();
   }
 
   /**
@@ -55,7 +63,7 @@ public class ViewSVG extends TextBasedView {
    * Illegal Argument Exception.
    * @return The SVG-style String.
    */
-  public String getSVGFromShapeList() {
+  public String printSVGFromShapeList() {
     StringBuilder strBuilder = new StringBuilder();
     String shapeType;
 
@@ -71,11 +79,17 @@ public class ViewSVG extends TextBasedView {
       strBuilder.append("<" + shapeType +  " " + getEllipseDescription(s.getxLoc(), s.getyLoc(),
               s.getxDim(), s.getyDim(), s.getColor()));
 
-      if (s.getChanges() == null || s.getChanges().size() == 0) {
-        strBuilder.append("/>");
-      } else {
+
+      strBuilder.append("\n\n");
+      strBuilder.append(printStartEndTimeSVGAnimations(s));
+
+      if (s.getChanges() != null && s.getChanges().size() > 0){
         strBuilder.append(">\n\n");
         for (IChange c : s.getChanges()) {
+          if (c.getStartShape() == null || c.getEndShape() == null) {
+            throw new IllegalArgumentException("Incomplete IChange");
+          }
+
           if (c.getType().equals(IChange.ChangeType.SCALE)) {
             double startXDim = c.getStartShape().getLocation().getX();
             double startYDim = c.getStartShape().getLocation().getY();
@@ -97,8 +111,11 @@ public class ViewSVG extends TextBasedView {
             if (c.getType().equals(IChange.ChangeType.COLOR)) {
               //animate color change
               strBuilder.append("attributeName=\"fill\"\n");
-              strBuilder.append("from=\"" + c.getStartShape().getColor().getRGB()
-                      + "\" to=\"" + c.getEndShape().getColor().getRGB() + "\"\n");
+              strBuilder.append("from=\""
+                      + Integer.toHexString(c.getStartShape().getColor().getRGB()).substring(2)
+                      + "\" to=\""
+                      + Integer.toHexString(c.getEndShape().getColor().getRGB()).substring(2)
+                      + "\"\n");
             } else if (c.getType().equals(IChange.ChangeType.MOVE)) {
               //animate x
               strBuilder.append("attributeName=\"x\"\n");
@@ -134,20 +151,27 @@ public class ViewSVG extends TextBasedView {
     strBuilder.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
             "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
 
-    strBuilder.append(getSVGFromShapeList());
+    strBuilder.append(printSVGFromShapeList());
 
     strBuilder.append("\n</svg>");
     System.out.println(strBuilder.toString());
   }
 
-  public static void main(String... args) {
+  /*public static void main(String... args) {
     ViewSVG view = new ViewSVG();
 
     ArrayList<DrawableTextShape> shapes = new ArrayList<>();
-    shapes.add(new DrawableTextShape("shape",0,"shape", "ellipse", 50, 50, 100, 100, Color.RED, null));
+    ArrayList<IChange> changes = new ArrayList<>();
+    IChange c  = new ChangeImpl("shape", 2, 9, IChange.ChangeType.COLOR);
+    c.setEndShape(new Ellipse(100,100,50,50, Color.GREEN));
+    c.setStartShape(new Ellipse(100,100,50,50, Color.RED));
+
+    changes.add(c);
+
+    shapes.add(new DrawableTextShape(1,10,"shape", "ellipse", 50, 50, 100, 100, Color.RED, changes));
 
     view.setShapes(shapes);
     view.setFilename("~/Desktop/test");
     view.display();
-  }
+  }*/
 }
