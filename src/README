@@ -14,3 +14,8 @@ changes include:
     - Added name property in abstract shape class since each shape has a name.
     Shape constructors now passes name as a parameter.
     - Added getName function to shape class to use for text outputs.
+    - Changed signature of getShapesAt(...) function in model to return IAnimatedShapes rather
+    than a normal IShape since calling controller functions need animation details,
+    not just the shape.
+    - Added a getLastFrame() function to model to determine how long the animation
+    needs to run for.

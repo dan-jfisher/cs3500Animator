@@ -24,17 +24,20 @@ public class AnimatedShapeToDrawableConverter {
   private IAnimatedShape shape;
   private IView.ViewType viewType;
   private int frameRate;
-  private AnimatedShapeToDrawableConverter animShapeToDrawableConverter;
   private Shape drawShape;
 
   /**
    * Constructor creates a new animated shape to drawable converter.
-   * @param origShape animated shape to be converted into a drawable shape.
-   * @param view view that the shape will be drawn in.
    */
-  public AnimatedShapeToDrawableConverter(IAnimatedShape origShape, IView view, int frameRate) {
-    viewType = view.getViewType();
-    shape = origShape;
+  public AnimatedShapeToDrawableConverter() {
+    this.shape = null;
+    this.viewType = null;
+    this.frameRate = 0;
+  }
+
+  public void setup(IAnimatedShape origShape, IView view, int frameRate) {
+    this.viewType = view.getViewType();
+    this.shape = origShape;
     this.frameRate = frameRate;
   }
 

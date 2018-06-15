@@ -119,12 +119,12 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
   }
 
   @Override
-  public List<IShape> getShapesAt(int time) {
-    List<IShape> currentShapes = new ArrayList<>();
+  public List<IAnimatedShape> getShapesAt(int time) {
+    List<IAnimatedShape> currentShapes = new ArrayList<>();
 
     for (String key : shapes.keySet()) {
       if (shapes.get(key).getStartTime() <= time && shapes.get(key).getEndTime() >= time) {
-        currentShapes.add(shapes.get(key).getShapeAt(time));
+        currentShapes.add(shapes.get(key));
       }
     }
 
@@ -201,5 +201,19 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
     }
     return returnShapes;
   }
+
+
+  @Override
+  public int getLastFrame() {
+    int lastFrame = 0;
+    for (String key : shapes.keySet()) {
+      if (shapes.get(key).getEndTime() > lastFrame) {
+        lastFrame = shapes.get(key).getEndTime();
+      }
+    }
+
+    return lastFrame;
+  }
+
 }
 

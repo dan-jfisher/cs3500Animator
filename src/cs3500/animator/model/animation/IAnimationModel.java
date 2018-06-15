@@ -24,7 +24,7 @@ public interface IAnimationModel {
    * @param time The time in question.
    * @return a List of shapes.
    */
-  List<IShape> getShapesAt(int time);
+  List<IAnimatedShape> getShapesAt(int time);
 
   /**
    * This function stores a Move and applies it to the relevant shape.
@@ -90,4 +90,10 @@ public interface IAnimationModel {
    * @return list of IShapes.
    */
   List<IShape> getAllShapes();
+
+  /**
+   * Gets the last frame of the animation.
+   * @return the last frame number as an int.
+   */
+  int getLastFrame();
 }
