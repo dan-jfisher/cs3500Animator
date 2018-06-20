@@ -16,6 +16,11 @@ public abstract class AbstractChange implements IChange {
   protected IShape startShape;
   protected IShape endShape;
 
+  /**
+   * Constructor takes a String for identification and an instance of {@link ChangeType}.
+   * @param id the name of the shape this change applies to.
+   * @param type the type of change this object represents.
+   */
   public AbstractChange(String id, ChangeType type) {
     this.type = type;
     this.id = id;
@@ -82,7 +87,7 @@ public abstract class AbstractChange implements IChange {
                 + " to " + endShape.getDimensions());
     }
 
-    description.append(" from t=" + start + " to t=" + end);
+    description.append(" from t=" + decForm.format(start) + " to t=" + decForm.format(end));
 
     return description.toString();
   }

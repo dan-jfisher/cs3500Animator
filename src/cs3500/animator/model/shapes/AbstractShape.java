@@ -56,5 +56,6 @@ public abstract class AbstractShape implements IShape {
   public ShapeType getType() {
     return this.shapeType;
   }
+
   public abstract IShape clone();
 }

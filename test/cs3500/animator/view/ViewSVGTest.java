@@ -2,11 +2,8 @@ package cs3500.animator.view;
 
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -18,11 +15,10 @@ import cs3500.animator.model.animation.IAnimationModel;
 import cs3500.animator.util.AnimatedShapeToDrawableConverter;
 import cs3500.animator.util.DrawableGUIShape;
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
 import static org.junit.Assert.assertEquals;
 
-public class ViewGUITest {
+public class ViewSVGTest {
 
   @Test
   public void validAnimationTest() {
@@ -30,12 +26,18 @@ public class ViewGUITest {
 
     AnimatedShapeToDrawableConverter converter = new AnimatedShapeToDrawableConverter();
     AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
-    builder.addOval("E1",500, 500, 100, 50, (float)1, (float)0, (float)0, 0, 200);
-    builder.addRectangle("R1",400, 600, 100, 120, (float)0, (float)0.5, (float)0.5, 20, 200);
-    builder.addColorChange("E1", 0,0,0,1,1,1, 50, 190);
-    builder.addScaleToChange("R1", 100, 120, 50,50, 20, 100);
-    builder.addScaleToChange("R1", 50, 50, 100,80, 101, 180);
-    builder.addMove("E1", 500, 500, 300, 700, 0, 100);
+    builder.addOval("E1",500, 500, 100, 50, (float)1, (float)0,
+            (float)0, 0, 200);
+    builder.addRectangle("R1",400, 600, 100, 120, (float)0,
+            (float)0.5, (float)0.5, 20, 200);
+    builder.addColorChange("E1", 0,0,0,1,1,1,
+            50, 190);
+    builder.addScaleToChange("R1", 100, 120, 50,50,
+            20, 100);
+    builder.addScaleToChange("R1", 50, 50, 100,80,
+            101, 180);
+    builder.addMove("E1", 500, 200, 300,
+            700, 0, 100);
 
     IAnimationModel model = builder.build();
     List<IAnimatedShape> shapes = model.getAllShapes();
@@ -56,11 +58,13 @@ public class ViewGUITest {
       //BufferedReader bufReader = new BufferedReader(reader);
       byte[] encoded = Files.readAllBytes(Paths.get("./svg.xml"));
       String str = new String(encoded);
-      assertEquals(str, "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n" +
+      assertEquals("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
+              "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n" +
               "\n" +
               "\n" +
               "<svg>\n" +
-              "<ellipse cx=\"400.0\" cy=\"600.0\" rx=\"100.0\" ry=\"50.0\" fill=\"#ff0000\" fill-opacity=\"0\">\n" +
+              "<ellipse cx=\"500.0\" cy=\"200.0\" rx=\"100.0\" ry=\"50.0\" fill=\"#ff0000\" " +
+              "fill-opacity=\"0\">\n" +
               "\n" +
               "<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n" +
               "to=\"1\"\n" +
@@ -71,18 +75,18 @@ public class ViewGUITest {
               "\n" +
               "<animate attributeType=\"XML\"\n" +
               "attributeName=\"fill\"\n" +
-              "from=\"#ff0000\" to=\"#ff8c8c\"\n" +
+              "from=\"#000000\" to=\"#8c8c8c\"\n" +
               "calMode=\"linear\"\n" +
               "begin=\"1.6666666s\" dur=\"4.666667s\"\n" +
               "fill=\"freeze\"/>\n" +
               "<animate attributeType=\"XML\"\n" +
               "attributeName=\"cx\"\n" +
-              "from=\"400.0\" to=\"300.0\"\n" +
+              "from=\"500.0\" to=\"300.0\"\n" +
               "begin=\"0.0s\" dur=\"3.3333333s\"\n" +
               "fill=\"freeze\"/>\n" +
               "<animate attributeType=\"XML\"\n" +
               "attributeName=\"cy\"\n" +
-              "from=\"600.0\" to=\"700.0\"\n" +
+              "from=\"200.0\" to=\"700.0\"\n" +
               "begin=\"0.0s\" dur=\"3.3333333s\"\n" +
               "fill=\"freeze\"/>\n" +
               "\n" +
@@ -90,7 +94,8 @@ public class ViewGUITest {
               "</svg>\n" +
               "\n" +
               "<svg>\n" +
-              "<rect x=\"400.0\" y=\"600.0\" height=\"120.0\" width=\"100.0\" fill=\"#008080\" fill-opacity=\"0\">\n" +
+              "<rect x=\"400.0\" y=\"600.0\" height=\"120.0\" width=\"100.0\" fill=\"#008080\" " +
+              "fill-opacity=\"0\">\n" +
               "\n" +
               "<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n" +
               "to=\"1\"\n" +
@@ -121,7 +126,7 @@ public class ViewGUITest {
               "</rect>\n" +
               "</svg>\n" +
               "\n" +
-              "</svg>");
+              "</svg>", str);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -143,5 +148,65 @@ public class ViewGUITest {
     shapes.add(null);
 
     view.setShapes(null);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void invalidAnimationTest1() {
+    ViewSVG view = (ViewSVG) ViewFactory.getView("svg");
+
+    AnimatedShapeToDrawableConverter converter = new AnimatedShapeToDrawableConverter();
+    AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
+    builder.addOval("E1", 500, 500, 100, 50, (float) 1, (float) 0,
+            (float) 0, 0, 200);
+    builder.addRectangle("R1", 400, 600, 100, 120, (float) 0,
+            (float) 0.5, (float) 0.5, 20, 200);
+    builder.addColorChange("E1", 0, 0, 0, 1, 1, 1,
+            50, 190);
+    builder.addScaleToChange("R1", 100, 120, 50, 50,
+            20, 100);
+    builder.addScaleToChange("R1", 50, 50, 100, 80,
+            20, 180);
+    builder.addMove("E1", 500, 200, 300,
+            700, 0, 100);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void invalidAnimationTest2() {
+    ViewSVG view = (ViewSVG) ViewFactory.getView("svg");
+
+    AnimatedShapeToDrawableConverter converter = new AnimatedShapeToDrawableConverter();
+    AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
+    builder.addOval("E1", 500, 500, 100, 50, (float) 1, (float) 0,
+            (float) 0, 0, 200);
+    builder.addRectangle("R1", 400, 600, 100, 120, (float) 0,
+            (float) 0.5, (float) 0.5, 20, 200);
+    builder.addColorChange("E1", 0, 0, 0, 1, 1, 1,
+            50, 30);
+    builder.addScaleToChange("R1", 100, 120, 50, 50,
+            20, 100);
+    builder.addScaleToChange("R1", 50, 50, 100, 80,
+            101, 180);
+    builder.addMove("E1", 500, 200, 300,
+            700, 0, 100);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void invalidAnimationTest3() {
+    ViewSVG view = (ViewSVG) ViewFactory.getView("svg");
+
+    AnimatedShapeToDrawableConverter converter = new AnimatedShapeToDrawableConverter();
+    AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
+    builder.addOval("E1", 500, 500, 100, 50, (float) 1, (float) 0,
+            (float) 0, 0, 200);
+    builder.addRectangle("R1", 400, 600, 100, 120, (float) 0,
+            (float) 0.5, (float) 0.5, 20, 200);
+    builder.addColorChange("E1", 0, 0, 0, 1, 1, 1,
+            50, 190);
+    builder.addScaleToChange("R1", -1, 120, 50, 50,
+            20, 100);
+    builder.addScaleToChange("R1", 50, 50, 100, 80,
+            100, 180);
+    builder.addMove("E1", 500, 200, 300,
+            700, 0, 100);
   }
 }

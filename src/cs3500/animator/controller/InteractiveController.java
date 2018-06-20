@@ -8,23 +8,32 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import cs3500.animator.model.animation.IAnimationModel;
-import cs3500.animator.view.ViewGUI;
-import cs3500.animator.view.ViewSVG;
+import cs3500.animator.view.InteractiveViewGUI;
 
-public class HybridController extends ControllerGUI implements ActionListener, ChangeListener {
-
-  private ControllerText fileOutputController;
+public class InteractiveController extends ControllerGUI implements ActionListener, ChangeListener {
+  InteractiveViewGUI interactiveView;
 
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
    *
    * @param model           model to be used to get cs3500.animator.model.animation information.
-   * @param guiView         View to display cs3500.animator.model.animation in a GUI.
+   * @param interactiveView         View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public HybridController(IAnimationModel model, ViewGUI guiView, int frameRatePerSec) {
-    super(model, guiView, frameRatePerSec);
-    fileOutputController = new ControllerText(model, new ViewSVG(), frameRate);
+  public InteractiveController(IAnimationModel model, InteractiveViewGUI interactiveView, int frameRatePerSec) {
+    super(model, interactiveView, frameRatePerSec);
+    this.interactiveView = interactiveView;
+
+    setAsActionListener();
+    setAsChangeListener();
+  }
+
+  public void setAsActionListener() {
+    interactiveView.setActionListener(this);
+  }
+
+  public void setAsChangeListener() {
+    interactiveView.setChangeListener(this);
   }
 
   @Override
@@ -38,31 +47,22 @@ public class HybridController extends ControllerGUI implements ActionListener, C
         timer.start();
       }
     } else if (action.equalsIgnoreCase("restart button")) {
-      timer.restart();
+      //---------------------------------------------Not sure how to restart yet-----------------------
     } else if (action.equalsIgnoreCase("toggle looping button")) {
-      if (timer.isRepeats()) {
-        timer.setRepeats(false);
-      } else {
-        timer.setRepeats(true);
-      }
-    } else if (action.equals("export animation")) {
-      //invoke FileOutputController
+      looping = !looping;
+      //---------------------------------------------permanent, but it shouldn't be--------------------
     }
   }
 
   @Override
   public void stateChanged(ChangeEvent changeEvent) {
+    int delay;
+
     JSlider source = (JSlider)changeEvent.getSource();
     if (!source.getValueIsAdjusting()) {
       int fps = (int)source.getValue();
-      if (fps == 0) {
-        if (!frozen) stopAnimation();
-      } else {
-        delay = 1000 / fps;
-        timer.setDelay(delay);
-        timer.setInitialDelay(delay * 10);
-        if (frozen) startAnimation();
-      }
+      delay = 1000 / fps;
+      timer.setDelay(delay);
     }
   }
 }
