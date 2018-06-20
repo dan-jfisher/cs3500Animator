@@ -46,7 +46,7 @@ public interface IShape extends Cloneable, Serializable {
   IShape clone();
 
   /**
-   * This creates a string containing a description of the shapes fields.
+   * This creates a string containing a description of the cs3500.animator.model.shapes fields.
    * @return the String.
    */
   String getDescription();

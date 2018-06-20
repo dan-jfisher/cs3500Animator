@@ -20,26 +20,30 @@ public interface IAnimatedShape {
   IShape getShapeAt(int time);
 
   /**
-   * Apply a move over the given time frame.
-   * @param end the location being moved to.
-   * @param change {@link IChange} change being applied
+   * This method applies a move from one location to another to this animated shape.
+   * @param change The change object associated with this move.
+   * @param start the initial location
+   * @param end the final location
    */
-  void applyMove(IChange change, Point2D end);
+  void applyMove(IChange change, Point2D start, Point2D end);
 
   /**
-   * Apply a color change over the given time frame.
-   * @param endColor the Color at the end of the change.
-   * @param change {@link IChange} change being applied
+   * This method applies a color change to this animated shape.
+   * @param change The change associated with this color change
+   * @param startColor the initial color
+   * @param endColor the final color
    */
-  void applyColorChange(IChange change, Color endColor);
+  void applyColorChange(IChange change, Color startColor, Color endColor);
 
   /**
-   * Apply a scaling change over the given time frame.
-   * @param change {@link IChange} change being applied
-   * @param dims The dimensions for the shape to be changed to
-   *             This is up to the implementation
+   * This method appleis a scale to this animated shape.
+   * @param change The change assoicated with this scale.
+   * @param oldXDim The original x-Dimension, said dimension is specified by the implementation
+   * @param oldYDim The original y-Dimension
+   * @param newXDim The final x-Dimension
+   * @param newYDim The final y-Dimension
    */
-  void applyScale(IChange change, double ... dims);
+  void applyScale(IChange change, double oldXDim, double oldYDim, double newXDim, double newYDim);
 
   /**
    * Get the text description of the shape when it was first created.

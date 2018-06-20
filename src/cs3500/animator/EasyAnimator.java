@@ -1,34 +1,94 @@
 package cs3500.animator;
 
-import java.awt.*;
-import java.util.Collection;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
-import cs3500.animator.controller.ControllerGUI;
-import cs3500.animator.controller.ControllerText;
+import cs3500.animator.controller.ControllerFactory;
 import cs3500.animator.controller.IController;
 import cs3500.animator.model.animation.AnimationModelImpl;
 import cs3500.animator.model.animation.IAnimationModel;
+import cs3500.animator.util.AnimationFileReader;
 import cs3500.animator.view.IView;
-import cs3500.animator.view.ViewGUI;
-import cs3500.animator.view.ViewSVG;
+import cs3500.animator.view.ViewFactory;
 
+
+/**
+ * This class provides an executable main method for our animator.
+ */
 public final class EasyAnimator {
+  /**
+   * This method takes the following arguments:
+   *  if- input filename
+   *  iv- view type (svg, text, gui)
+   *  o- output filename
+   *  speed- cs3500.animator.model.animation speed in frames per second.
+   * @param args The arguments specified above.
+   */
   public static void main(String[] args) {
+    String inputFilename = null;
+    String outputFilename = null;
+    String viewType = null;
+    int fps = 0;
 
-    AnimationModelImpl.Builder builder = new AnimationModelImpl.Builder();
-    builder.addRectangle("R1", 400, 400, 50, 70, (float)0.4,(float)0.5,(float)0.9,0,50);
-    builder.addMove("R1", 200,200, 500, 500, 2, 25);
-    builder.addOval("E1", 600, 600, 100, 30, (float)0.9, (float)0.2, (float)0.1, 10, 85);
-    builder.addColorChange("E1", (float) 0.9,(float)0.2, (float)0.1, (float)0.1, (float)0.1, (float)0.9,15, 80);
 
-    IAnimationModel model = builder.build();
-    System.out.println(model.getAnimationDescription());
+    Map<String, String> params = new HashMap<>();
+    String key = null;
+    for (int i = 0; i < args.length; i++) {
+      String a = args[i];
 
-    ViewSVG view = new ViewSVG();
-    view.setFilename("/home/dan/svg.xml");
+      if (a.charAt(0) == '-') {
+        if (a.length() > 1) {
+          key = a.substring(1);
+        } else {
+          throw new IllegalArgumentException("Invalid command line input");
+        }
+      }
+      else if (key != null) {
+        params.put(new String(key), a);
+        key = null;
+      }
+      else {
+        throw new IllegalArgumentException("Invalid command line input");
+      }
+    }
 
-    IController controller = new ControllerText(model, view, 30);
+    IView view = null;
 
+    for (String k : params.keySet()) {
+      if (k.equals("if")) {
+        inputFilename = params.get(k);
+      } else if (k.equals("iv")) {
+        viewType = params.get(k);
+        view = ViewFactory.getView(viewType);
+      } else if (k.equals("o")) {
+        outputFilename = params.get(k);
+      } else if (k.equals("speed")) {
+        try {
+          fps = Integer.parseInt(params.get(k));
+        } catch (NumberFormatException e) {
+          throw new IllegalArgumentException("Invalid speed");
+        }
+      } else {
+        throw new IllegalArgumentException("Invalid command line input");
+      }
+    }
+
+    IAnimationModel model;
+    if (inputFilename == null) {
+      throw new IllegalArgumentException("Missing input file");
+    } else {
+      AnimationFileReader reader = new AnimationFileReader();
+      try {
+        model = reader.readFile(inputFilename, new AnimationModelImpl.Builder());
+      } catch (FileNotFoundException e) {
+        throw new IllegalArgumentException("Could not open input file");
+      }
+    }
+
+
+    IController controller =  ControllerFactory.getController(viewType, view, model, fps,
+            outputFilename);
     controller.run();
   }
 }

@@ -35,19 +35,38 @@ public class AnimatedShapeToDrawableConverter {
     this.frameRate = 0;
   }
 
+  /**
+   * This function sets up the conversion.
+   * @param origShape original shape
+   * @param view view
+   * @param frameRate frames per seconds
+   */
   public void setup(IAnimatedShape origShape, IView view, int frameRate) {
     this.viewType = view.getViewType();
     this.shape = origShape;
     this.frameRate = frameRate;
   }
 
+  /**
+   * The default converter.
+   * @return The time domain change
+   */
   public IDrawableShape convert() {
+    return convert(0);
+  }
+
+  /**
+   * This method converts an animated shape into a drawable one.
+   * @param frameNum The frameNumber that contains the shape in question.
+   * @return The time domain change
+   */
+  public IDrawableShape convert(int frameNum) {
     int startFrame = shape.getStartTime();
     float startTime = startFrame / frameRate;
     float endFrame = shape.getEndTime();
-    float endTime = endFrame/frameRate;
+    float endTime = endFrame / frameRate;
 
-    IShape baseShape = shape.getShapeAt(startFrame);
+    IShape baseShape = shape.getShapeAt(frameNum);
     String name = baseShape.getName();
     ShapeType sType = baseShape.getType();
     double xLoc = baseShape.getLocation().getX();
@@ -57,7 +76,7 @@ public class AnimatedShapeToDrawableConverter {
     Color color = baseShape.getColor();
     ArrayList<TimeDomainChangeImpl> timeChanges = new ArrayList<>();
 
-    switch(viewType) {
+    switch (viewType) {
       case SVG:
         List<IChange> oldChanges = shape.getChanges();
         for (IChange changeInFrame: oldChanges) {

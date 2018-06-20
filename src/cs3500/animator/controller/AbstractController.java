@@ -1,7 +1,6 @@
 package cs3500.animator.controller;
 
 import cs3500.animator.model.animation.IAnimationModel;
-import cs3500.animator.view.IView;
 
 /**
  * Abstract controller class containing identical properties/methods for all controllers.

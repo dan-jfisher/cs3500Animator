@@ -14,7 +14,6 @@ import java.util.List;
 import cs3500.animator.model.shapes.Ellipse;
 import cs3500.animator.model.shapes.Point2D;
 import cs3500.animator.model.shapes.Rectangle;
-import cs3500.animator.model.shapes.IShape;
 import cs3500.animator.util.TweenModelBuilder;
 
 public class AnimationModelImpl implements IAnimationModel, Serializable {
@@ -72,7 +71,8 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
     public TweenModelBuilder<IAnimationModel> addMove(String name, float moveFromX,
                                                       float moveFromY, float moveToX,
                                                       float moveToY, int startTime, int endTime) {
-      model.storeMove(name, new Point2D(moveToX, moveToY), startTime, endTime);
+      model.storeMove(name, new Point2D(moveFromX, moveFromY),
+              new Point2D(moveToX, moveToY), startTime, endTime);
       return this;
     }
 
@@ -81,7 +81,8 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
                                                              float oldB, float newR, float newG,
                                                              float newB, int startTime,
                                                              int endTime) {
-      model.storeColorChange(name, new Color(newR, newG, newB), startTime, endTime);
+      model.storeColorChange(name, new Color(oldR, oldG, oldB),
+              new Color(newR, newG, newB), startTime, endTime);
       return this;
     }
 
@@ -90,7 +91,7 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
                                                                float fromSy, float toSx,
                                                                float toSy, int startTime,
                                                                int endTime) {
-      model.storeScale(name, startTime, endTime, toSx, toSy);
+      model.storeScale(name, startTime, endTime, fromSx, fromSy, toSx, toSy);
       return this;
     }
 
@@ -132,43 +133,45 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
   }
 
   @Override
-  public void storeMove(String id, Point2D end, int startTime, int endTime) {
+  public void storeMove(String id, Point2D start, Point2D end, int startTime, int endTime) {
     IAnimatedShape s = shapes.get(id);
 
-    if(s == null) {
+    if (s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
     IChange move = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.MOVE);
-    s.applyMove(move, end);
+    s.applyMove(move, start, end);
 
     changes.add(move);
   }
 
   @Override
-  public void storeScale(String id, int startTime, int endTime, double ... dims) {
+  public void storeScale(String id, int startTime, int endTime, double startXDim, double startYDim,
+                         double endXDim, double endYDim) {
     IAnimatedShape s = shapes.get(id);
 
-    if(s == null) {
+    if (s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
     IChange scale = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.SCALE);
-    s.applyScale(scale, dims);
+    s.applyScale(scale, startXDim, startYDim, endXDim, endYDim);
 
     changes.add(scale);
   }
 
   @Override
-  public void storeColorChange(String id, Color endColor, int startTime, int endTime) {
+  public void storeColorChange(String id, Color startColor, Color endColor, int startTime,
+                               int endTime) {
     IAnimatedShape s = shapes.get(id);
 
-    if(s == null) {
+    if (s == null) {
       throw new IllegalArgumentException("Invalid ID");
     }
 
     IChange color = new ChangeImpl(id, startTime, endTime, IChange.ChangeType.COLOR);
-    s.applyColorChange(color, endColor);
+    s.applyColorChange(color, startColor, endColor);
 
     changes.add(color);
   }
@@ -194,10 +197,10 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
   }
 
   @Override
-  public List<IShape> getAllShapes() {
-    ArrayList<IShape>  returnShapes = new ArrayList<>();
+  public List<IAnimatedShape> getAllShapes() {
+    ArrayList<IAnimatedShape>  returnShapes = new ArrayList<>();
     for (String key: shapes.keySet()) {
-      returnShapes.add(shapes.get(key).getShapeAt(shapes.get(key).getStartTime()));
+      returnShapes.add(shapes.get(key));
     }
     return returnShapes;
   }
