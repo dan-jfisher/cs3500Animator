@@ -58,7 +58,9 @@ public class HybridController extends ControllerGUI implements ActionListener, C
     if (!source.getValueIsAdjusting()) {
       int fps = (int)source.getValue();
       if (fps == 0) {
-        if (!frozen) stopAnimation();
+        if (!frozen) {
+          stopAnimation();
+        }
       } else {
         delay = 1000 / fps;
         timer.setDelay(delay);
