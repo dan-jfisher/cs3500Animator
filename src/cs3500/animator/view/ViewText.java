@@ -1,9 +1,11 @@
 package cs3500.animator.view;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import cs3500.animator.model.animation.IChange;
+import cs3500.animator.util.IDrawableShape;
 import cs3500.animator.util.DrawableTextShape;
 
 public class ViewText extends TextBasedView {
@@ -17,7 +19,6 @@ public class ViewText extends TextBasedView {
     viewType = ViewType.TEXT;
   }
 
-  @Override
   public void setShapes(ArrayList<DrawableTextShape> shapes) {
     super.setShapes(shapes);
     for (DrawableTextShape s : shapes) {
@@ -38,5 +39,31 @@ public class ViewText extends TextBasedView {
             + "Type: " + s.getShapeType() + "\n"
             + "");
     }
+  }
+
+  @Override
+  public String getRectDescription(double x, double y, double width, double height, Color color) {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
+
+  @Override
+  public String getEllipseDescription(double x, double y, double xRadius,
+                                      double yRadius, Color color) {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
+
+  @Override
+  public void setFilename(String filename) {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
+
+  @Override
+  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
+
+  @Override
+  public String printSVGFromShapeList() {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
   }
 }

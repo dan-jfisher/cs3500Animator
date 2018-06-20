@@ -1,4 +1,4 @@
-package cs3500.animator.main;
+package cs3500.animator;
 
 import java.awt.*;
 import java.util.Collection;
@@ -24,7 +24,8 @@ public final class EasyAnimator {
     IAnimationModel model = builder.build();
     System.out.println(model.getAnimationDescription());
 
-    ViewSVG view = new ViewSVG("/home/dan/svg.xml");
+    ViewSVG view = new ViewSVG();
+    view.setFilename("/home/dan/svg.xml");
 
     IController controller = new ControllerText(model, view, 30);
 

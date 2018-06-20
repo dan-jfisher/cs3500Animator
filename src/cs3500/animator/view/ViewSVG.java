@@ -1,12 +1,10 @@
 package cs3500.animator.view;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
-import cs3500.animator.model.animation.ChangeImpl;
 import cs3500.animator.model.animation.IChange;
-import cs3500.animator.model.shapes.Ellipse;
 import cs3500.animator.util.DrawableTextShape;
+import cs3500.animator.util.IDrawableShape;
 
 public class ViewSVG extends TextBasedView {
   String filename;
@@ -23,6 +21,11 @@ public class ViewSVG extends TextBasedView {
     }
   }
 
+  @Override
+  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
+    throw new UnsupportedOperationException("ViewSVG object does not support this function");
+  }
+
   public String getRectDescription(double x, double y, double width, double height, Color color) {
     StringBuilder strBuilder = new StringBuilder();
 
@@ -34,7 +37,8 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
-  public String getEllipseDescription(double x, double y, double xRadius, double yRadius, Color color) {
+  public String getEllipseDescription(double x, double y, double xRadius,
+                                      double yRadius, Color color) {
     StringBuilder strBuilder = new StringBuilder();
 
     strBuilder.append("cx=\"" + x + "\" cy=\"" + y + "\" rx=\"" + xRadius

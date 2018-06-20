@@ -2,7 +2,7 @@ package cs3500.animator.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.Timer;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -25,6 +25,8 @@ public class HybridController extends ControllerGUI implements ActionListener, C
   public HybridController(IAnimationModel model, ViewGUI guiView, int frameRatePerSec) {
     super(model, guiView, frameRatePerSec);
     fileOutputController = new ControllerText(model, new ViewSVG(), frameRate);
+    //timer = new Timer("t1");
+
   }
 
   @Override

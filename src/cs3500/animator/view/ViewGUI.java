@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import cs3500.animator.util.IDrawableShape;
 import cs3500.animator.util.DrawableGUIShape;
 
-public class ViewGUI extends JFrame implements IView{
+public class ViewGUI extends JFrame implements IView {
   private ShapePanel panel;
   private JScrollPane scrollPane;
   private ViewType viewType;
@@ -26,7 +27,8 @@ public class ViewGUI extends JFrame implements IView{
     this.pack();
   }
 
-  public void setShapes(ArrayList<DrawableGUIShape> newShapes) {
+  public void setShapes(ArrayList<DrawableGUIShape> newShapes)
+  {
     panel.setShapes(newShapes);
   }
 
@@ -59,5 +61,30 @@ public class ViewGUI extends JFrame implements IView{
   @Override
   public ViewType getViewType() {
     return viewType;
+  }
+
+  @Override
+  public String getRectDescription(double x, double y, double width, double height, Color color) {
+    throw new UnsupportedOperationException("ViewGUI object does not support this function");
+  }
+
+  @Override
+  public String getEllipseDescription(double x, double y, double xRadius, double yRadius, Color color) {
+    throw new UnsupportedOperationException("ViewGUI object does not support this function");
+  }
+
+  @Override
+  public void setFilename(String filename) {
+    throw new UnsupportedOperationException("ViewGUI object does not support this function");
+  }
+
+  @Override
+  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
+    throw new UnsupportedOperationException("ViewGUI object does not support this function");
+  }
+
+  @Override
+  public String printSVGFromShapeList() {
+    throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 }

@@ -16,8 +16,8 @@ import cs3500.animator.view.ViewGUI;
  */
 public class ControllerGUI extends AbstractController {
 
-  private ViewGUI guiView;
-
+  protected ViewGUI guiView;
+  protected Timer timer;
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
    * @param model model to be used to get animation information.
@@ -32,7 +32,7 @@ public class ControllerGUI extends AbstractController {
 
   @Override
   public void run() {
-    Timer timer = new Timer("t1");
+    timer = new Timer("t1");
     AnimatedShapeToDrawableConverter shapeToDrawableConverter
             = new AnimatedShapeToDrawableConverter();
 
