@@ -1,16 +1,24 @@
 package cs3500.animator.view;
 
-import java.awt.*;
-import java.util.ArrayList;;
 
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 import cs3500.animator.util.DrawableGUIShape;
-import cs3500.animator.util.DrawableTextShape;
 
+/**
+ * This is the panel used to paint cs3500.animator.model.shapes for the {@link ViewGUI}.
+ */
 public class ShapePanel extends JPanel {
   private ArrayList<DrawableGUIShape> shapes;
 
+  /**
+   * This is the default constructor.
+   */
   public ShapePanel() {
     super();
     shapes = new ArrayList<>();
@@ -29,7 +37,20 @@ public class ShapePanel extends JPanel {
     }
   }
 
+  /**
+   * This method sets the cs3500.animator.model.shapes to be animated for any given frame.
+   * @param shapes the cs3500.animator.model.shapes to be displayed.
+   */
   public void setShapes(ArrayList<DrawableGUIShape> shapes) {
+    if (shapes == null) {
+      throw new IllegalArgumentException("invalid shape list");
+    } else {
+      for (DrawableGUIShape s : shapes) {
+        if (s == null) {
+          throw new IllegalArgumentException("invalid shape list");
+        }
+      }
+    }
     this.shapes.clear();
     this.shapes.addAll(shapes);
   }

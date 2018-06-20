@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * This class represents a file reader for the animation file. This reads in the
- * file in the prescribed file format, and relies on a model builder interface.
+ * This class represents a file reader for the cs3500.animator.model.animation file.
+ * This reads in the file in the prescribed file format, and relies on a model builder interface.
  * The user of this class should create a model builder that implements this
  * interface.
  */
@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class AnimationFileReader {
 
   /**
-   * Read the animation file and use the builder to build a model.
+   * Read the cs3500.animator.model.animation file and use the builder to build a model.
    *
    * @param fileName the path of the file to be read
    * @param builder  the builder used to build the model

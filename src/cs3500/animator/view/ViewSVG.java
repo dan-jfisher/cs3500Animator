@@ -1,31 +1,36 @@
 package cs3500.animator.view;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import cs3500.animator.model.animation.IChange;
+import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
+/**
+ * This class uses a list of {@link DrawableTextShape}s to create an svg document which can be
+ * animated using a web browser.
+ */
 public class ViewSVG extends TextBasedView {
-  String filename;
 
+  /**
+   * This is the defualt constructor.
+   */
   public ViewSVG() {
     super();
-    filename = null;
+    this.ap = null;
     viewType = ViewType.SVG;
   }
 
-  public void setFilename(String filename) {
-    if (filename == null || filename.equals("")) {
-      this.filename = filename;
-    }
-  }
-
-  @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
-    throw new UnsupportedOperationException("ViewSVG object does not support this function");
-  }
-
+  /**
+   * This method writes an SVG style for a rectangle.
+   * @param x the x coordinate of the corner.
+   * @param y the y coordinate of the corner.
+   * @param width The width of the rectangle.
+   * @param height The height of the rectangle.
+   * @param color The color of the rectangle.
+   * @return The svg style description.
+   */
   public String getRectDescription(double x, double y, double width, double height, Color color) {
     StringBuilder strBuilder = new StringBuilder();
 
@@ -37,8 +42,17 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
-  public String getEllipseDescription(double x, double y, double xRadius,
-                                      double yRadius, Color color) {
+  /**
+   * This method writes an SVG style for an ellipse.
+   * @param x the x coordinate of the center.
+   * @param y the y coordinate of the center.
+   * @param xRadius the horizontal radius of the ellipse.
+   * @param yRadius the vertical radius of the ellipse.
+   * @param color the color of the ellipse.
+   * @return
+   */
+  public String getEllipseDescription(double x, double y, double xRadius, double yRadius,
+                                      Color color) {
     StringBuilder strBuilder = new StringBuilder();
 
     strBuilder.append("cx=\"" + x + "\" cy=\"" + y + "\" rx=\"" + xRadius
@@ -49,100 +63,123 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
-  public String printStartEndTimeSVGAnimations (DrawableTextShape s) {
+  /**
+   * This method adds transformations for animating the appearance and disappearance of a shape.
+   * This must be done for every shape.
+   * @param s The shape being animated
+   * @return the svg description of the appearance/disappearance cs3500.animator.model.animation.
+   */
+  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
     StringBuilder stringBuilder = new StringBuilder();
 
     stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
-    stringBuilder.append("to=\"1\"\nbegin=\"" + s.getStartTime() + "\"/>\n");
+    stringBuilder.append("to=\"1\"\nbegin=\"" + s.getStartTime() + "s\"/>\n");
 
     stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
-    stringBuilder.append("to=\"0\"\nbegin=\"" + s.getEndTime() + "\"/>");
+    stringBuilder.append("to=\"0\"\nbegin=\"" + s.getEndTime() + "s\"/>");
 
     return stringBuilder.toString();
   }
 
   /**
-   * This function loops through the shapes and converts them to SVG.
-   * It only accepts shapes of type ellipse and rectangle.  Otherwise it throws an
+   * This function loops through the cs3500.animator.model.shapes and converts them to SVG.
+   * It only accepts cs3500.animator.model.shapes of type ellipse and rectangle.
+   * Otherwise it throws an
    * Illegal Argument Exception.
    * @return The SVG-style String.
    */
   public String printSVGFromShapeList() {
     StringBuilder strBuilder = new StringBuilder();
     String shapeType;
+    String xLocAttributeName;
+    String yLocAttributeName;
+    String xDimName;
+    String yDimName;
 
     for (DrawableTextShape s : shapes) {
-      if (s.getShapeType().equals("ellipse")) {
+      strBuilder.append("\n<svg>\n");
+      if (s.getShapeType().equals(ShapeType.ELLIPSE)) {
         shapeType = "ellipse";
-      } else if (s.getShapeType().equals("rect")) {
+        xLocAttributeName = "cx";
+        yLocAttributeName = "cy";
+        xDimName = "rx";
+        yDimName = "ry";
+        strBuilder.append("<" + shapeType +  " " + getEllipseDescription(s.getxLoc(), s.getyLoc(),
+                s.getxDim(), s.getyDim(), s.getColor()));
+      } else if (s.getShapeType().equals(ShapeType.RECTANGLE)) {
         shapeType = "rect";
+        xLocAttributeName = "x";
+        yLocAttributeName = "y";
+        xDimName = "width";
+        yDimName = "height";
+        strBuilder.append("<" + shapeType +  " " + getRectDescription(s.getxLoc(), s.getyLoc(),
+                s.getxDim(), s.getyDim(), s.getColor()));
       } else {
         throw new IllegalArgumentException("Illegal shape type");
       }
-
-      strBuilder.append("<" + shapeType +  " " + getEllipseDescription(s.getxLoc(), s.getyLoc(),
-              s.getxDim(), s.getyDim(), s.getColor()));
 
 
       strBuilder.append("\n\n");
       strBuilder.append(printStartEndTimeSVGAnimations(s));
 
-      if (s.getChanges() != null && s.getChanges().size() > 0){
-        strBuilder.append(">\n\n");
+      if (s.getChanges() != null && s.getChanges().size() > 0) {
+        strBuilder.append("\n\n");
         for (IChange c : s.getChanges()) {
           if (c.getStartShape() == null || c.getEndShape() == null) {
             throw new IllegalArgumentException("Incomplete IChange");
           }
 
+          strBuilder.append("<animate attributeType=\"XML\"\n");
+
           if (c.getType().equals(IChange.ChangeType.SCALE)) {
-            double startXDim = c.getStartShape().getLocation().getX();
-            double startYDim = c.getStartShape().getLocation().getY();
-            double endXDim = c.getEndShape().getLocation().getX();
-            double endYDim = c.getEndShape().getLocation().getY();
+            double startXDim = c.getStartShape().getXDim();
+            double startYDim = c.getStartShape().getYDim();
+            double endXDim = c.getEndShape().getXDim();
+            double endYDim = c.getEndShape().getYDim();
 
-
-            //animateTransform tagline
-            strBuilder.append("animateTransform attributeName=\"transform\"\n");
-            strBuilder.append("type=\"scale\"\n");
-            strBuilder.append("from=\"" + startXDim + " " + startYDim + "\" ");
-            strBuilder.append("to=\"" + endXDim + " " + endYDim + "\"\n");
+            strBuilder.append("attributeName=\"" + xDimName + "\"\n");
+            strBuilder.append("from=\"" + startXDim + "\" ");
+            strBuilder.append("to=\"" + endXDim + "\"\n");
             strBuilder.append("begin=\"" + c.getStart() + "s\" "
-                    + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"\n");
-          } else {
-            //animate tagline
+                    + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"\n"
+                    + "fill=\"freeze\"/>\n");
+
+            strBuilder.append("<animate attributeName=\"" + yDimName + "\"\n");
+            strBuilder.append("from=\"" + startYDim + "\" ");
+            strBuilder.append("to=\"" + endYDim + "\"\n");
+          } else if (c.getType().equals(IChange.ChangeType.COLOR)) {
+            //animate color change
+            strBuilder.append("attributeName=\"fill\"\n");
+            strBuilder.append("from=\"#"
+                    + Integer.toHexString(c.getStartShape().getColor().getRGB()).substring(2)
+                    + "\" to=\"#"
+                    + Integer.toHexString(c.getEndShape().getColor().getRGB()).substring(2)
+                    + "\"\ncalMode=\"linear\"\n");
+          } else if (c.getType().equals(IChange.ChangeType.MOVE)) {
+            //animate x
+            strBuilder.append("attributeName=\"" + xLocAttributeName + "\"\n");
+            strBuilder.append("from=\"" + c.getStartShape().getLocation().getX()
+                    + "\" to=\"" + c.getEndShape().getLocation().getX() + "\"\n");
+            strBuilder.append("begin=\"" + c.getStart() + "s\" "
+                    + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"\n"
+                    + "fill=\"freeze\"/>\n");
+
+            //animate y
             strBuilder.append("<animate attributeType=\"XML\"\n");
-
-            if (c.getType().equals(IChange.ChangeType.COLOR)) {
-              //animate color change
-              strBuilder.append("attributeName=\"fill\"\n");
-              strBuilder.append("from=\""
-                      + Integer.toHexString(c.getStartShape().getColor().getRGB()).substring(2)
-                      + "\" to=\""
-                      + Integer.toHexString(c.getEndShape().getColor().getRGB()).substring(2)
-                      + "\"\n");
-            } else if (c.getType().equals(IChange.ChangeType.MOVE)) {
-              //animate x
-              strBuilder.append("attributeName=\"x\"\n");
-              strBuilder.append("from=\"" + c.getStartShape().getLocation().getX()
-                      + "\" to=\"" + c.getEndShape().getLocation().getX() + "\'\n");
-              strBuilder.append("begin=\"" + c.getStart() + "s\" "
-                      + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"/>\n");
-
-              //animate y
-              strBuilder.append("<animate attributeType=\"XML\"\n");
-              strBuilder.append("attributeName=\"y\"\n");
-              strBuilder.append("from=\"" + c.getStartShape().getLocation().getY()
-                      + "\" to=\"" + c.getEndShape().getLocation().getY() + "\'\n");
-            }
+            strBuilder.append("attributeName=\"" + yLocAttributeName + "\"\n");
+            strBuilder.append("from=\"" + c.getStartShape().getLocation().getY()
+                    + "\" to=\"" + c.getEndShape().getLocation().getY() + "\"\n");
           }
 
-          //end of animation block
+          //end of cs3500.animator.model.animation block
           strBuilder.append("begin=\"" + c.getStart() + "s\" "
-                  + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"/>\n");
+                  + "dur=\"" + (c.getEnd() - c.getStart()) + "s\"\n"
+                  + "fill=\"freeze\"/>\n");
         }
       }
 
       strBuilder.append("\n</" + shapeType + ">");
+      strBuilder.append("\n</svg>\n");
     }
 
     return strBuilder.toString();
@@ -150,32 +187,17 @@ public class ViewSVG extends TextBasedView {
 
   @Override
   public void display() {
-    StringBuilder strBuilder = new StringBuilder();
+    try {
+      ap.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
+              "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
 
-    strBuilder.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
-            "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
+      ap.append(printSVGFromShapeList());
 
-    strBuilder.append(printSVGFromShapeList());
+      ap.append("\n</svg>");
 
-    strBuilder.append("\n</svg>");
-    System.out.println(strBuilder.toString());
+      ap.close();
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Could not open file");
+    }
   }
-
-  /*public static void main(String... args) {
-    ViewSVG view = new ViewSVG();
-
-    ArrayList<DrawableTextShape> shapes = new ArrayList<>();
-    ArrayList<IChange> changes = new ArrayList<>();
-    IChange c  = new ChangeImpl("shape", 2, 9, IChange.ChangeType.COLOR);
-    c.setEndShape(new Ellipse(100,100,50,50, Color.GREEN));
-    c.setStartShape(new Ellipse(100,100,50,50, Color.RED));
-
-    changes.add(c);
-
-    shapes.add(new DrawableTextShape(1,10,"shape", "ellipse", 50, 50, 100, 100, Color.RED, changes));
-
-    view.setShapes(shapes);
-    view.setFilename("~/Desktop/test");
-    view.display();
-  }*/
 }

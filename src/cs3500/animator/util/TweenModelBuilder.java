@@ -2,7 +2,7 @@ package cs3500.animator.util;
 
 /**
  * This interface contains all the methods that the AnimationFileReader class
- * calls as it reads a file containing the animation and builds a model It is
+ * calls as it reads a file containing the cs3500.animator.model.animation and builds a model It is
  * parameterized over the actual model type.
  */
 
