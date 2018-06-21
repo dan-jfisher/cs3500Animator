@@ -40,6 +40,7 @@ public class ViewText extends TextBasedView {
 
   /**
    * This method describes a shape according to the parameters given by assignments 5 and 6.
+   *
    * @param s the shape to be described.
    * @return the description of the shape.
    */
@@ -94,7 +95,7 @@ public class ViewText extends TextBasedView {
 
   }
 
- @Override
+  @Override
   public String getRectDescription(double x, double y, double width, double height, Color color) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
@@ -111,11 +112,12 @@ public class ViewText extends TextBasedView {
   }
 
   @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
+  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
+    return null;
   }
 
   @Override
   public String printSVGFromShapeList() {
     throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
 }

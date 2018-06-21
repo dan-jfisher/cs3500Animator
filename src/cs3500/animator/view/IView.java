@@ -57,7 +57,7 @@ public interface IView {
    * @param s
    * @return
    */
-  String printStartEndTimeSVGAnimations(IDrawableShape s);
+  String printStartEndTimeSVGAnimations(DrawableTextShape s);
 
   /**
    *

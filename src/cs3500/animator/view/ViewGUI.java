@@ -79,7 +79,7 @@ public class ViewGUI extends JFrame implements IView {
   }
 
   @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
+  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
     throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 
