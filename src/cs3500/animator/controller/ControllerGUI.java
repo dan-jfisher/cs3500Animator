@@ -54,6 +54,7 @@ public class ControllerGUI extends AbstractController {
         if (frameNum > endFrame) {
           timer.stop();
         }
+
         ArrayList<DrawableGUIShape> drawableGUIShapes = new ArrayList<>();
         ArrayList<IAnimatedShape> shapesToConvert = (ArrayList<IAnimatedShape>)
                 model.getShapesAt(frameNum);

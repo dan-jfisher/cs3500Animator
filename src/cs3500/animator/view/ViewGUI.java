@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 import cs3500.animator.util.DrawableGUIShape;
 
 /**
@@ -17,7 +16,6 @@ import cs3500.animator.util.DrawableGUIShape;
  */
 public class ViewGUI extends JFrame implements IView {
   private ShapePanel panel;
-  private JScrollPane scrollPane;
   private ViewType viewType;
 
   /**

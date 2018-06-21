@@ -11,7 +11,7 @@ import cs3500.animator.model.shapes.ShapeType;
  * Shape to draw in a text view with information on visual/cs3500.animator.model.animation
  * attributes.
  */
-public class DrawableTextShape extends AbstractDrawableShape {
+public class DrawableTextShape extends AbstractDrawableShape implements IDrawableShape {
 
   private float startTime;
   private float endTime;

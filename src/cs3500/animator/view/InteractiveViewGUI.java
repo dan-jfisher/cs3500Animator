@@ -12,8 +12,6 @@ public class InteractiveViewGUI extends ViewGUI {
   private JButton toggleLoopingButton;
   private JButton exportButton;
 
-  //still needs another window to enter filename into
-
   private final int FPS_MIN = 1;
   private final int FPS_MAX = 60;
   private final int FPS_INIT = 30;
@@ -29,7 +27,7 @@ public class InteractiveViewGUI extends ViewGUI {
     stopStartButton.setActionCommand("start stop button");
     panel.add(stopStartButton);
     restartButton = new JButton("restart");
-    restartButton.setActionCommand("reset button");
+    restartButton.setActionCommand("restart button");
     panel.add(restartButton);
     toggleLoopingButton = new JButton("toggle looping");
     toggleLoopingButton.setActionCommand("toggle looping button");

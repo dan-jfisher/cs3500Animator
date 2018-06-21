@@ -20,7 +20,8 @@ public class InteractiveController extends ControllerGUI implements ActionListen
    * @param interactiveView         View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public InteractiveController(IAnimationModel model, InteractiveViewGUI interactiveView, int frameRatePerSec) {
+  public InteractiveController(IAnimationModel model, InteractiveViewGUI interactiveView,
+                               int frameRatePerSec) {
     super(model, interactiveView, frameRatePerSec);
     this.interactiveView = interactiveView;
 
@@ -47,10 +48,10 @@ public class InteractiveController extends ControllerGUI implements ActionListen
         timer.start();
       }
     } else if (action.equalsIgnoreCase("restart button")) {
-      //---------------------------------------------Not sure how to restart yet-----------------------
+      timer.stop();
+      this.run();
     } else if (action.equalsIgnoreCase("toggle looping button")) {
       looping = !looping;
-      //---------------------------------------------permanent, but it shouldn't be--------------------
     }
   }
 
