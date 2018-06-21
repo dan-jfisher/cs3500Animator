@@ -58,4 +58,6 @@ public abstract class TextBasedView implements IView {
   public ViewType getViewType() {
     return viewType;
   }
+
+  public abstract String printStartEndTimeSVGAnimations(DrawableTextShape s);
 }

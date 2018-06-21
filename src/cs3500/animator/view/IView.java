@@ -3,6 +3,7 @@ package cs3500.animator.view;
 import java.util.ArrayList;
 import java.awt.Color;
 
+import cs3500.animator.util.DrawableTextShape;
 import cs3500.animator.util.IDrawableShape;
 
 /**
@@ -56,7 +57,7 @@ public interface IView {
    * @param s
    * @return
    */
-  String printStartEndTimeSVGAnimations(IDrawableShape s);
+  String printStartEndTimeSVGAnimations(DrawableTextShape s);
 
   /**
    *
