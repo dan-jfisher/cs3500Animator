@@ -54,13 +54,6 @@ public interface IView {
 
   /**
    *
-   * @param s
-   * @return
-   */
-  String printStartEndTimeSVGAnimations(IDrawableShape s);
-
-  /**
-   *
    * @return
    */
   String printSVGFromShapeList();

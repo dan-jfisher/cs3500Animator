@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
-public class InteractiveViewGUI extends ViewGUI {
+/**
+ *
+ */
+public class InteractiveViewGUI extends ViewGUI implements IGuiInteractiveView {
   private JSlider slider;
   private JButton stopStartButton;
   private JButton restartButton;
@@ -18,6 +21,10 @@ public class InteractiveViewGUI extends ViewGUI {
   private final int FPS_MAX = 60;
   private final int FPS_INIT = 30;
 
+  /**
+   * Creates a new InteractiveViewGUI object. This type of view can display animations whose
+   * settings can be adjusted by the client.
+   */
   public InteractiveViewGUI() {
     super();
 
@@ -40,6 +47,7 @@ public class InteractiveViewGUI extends ViewGUI {
     this.add(panel);
   }
 
+  @Override
   public void setActionListener(ActionListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
@@ -51,6 +59,7 @@ public class InteractiveViewGUI extends ViewGUI {
     exportButton.addActionListener(listener);
   }
 
+  @Override
   public void setChangeListener(ChangeListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");

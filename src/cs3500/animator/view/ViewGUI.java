@@ -15,13 +15,13 @@ import cs3500.animator.util.DrawableGUIShape;
 /**
  * This class serves as both an IView object and a JFrame for cs3500.animator.model.animation.
  */
-public class ViewGUI extends JFrame implements IView {
+public class ViewGUI extends JFrame implements IGuiView {
   private ShapePanel panel;
   private JScrollPane scrollPane;
   private ViewType viewType;
 
   /**
-   * This is the defualt constructor.
+   * This is the default constructor.
    */
   public ViewGUI() {
     super();
@@ -37,20 +37,23 @@ public class ViewGUI extends JFrame implements IView {
   }
 
   /**
-   * This method sets the cs3500.animator.model.shapes to be animated on the next tic.
-   * @param newShapes The cs3500.animator.model.shapes to be painted.
-   */
-  public void setShapes(ArrayList<DrawableGUIShape> newShapes) {
-    panel.setShapes(newShapes);
-  }
-
-  /**
    * This method is called by the constructor and adds a panel with scroll bars to this object.
    */
-  public void addPanelWithScrollPane() {
+  private void addPanelWithScrollPane() {
     this.panel = new ShapePanel();
     this.add(panel);
     this.add(new JScrollPane(panel));
+  }
+
+
+
+  /**
+   * This method sets the cs3500.animator.model.shapes to be animated on the next tic.
+   * @param newShapes The cs3500.animator.model.shapes to be painted.
+   */
+  @Override
+  public void setShapes(ArrayList<DrawableGUIShape> newShapes) {
+    panel.setShapes(newShapes);
   }
 
   @Override
@@ -75,11 +78,6 @@ public class ViewGUI extends JFrame implements IView {
 
   @Override
   public void setFilename(String filename) {
-    throw new UnsupportedOperationException("ViewGUI object does not support this function");
-  }
-
-  @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
     throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 

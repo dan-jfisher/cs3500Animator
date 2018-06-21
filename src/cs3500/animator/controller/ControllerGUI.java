@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
+import javax.swing.text.View;
 
 import cs3500.animator.model.animation.IAnimatedShape;
 import cs3500.animator.model.animation.IAnimationModel;
 import cs3500.animator.util.AnimatedShapeToDrawableConverter;
 import cs3500.animator.util.DrawableGUIShape;
+import cs3500.animator.view.IGuiView;
 import cs3500.animator.view.ViewGUI;
 
 /**

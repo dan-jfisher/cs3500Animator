@@ -8,10 +8,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import cs3500.animator.model.animation.IAnimationModel;
+import cs3500.animator.view.IGuiInteractiveView;
+import cs3500.animator.view.IGuiView;
 import cs3500.animator.view.InteractiveViewGUI;
 
 public class InteractiveController extends ControllerGUI implements ActionListener, ChangeListener {
-  InteractiveViewGUI interactiveView;
+  IGuiInteractiveView interactiveView;
 
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.

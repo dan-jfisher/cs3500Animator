@@ -3,10 +3,14 @@ package cs3500.animator.controller;
 import java.awt.event.ActionEvent;
 
 import cs3500.animator.model.animation.IAnimationModel;
+import cs3500.animator.view.IGuiInteractiveView;
 import cs3500.animator.view.InteractiveViewGUI;
 import cs3500.animator.view.TextBasedView;
 import cs3500.animator.view.ViewSVG;
 
+/**
+ *
+ */
 public class HybridController extends InteractiveController {
   private ControllerText fileOutputController;
 

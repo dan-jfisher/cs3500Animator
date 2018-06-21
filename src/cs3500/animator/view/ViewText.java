@@ -111,11 +111,7 @@ public class ViewText extends TextBasedView {
   }
 
   @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
-  }
-
-  @Override
   public String printSVGFromShapeList() {
     throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
 }
