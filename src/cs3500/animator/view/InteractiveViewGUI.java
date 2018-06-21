@@ -67,18 +67,26 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     this.listener = listener;
   }
 
+  public void fireAction(Listener.GuiEventType type) {
+    listener.action(type);
+  }
+
+  public void fireChange(Listener.GuiEventType type, int value) {
+    listener.change(type, value);
+  }
+
   @Override
   public void actionPerformed(ActionEvent actionEvent) {
     String action = actionEvent.getActionCommand();
 
     if(action.equalsIgnoreCase("start stop button")) {
-      listener.action(Listener.GuiEventType.START_STOP);
+      fireAction(Listener.GuiEventType.START_STOP);
     } else if (action.equalsIgnoreCase("restart button")) {
-      listener.action(Listener.GuiEventType.RESTART);
+      fireAction(Listener.GuiEventType.RESTART);
     } else if (action.equalsIgnoreCase("toggle looping button")) {
-      listener.action(Listener.GuiEventType.TOGGLE_LOOPING);
+      fireAction(Listener.GuiEventType.TOGGLE_LOOPING);
     } else if (action.equalsIgnoreCase("export button")) {
-      listener.action(Listener.GuiEventType.EXPORT);
+      fireAction(Listener.GuiEventType.EXPORT);
     }
   }
 
@@ -87,7 +95,7 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     JSlider source = (JSlider)changeEvent.getSource();
     if (!source.getValueIsAdjusting()) {
       int value = (int)source.getValue();
-      listener.change(Listener.GuiEventType.CHANGE_SPEED, value);
+      fireChange(Listener.GuiEventType.CHANGE_SPEED, value);
     }
   }
 }
