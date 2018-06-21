@@ -6,6 +6,7 @@ import java.io.IOException;
 import cs3500.animator.model.animation.IChange;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
+import cs3500.animator.util.IDrawableShape;
 
 /**
  * This class uses a list of {@link DrawableTextShape}s to create an svg document which can be

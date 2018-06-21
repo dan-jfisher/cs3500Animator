@@ -124,7 +124,7 @@ public class AnimationModelImpl implements IAnimationModel, Serializable {
     List<IAnimatedShape> currentShapes = new ArrayList<>();
 
     for (String key : shapes.keySet()) {
-      if (shapes.get(key).getStartTime() <= time && shapes.get(key).getEndTime() >= time) {
+      if (shapes.get(key).getStartTime() < time && shapes.get(key).getEndTime() >= time) {
         currentShapes.add(shapes.get(key));
       }
     }

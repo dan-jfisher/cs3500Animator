@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.awt.Color;
 
 import cs3500.animator.model.animation.IChange;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
+import cs3500.animator.util.IDrawableShape;
+
 
 /**
  * This is the view for outputting a text description of the cs3500.animator.model.animation.
@@ -38,12 +41,13 @@ public class ViewText extends TextBasedView {
 
   /**
    * This method describes a shape according to the parameters given by assignments 5 and 6.
+   *
    * @param s the shape to be described.
    * @return the description of the shape.
    */
   public String describeShape(DrawableTextShape s) {
     StringBuilder strBuilder = new StringBuilder();
-    DecimalFormat decForm =  new DecimalFormat("0.0");
+    DecimalFormat decForm = new DecimalFormat("0.0");
 
     strBuilder.append("Name: " + s.getName() + "\nType: ");
     if (s.getShapeType().equals(ShapeType.ELLIPSE)) {
@@ -52,7 +56,7 @@ public class ViewText extends TextBasedView {
               + decForm.format(s.getyLoc()) + "), "
               + "X Radius: " + decForm.format(s.getxDim()) + ", " + "Y Radius: "
               + decForm.format(s.getyDim()) + ", "
-              +  "Color: " + "(" + s.getColor().getRed() + ", " + s.getColor().getGreen()
+              + "Color: " + "(" + s.getColor().getRed() + ", " + s.getColor().getGreen()
               + ", " + s.getColor().getBlue() + ")\n");
     } else if (s.getShapeType().equals(ShapeType.RECTANGLE)) {
       strBuilder.append("rectangle\n");
@@ -60,14 +64,14 @@ public class ViewText extends TextBasedView {
               + decForm.format(s.getyLoc()) + "), "
               + "Width: " + decForm.format(s.getxDim()) + ", " + "Height: "
               + decForm.format(s.getyDim()) + ", "
-              +  "Color: " + "(" + s.getColor().getRed() + ", " + s.getColor().getGreen()
+              + "Color: " + "(" + s.getColor().getRed() + ", " + s.getColor().getGreen()
               + ", " + s.getColor().getBlue() + ")\n");
     } else {
       throw new IllegalArgumentException("Illegal ShapeType");
     }
 
     strBuilder.append("Appears at t=" + decForm.format(s.getStartTime()) + "\n"
-          + "Disappears at t=" + decForm.format(s.getEndTime()) + "\n\n");
+            + "Disappears at t=" + decForm.format(s.getEndTime()) + "\n\n");
 
     return strBuilder.toString();
   }
@@ -92,7 +96,7 @@ public class ViewText extends TextBasedView {
 
   }
 
- @Override
+  @Override
   public String getRectDescription(double x, double y, double width, double height, Color color) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
@@ -109,11 +113,7 @@ public class ViewText extends TextBasedView {
   }
 
   @Override
-  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
-  }
-
-  @Override
   public String printSVGFromShapeList() {
     throw new UnsupportedOperationException("ViewText object does not support this function");
+  }
 }

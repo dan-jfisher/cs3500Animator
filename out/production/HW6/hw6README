@@ -1,16 +1,21 @@
 Most of our new model was adopted from Dan's original model with some minor changes. These
 changes include:
-    - Changed shapes HashMap to use strings as the key rather than an int. This is the proper
-    way to ID shapes.
+    - Changed cs3500.animator.model.shapes HashMap to use strings as the key rather than an int. This is the proper
+    way to ID cs3500.animator.model.shapes.
     - Adopted shapeType from Kevin's model to label each shape object as a shape.
     This lets controller determine what kind of shape it is working with so it knows which
     geometry shape to create as a result.
-    - Implemented Kevin's getShapes method to return array of shapes that will need to be viewed
+    - Implemented Kevin's getShapes method to return array of cs3500.animator.model.shapes that will need to be viewed
     in the views
     - Stored changes in AnimatedShapeImpl as ArrayList instead of List since it is only used as an
     ArrayList and this class is not an abstraction of any other class.
-    - Added method to retrieve changes a shape is going to undergo in the animation in
+    - Added method to retrieve changes a shape is going to undergo in the cs3500.animator.model.animation in
     AnimatedShapeImpl class.
     - Added name property in abstract shape class since each shape has a name.
     Shape constructors now passes name as a parameter.
     - Added getName function to shape class to use for text outputs.
+    - Changed signature of getShapesAt(...) function in model to return IAnimatedShapes rather
+    than a normal IShape since calling controller functions need cs3500.animator.model.animation details,
+    not just the shape.
+    - Added a getLastFrame() function to model to determine how long the cs3500.animator.model.animation
+    needs to run for.

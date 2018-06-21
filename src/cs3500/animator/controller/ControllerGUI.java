@@ -36,7 +36,6 @@ public class ControllerGUI extends AbstractController {
 
   @Override
   public void run() {
-    Timer timer = new Timer("t1");
     AnimatedShapeToDrawableConverter shapeToDrawableConverter
             = new AnimatedShapeToDrawableConverter();
 

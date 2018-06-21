@@ -1,0 +1,3 @@
+The following changes were made to our code from the previous assignment:
+    - Added functions of all views to IView and make unsupported functions throw
+    UnsupportedOperationException's.
