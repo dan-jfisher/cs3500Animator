@@ -1,7 +1,8 @@
 package cs3500.animator.view;
 
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -78,7 +79,7 @@ public class ViewGUI extends JFrame implements IView {
   }
 
   @Override
-  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
+  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
     throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 

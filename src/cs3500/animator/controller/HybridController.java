@@ -31,11 +31,11 @@ public class HybridController extends InteractiveController {
     }
   }
 
-    /**
-     * This function instantiates fileOutputController, and uses a ViewSVG to output the animation
-     * description to a file.
-     * @param filename the desired file location.
-     */
+  /**
+   * This function instantiates fileOutputController, and uses a ViewSVG to output the animation
+   * description to a file.
+   * @param filename the desired file location.
+   */
   public void export(String filename) {
     TextBasedView outputView = new ViewSVG();
     outputView.setFilename(filename);

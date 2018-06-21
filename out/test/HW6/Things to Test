@@ -1,0 +1,28 @@
+Some tests to make:
+
+    Check for errors/invalid throws:
+        - negative and 0 frameRate
+        - invalid filename for setFileName in ViewSVG
+        *********NOTE**************************************************************
+        MAY BE ERROR IN setFileName in ViewSVG FUNCTION WHEN CHECKING FOR FILE;
+        CODE CURRENTLY SETS THIS.FILENAME = FILENAME IF FILENAME EQUALS NULL OR ""
+        SHOULD BE THROWS ILLEGAL ARGUMENT WHEN THAT HAPPENS I THINK
+        ***************************************************************************
+        - Same change overlapping in time period should throw an error. Check for each type
+        of change.
+        - SetShapes should throw error when given null list.
+
+    For both views:
+       - Test each possible change and what way those changes work (i.e. scale bigger and scale
+       smaller)
+       - Test that consecutive changes work (more than one test; different combinations of changes)
+       - different frame rates result in different time in seconds for each cs3500.animator.model.animation
+
+    ViewSVG:
+    - Draw cs3500.animator.model.shapes at negative positions (shouldn't throw error, but shouldn't be on screen)
+    - GetRectangleDescription()
+    - GetEllipseDescription
+
+    ViewText:
+    - Display() function prints out all cs3500.animator.model.shapes in cs3500.animator.model.animation, not just the visible ones.
+    (maybe make a shape that never appears and see if it still prints?)
