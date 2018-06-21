@@ -28,15 +28,15 @@ public class ControllerFactory {
     }
 
     if (type.equalsIgnoreCase("svg")) {
-      ((TextBasedView) view).setFilename(outfile);
+      view.setFilename(outfile);
       return new ControllerText(model, (TextBasedView) view, fps);
     } else if (type.equalsIgnoreCase("text")) {
-      ((TextBasedView) view).setFilename(outfile);
+      view.setFilename(outfile);
       return new ControllerText(model, (TextBasedView) view, fps);
     } else if (type.equalsIgnoreCase("gui")) {
       return new ControllerGUI(model, (ViewGUI) view, fps);
     } else if (type.equalsIgnoreCase("hybrid")) {
-      return new HybridController(model, (InteractiveViewGUI) view, fps);
+      return new HybridController(model, (InteractiveViewGUI) view, fps, outfile);
     } else {
       throw new IllegalArgumentException("Invalid view type");
     }

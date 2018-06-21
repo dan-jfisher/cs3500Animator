@@ -12,7 +12,8 @@ import cs3500.animator.view.ViewSVG;
  *
  */
 public class HybridController extends InteractiveController {
-  private ControllerText fileOutputController;
+  private IController fileOutputController;
+  private String outputFile;
 
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
@@ -21,17 +22,19 @@ public class HybridController extends InteractiveController {
    * @param interactiveView View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public HybridController(IAnimationModel model, InteractiveViewGUI interactiveView, int frameRatePerSec) {
+  public HybridController(IAnimationModel model, InteractiveViewGUI interactiveView, int frameRatePerSec, String outputFile) {
     super(model, interactiveView, frameRatePerSec);
+    this.outputFile = outputFile;
   }
 
   @Override
-  public void actionPerformed(ActionEvent actionEvent) {
-    super.actionPerformed(actionEvent);
+  public void action(GuiEventType type) {
+    super.action(type);
 
-
-    if (actionEvent.getActionCommand().equals("export animation")) {
-      //invoke FileOutputController
+    if (type.equals(GuiEventType.EXPORT)) {
+      ViewSVG v = new ViewSVG();
+      fileOutputController = ControllerFactory.getController("svg", v, model, frameRate, outputFile);
+      fileOutputController.run();
     }
   }
 

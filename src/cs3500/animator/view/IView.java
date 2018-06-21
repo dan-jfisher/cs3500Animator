@@ -54,12 +54,6 @@ public interface IView {
 
   /**
    *
-   * @return
-   */
-  String printSVGFromShapeList();
-
-  /**
-   *
    */
   enum ViewType { GUI, SVG, TEXT}
 }

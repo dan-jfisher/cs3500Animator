@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 import cs3500.animator.util.DrawableGUIShape;
 
 /**
@@ -17,7 +16,6 @@ import cs3500.animator.util.DrawableGUIShape;
  */
 public class ViewGUI extends JFrame implements IGuiView {
   private ShapePanel panel;
-  private JScrollPane scrollPane;
   private ViewType viewType;
 
   /**
@@ -78,11 +76,6 @@ public class ViewGUI extends JFrame implements IGuiView {
 
   @Override
   public void setFilename(String filename) {
-    throw new UnsupportedOperationException("ViewGUI object does not support this function");
-  }
-
-  @Override
-  public String printSVGFromShapeList() {
     throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 }

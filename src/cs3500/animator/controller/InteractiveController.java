@@ -12,9 +12,8 @@ import cs3500.animator.view.IGuiInteractiveView;
 import cs3500.animator.view.IGuiView;
 import cs3500.animator.view.InteractiveViewGUI;
 
-public class InteractiveController extends ControllerGUI implements ActionListener, ChangeListener {
-  IGuiInteractiveView interactiveView;
-
+public class InteractiveController extends ControllerGUI implements Listener {
+  InteractiveViewGUI interactiveView;
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
    *
@@ -22,7 +21,8 @@ public class InteractiveController extends ControllerGUI implements ActionListen
    * @param interactiveView         View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public InteractiveController(IAnimationModel model, InteractiveViewGUI interactiveView, int frameRatePerSec) {
+  public InteractiveController(IAnimationModel model, InteractiveViewGUI interactiveView,
+                               int frameRatePerSec) {
     super(model, interactiveView, frameRatePerSec);
     this.interactiveView = interactiveView;
 
@@ -39,31 +39,26 @@ public class InteractiveController extends ControllerGUI implements ActionListen
   }
 
   @Override
-  public void actionPerformed(ActionEvent actionEvent) {
-    String action = actionEvent.getActionCommand();
-
-    if(action.equalsIgnoreCase("start stop button")) {
+  public void action(GuiEventType type) {
+    if(type.equals(GuiEventType.START_STOP)) {
       if (timer.isRunning()) {
         timer.stop();
       } else {
         timer.start();
       }
-    } else if (action.equalsIgnoreCase("restart button")) {
-      //---------------------------------------------Not sure how to restart yet-----------------------
-    } else if (action.equalsIgnoreCase("toggle looping button")) {
+    } else if (type.equals(GuiEventType.RESTART)) {
+      timer.stop();
+      this.run();
+    } else if (type.equals(GuiEventType.TOGGLE_LOOPING)) {
       looping = !looping;
-      //---------------------------------------------permanent, but it shouldn't be--------------------
     }
   }
 
   @Override
-  public void stateChanged(ChangeEvent changeEvent) {
-    int delay;
-
-    JSlider source = (JSlider)changeEvent.getSource();
-    if (!source.getValueIsAdjusting()) {
-      int fps = (int)source.getValue();
-      delay = 1000 / fps;
+  public void change(GuiEventType type, int value) {
+    if (type.equals(GuiEventType.CHANGE_SPEED)) {
+      frameRate = value;
+      int delay = 1000 / frameRate;
       timer.setDelay(delay);
     }
   }
