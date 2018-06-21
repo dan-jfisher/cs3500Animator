@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import cs3500.animator.model.shapes.Ellipse;
@@ -17,12 +17,12 @@ import cs3500.animator.model.shapes.Rectangle;
 import cs3500.animator.util.TweenModelBuilder;
 
 public class AnimationModelImpl implements IAnimationModel, Serializable {
-  HashMap<String, IAnimatedShape> shapes;
+  LinkedHashMap<String, IAnimatedShape> shapes;
   List<IChange> changes;
 
   public AnimationModelImpl() {
     changes = new ArrayList<>();
-    shapes = new HashMap<>();
+    shapes = new LinkedHashMap<>();
   }
 
   public static final class Builder implements TweenModelBuilder<IAnimationModel> {
