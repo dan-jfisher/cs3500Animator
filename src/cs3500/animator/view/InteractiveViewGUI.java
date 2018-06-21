@@ -1,16 +1,22 @@
 package cs3500.animator.view;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class InteractiveViewGUI extends ViewGUI {
+import cs3500.animator.controller.Listener;
+
+public class InteractiveViewGUI extends ViewGUI implements ActionListener, ChangeListener {
   private JSlider slider;
   private JButton stopStartButton;
   private JButton restartButton;
   private JButton toggleLoopingButton;
   private JButton exportButton;
+
+  private Listener listener;
 
   private final int FPS_MIN = 1;
   private final int FPS_MAX = 60;
@@ -38,22 +44,50 @@ public class InteractiveViewGUI extends ViewGUI {
     this.add(panel);
   }
 
-  public void setActionListener(ActionListener listener) {
+  public void setActionListener(Listener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
     }
 
-    stopStartButton.addActionListener(listener);
-    restartButton.addActionListener(listener);
-    toggleLoopingButton.addActionListener(listener);
-    exportButton.addActionListener(listener);
+    stopStartButton.addActionListener(this);
+    restartButton.addActionListener(this);
+    toggleLoopingButton.addActionListener(this);
+    exportButton.addActionListener(this);
+
+    this.listener = listener;
   }
 
-  public void setChangeListener(ChangeListener listener) {
+  public void setChangeListener(Listener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
     }
 
-    slider.addChangeListener(listener);
+    slider.addChangeListener(this);
+
+    this.listener = listener;
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent actionEvent) {
+    String action = actionEvent.getActionCommand();
+
+    if(action.equalsIgnoreCase("start stop button")) {
+      listener.action(Listener.GuiEventType.START_STOP);
+    } else if (action.equalsIgnoreCase("restart button")) {
+      listener.action(Listener.GuiEventType.RESTART);
+    } else if (action.equalsIgnoreCase("toggle looping button")) {
+      listener.action(Listener.GuiEventType.TOGGLE_LOOPING);
+    } else if (action.equalsIgnoreCase("export button")) {
+      listener.action(Listener.GuiEventType.EXPORT);
+    }
+  }
+
+  @Override
+  public void stateChanged(ChangeEvent changeEvent) {
+    JSlider source = (JSlider)changeEvent.getSource();
+    if (!source.getValueIsAdjusting()) {
+      int value = (int)source.getValue();
+      listener.change(Listener.GuiEventType.CHANGE_SPEED, value);
+    }
   }
 }

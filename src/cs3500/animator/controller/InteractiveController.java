@@ -10,7 +10,7 @@ import javax.swing.event.ChangeListener;
 import cs3500.animator.model.animation.IAnimationModel;
 import cs3500.animator.view.InteractiveViewGUI;
 
-public class InteractiveController extends ControllerGUI implements ActionListener, ChangeListener {
+public class InteractiveController extends ControllerGUI implements Listener {
   InteractiveViewGUI interactiveView;
 
   /**
@@ -38,31 +38,26 @@ public class InteractiveController extends ControllerGUI implements ActionListen
   }
 
   @Override
-  public void actionPerformed(ActionEvent actionEvent) {
-    String action = actionEvent.getActionCommand();
-
-    if(action.equalsIgnoreCase("start stop button")) {
+  public void action(GuiEventType type) {
+    if(type.equals(GuiEventType.START_STOP)) {
       if (timer.isRunning()) {
         timer.stop();
       } else {
         timer.start();
       }
-    } else if (action.equalsIgnoreCase("restart button")) {
+    } else if (type.equals(GuiEventType.RESTART)) {
       timer.stop();
       this.run();
-    } else if (action.equalsIgnoreCase("toggle looping button")) {
+    } else if (type.equals(GuiEventType.TOGGLE_LOOPING)) {
       looping = !looping;
     }
   }
 
   @Override
-  public void stateChanged(ChangeEvent changeEvent) {
-    int delay;
-
-    JSlider source = (JSlider)changeEvent.getSource();
-    if (!source.getValueIsAdjusting()) {
-      int fps = (int)source.getValue();
-      delay = 1000 / fps;
+  public void change(GuiEventType type, int value) {
+    if (type.equals(GuiEventType.CHANGE_SPEED)) {
+      frameRate = value;
+      int delay = 1000 / frameRate;
       timer.setDelay(delay);
     }
   }

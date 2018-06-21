@@ -24,10 +24,10 @@ public class HybridController extends InteractiveController {
   }
 
   @Override
-  public void actionPerformed(ActionEvent actionEvent) {
-    super.actionPerformed(actionEvent);
+  public void action(GuiEventType type) {
+    super.action(type);
 
-    if (actionEvent.getActionCommand().equals("export button")) {
+    if (type.equals(GuiEventType.EXPORT)) {
       ViewSVG v = new ViewSVG();
       fileOutputController = ControllerFactory.getController("svg", v, model, frameRate, outputFile);
       fileOutputController.run();
