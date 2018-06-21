@@ -11,7 +11,6 @@ import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
 import cs3500.animator.util.IDrawableShape;
 
-
 /**
  * This is the view for outputting a text description of the cs3500.animator.model.animation.
  * This descritption is writen to a file location supplied by the user.
@@ -41,7 +40,6 @@ public class ViewText extends TextBasedView {
 
   /**
    * This method describes a shape according to the parameters given by assignments 5 and 6.
-   *
    * @param s the shape to be described.
    * @return the description of the shape.
    */
@@ -96,7 +94,7 @@ public class ViewText extends TextBasedView {
 
   }
 
-  @Override
+ @Override
   public String getRectDescription(double x, double y, double width, double height, Color color) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
@@ -113,7 +111,11 @@ public class ViewText extends TextBasedView {
   }
 
   @Override
-  public String printSVGFromShapeList() {
+  public String printStartEndTimeSVGAnimations(IDrawableShape s) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
+
+  @Override
+  public String printSVGFromShapeList() {
+    throw new UnsupportedOperationException("ViewText object does not support this function");
 }

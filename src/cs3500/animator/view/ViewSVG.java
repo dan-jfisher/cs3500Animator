@@ -64,12 +64,14 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
+
   /**
    * This method adds transformations for animating the appearance and disappearance of a shape.
    * This must be done for every shape.
    * @param s The shape being animated
    * @return the svg description of the appearance/disappearance cs3500.animator.model.animation.
    */
+  @Override
   public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
     StringBuilder stringBuilder = new StringBuilder();
 

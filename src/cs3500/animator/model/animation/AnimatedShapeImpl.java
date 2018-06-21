@@ -67,7 +67,7 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
    */
   public void saveChange(IChange change) {
     change.setStartShape(getLastValidShape((int)change.getStart()));
-    change.setEndShape(getLastValidShape((int)change.getStart()));
+    change.setEndShape(getLastValidShape((int)change.getEnd()));
     changes.add(change);
   }
 
