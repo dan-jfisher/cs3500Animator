@@ -63,7 +63,7 @@ public class ViewSVGTest {
               "\n" +
               "\n" +
               "<svg>\n" +
-              "<ellipse cx=\"500.0\" cy=\"200.0\" rx=\"100.0\" ry=\"50.0\" fill=\"#ff0000\" " +
+              "<ellipse cx=\"500.0\" cy=\"200.0\" rx=\"100.0\" ry=\"50.0\" fill=\"#000000\" " +
               "fill-opacity=\"0\">\n" +
               "\n" +
               "<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n" +

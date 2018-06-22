@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3428edb9-c408-4823-869f-ac3852132509" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/controller/ControllerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/controller/ControllerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/controller/IListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/controller/IListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/controller/InteractiveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/controller/InteractiveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/controller/Listener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/model/animation/TimeDomainChangeImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/model/animation/TimeDomainChangeImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Ellipse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Point2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Point2D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/ShapeType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/model/shapes/ShapeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/util/AbstractDrawableShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/util/AbstractDrawableShape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/util/TweenModelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/util/TweenModelBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/IGuiInteractiveView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/IGuiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/IGuiView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/IView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/IView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/InteractiveViewGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/InteractiveViewGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/ShapePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/ShapePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/TextBasedView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/TextBasedView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs3500/animator/view/ViewSVG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs3500/animator/view/ViewSVG.java" afterDir="false" />
-    </list>
+    <list default="true" id="3428edb9-c408-4823-869f-ac3852132509" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -327,7 +308,7 @@
               <item name="HW6" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="animator" type="462c0819:PsiDirectoryNode" />
-              <item name="testFiles" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -347,7 +328,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.EasyAnimator">
+  <component name="RunManager" selected="JUnit.ViewSVGTest">
     <configuration name="EasyAnimator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cs3500.animator.EasyAnimator" />
       <module name="HW6" />
@@ -368,6 +349,52 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HW6" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs3500.animator.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="cs3500.animator.controller" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.animator.controller.ControllerTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ViewSVGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HW6" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cs3500.animator.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="cs3500.animator.view" />
+      <option name="MAIN_CLASS_NAME" value="cs3500.animator.view.ViewSVGTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -410,9 +437,13 @@
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.EasyAnimator" />
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.ViewSVGTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ViewSVGTest" />
+        <item itemvalue="JUnit.ControllerTest" />
         <item itemvalue="Application.EasyAnimator" />
       </list>
     </recent_temporary>
@@ -432,7 +463,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -443,12 +473,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.328877" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.328877" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.328877" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.328877" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
