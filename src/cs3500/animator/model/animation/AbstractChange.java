@@ -94,11 +94,19 @@ public abstract class AbstractChange implements IChange {
 
   @Override
   public void setStartShape(IShape shape) {
+    if (shape == null) {
+      throw new IllegalArgumentException("Shape cannot be null");
+    }
     startShape = shape;
   }
 
   @Override
-  public void setEndShape(IShape shape) {
+  public void setEndShape(IShape shape)
+  {
+    if (shape == null) {
+      throw new IllegalArgumentException("Shape cannot be null");
+    }
+
     endShape = shape;
   }
 

@@ -3,13 +3,17 @@ The following changes were made to our code from the previous assignment:
     UnsupportedOperationException's.
     - Changed model to store shapes in LinkedHashMap rather than HashMap since draw order
     wasn't conserved in HashMap.
-
+    - set the Timer to be a member variable of ViewGUI so that it can be seen by classes that
+        extend it.
+    - Added more IllegalArgumentExceptions where applicable.
 
 The following classes were added:
-    - IGuiBasedView
-    - InteractiveViewGUI
-    - HybridController
-    - InteractiveController
+    - InteractiveViewGUI - GUI class that has features that end-user can adjust on screen.
+    - HybridController - Controller which works for both interactive gui and text views.
+    - InteractiveController - Controller which works with interactive views for
+    interactive animations.
+    - IListener - Interface whose objects listens for actions to which they react.
+
+Other changes that were made:
     - Added looping functionality to ViewGUI
-    - set the Timer to be a member variable of ViewGUI so that it can be seen by classes that
-    extend it
+

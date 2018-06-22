@@ -19,20 +19,36 @@ import cs3500.animator.view.ViewGUI;
 public class ControllerGUI extends AbstractController {
   protected ViewGUI guiView;
   protected Timer timer;
-  boolean looping;
+  protected boolean looping;
 
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
    * @param model model to be used to get cs3500.animator.model.animation information.
    * @param guiView View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
+   *                        Set to 1 if negative.
+   * @throws IllegalArgumentException if view or model are null.
    */
-  public ControllerGUI(IAnimationModel model, ViewGUI guiView, int frameRatePerSec) {
+  public ControllerGUI(IAnimationModel model, ViewGUI guiView, int frameRatePerSec)
+          throws IllegalArgumentException {
+    if (model == null || guiView == null) {
+      throw new IllegalArgumentException("model and view cannot be null.");
+    }
+
+    if (frameRatePerSec <= 0) {
+      frameRatePerSec = 1;
+    }
+
     this.guiView = guiView;
     this.model = model;
     this.frameRate = frameRatePerSec;
     looping = true;
   }
+
+  /**
+   * Protected default constructor so child classes can have their own constructors.
+   */
+  protected ControllerGUI() {}
 
   @Override
   public void run() {

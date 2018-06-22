@@ -20,8 +20,18 @@ public class ControllerText extends AbstractController {
    * Creates a controller for a text view output of an cs3500.animator.model.animation.
    * @param model model representing cs3500.animator.model.animation.
    * @param view view to be presenting cs3500.animator.model.animation.
+   * @param frameRate desired framerate of animation. Set to 1 fps if param is <= 0.
+   * @throws IllegalArgumentException if model/view are null.
    */
-  public ControllerText(IAnimationModel model, TextBasedView view, int frameRate) {
+  public ControllerText(IAnimationModel model, TextBasedView view, int frameRate)
+                        throws IllegalArgumentException {
+    if (model == null || view == null) {
+      throw new IllegalArgumentException("model and view cannot be null.");
+    }
+
+    if (frameRate <= 0) {
+      frameRate = 1;
+    }
 
     this.model = model;
     this.view = view;

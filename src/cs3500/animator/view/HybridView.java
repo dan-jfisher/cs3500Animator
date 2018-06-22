@@ -1,10 +1,12 @@
 package cs3500.animator.view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JSlider;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -15,14 +17,14 @@ import cs3500.animator.controller.IListener;
  * animation to change settings regarding the animation, such as speed, looping, restart, and
  * start/stop.
  */
-public class InteractiveViewGUI extends ViewGUI implements ActionListener, ChangeListener {
-  private JSlider slider;
-  private JButton stopStartButton;
-  private JButton restartButton;
-  private JButton toggleLoopingButton;
-  private JButton exportButton;
+public class HybridView extends ViewGUI implements ActionListener, ChangeListener {
+  protected JSlider slider;
+  protected JButton stopStartButton;
+  protected JButton restartButton;
+  protected JButton toggleLoopingButton;
+  protected JButton exportButton;
 
-  private IListener listener;
+  protected IListener listener;
 
   private final int FPS_MIN = 1;
   private final int FPS_MAX = 60;
@@ -32,7 +34,7 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
    * Creates a new InteractiveViewGUI object. This type of view can display animations whose
    * settings can be adjusted by the client.
    */
-  public InteractiveViewGUI() {
+  public HybridView() {
     super();
 
     JPanel panel = new JPanel();

@@ -21,8 +21,8 @@ public interface IListener {
 
   /**
    * This fires when an event that requires a variable value happens (i.e. change speed).
-   * @param type
-   * @param value
+   * @param type type of gui event.
+   * @param value value that the setting will be changed to.
    */
   void change(GuiEventType type, int value);
 }

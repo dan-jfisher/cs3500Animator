@@ -18,7 +18,7 @@ public class ViewFactory {
     } else if (type.equalsIgnoreCase("gui")) {
       return new ViewGUI();
     } else if (type.equalsIgnoreCase("hybrid")) {
-      return new InteractiveViewGUI();
+      return new HybridView();
     } else {
       throw new IllegalArgumentException("Invalid view type");
     }
