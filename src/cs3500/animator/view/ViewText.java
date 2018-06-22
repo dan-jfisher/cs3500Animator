@@ -105,14 +105,4 @@ public class ViewText extends TextBasedView {
                                       double yRadius, Color color) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
-
-  @Override
-  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
-    return null;
-  }
-
-  @Override
-  public String printSVGFromShapeList() {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
-  }
 }
