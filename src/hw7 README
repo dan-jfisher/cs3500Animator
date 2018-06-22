@@ -6,7 +6,10 @@ The following changes were made to our code from the previous assignment:
 
 
 The following classes were added:
-    -IGuiBasedView
-    -InteractiveViewGUI
-    -HybridController
-    -InteractiveController
+    - IGuiBasedView
+    - InteractiveViewGUI
+    - HybridController
+    - InteractiveController
+    - Added looping functionality to ViewGUI
+    - set the Timer to be a member variable of ViewGUI so that it can be seen by classes that
+    extend it
