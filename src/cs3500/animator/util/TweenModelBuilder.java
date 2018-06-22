@@ -5,7 +5,6 @@ package cs3500.animator.util;
  * calls as it reads a file containing the cs3500.animator.model.animation and builds a model It is
  * parameterized over the actual model type.
  */
-
 public interface TweenModelBuilder<T> {
 
   /**

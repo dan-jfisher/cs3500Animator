@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.text.DecimalFormat;
 
 /**
- * This implementation of shape has a width and a height.
+ * A Rectangle is an object with 2 pairs of equal-length sides with only 90-degree angles.
+ * This rectangle is used for creating animations.
  */
 public class Rectangle extends AbstractShape {
 

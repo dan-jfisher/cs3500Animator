@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.text.DecimalFormat;
 
 /**
- * This implementation of Shpae has an xRadius and a yRadius.
+ * An ellipse has a xRadius and a yRadius. Ellipses are a type of shape supported in our animation
+ * implementation.
  */
 public class Ellipse extends AbstractShape {
   protected double xRadius;

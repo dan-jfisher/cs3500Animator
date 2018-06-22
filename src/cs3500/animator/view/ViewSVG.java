@@ -15,7 +15,7 @@ import cs3500.animator.util.IDrawableShape;
 public class ViewSVG extends TextBasedView {
 
   /**
-   * This is the defualt constructor.
+   * This is the default constructor.
    */
   public ViewSVG() {
     super();
@@ -84,7 +84,7 @@ public class ViewSVG extends TextBasedView {
    * @param xRadius the horizontal radius of the ellipse.
    * @param yRadius the vertical radius of the ellipse.
    * @param color the color of the ellipse.
-   * @return
+   * @return String of description of ellipse.
    */
   public String getEllipseDescription(double x, double y, double xRadius, double yRadius,
                                       Color color) {

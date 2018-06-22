@@ -19,7 +19,8 @@ public abstract class TextBasedView implements IView {
   Writer ap;
 
   /**
-   * This is the default constructor.
+   * This is the default constructor for Text-Based views. Instantiates arrayList which stores
+   * the shapes.
    */
   public TextBasedView() {
     shapes = new ArrayList<>();
