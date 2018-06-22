@@ -1,13 +1,14 @@
 package cs3500.animator.view;
 
-import cs3500.animator.controller.Listener;
-
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import cs3500.animator.controller.IListener;
 
 /**
  *
@@ -19,7 +20,7 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
   private JButton toggleLoopingButton;
   private JButton exportButton;
 
-  private Listener listener;
+  private IListener listener;
 
   private final int FPS_MIN = 1;
   private final int FPS_MAX = 60;
@@ -48,10 +49,10 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     exportButton = new JButton("export");
     exportButton.setActionCommand("export button");
     panel.add(exportButton);
-    this.add(panel);
+    this.add(panel, BorderLayout.EAST);
   }
 
-  public void setActionListener(Listener listener) {
+  public void setActionListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
     }
@@ -64,7 +65,7 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     this.listener = listener;
   }
 
-  public void setChangeListener(Listener listener) {
+  public void setChangeListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
     }
@@ -74,11 +75,11 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     this.listener = listener;
   }
 
-  public void fireAction(Listener.GuiEventType type) {
+  public void fireAction(IListener.GuiEventType type) {
     listener.action(type);
   }
 
-  public void fireChange(Listener.GuiEventType type, int value) {
+  public void fireChange(IListener.GuiEventType type, int value) {
     listener.change(type, value);
   }
 
@@ -87,13 +88,13 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     String action = actionEvent.getActionCommand();
 
     if(action.equalsIgnoreCase("start stop button")) {
-      fireAction(Listener.GuiEventType.START_STOP);
+      fireAction(IListener.GuiEventType.START_STOP);
     } else if (action.equalsIgnoreCase("restart button")) {
-      fireAction(Listener.GuiEventType.RESTART);
+      fireAction(IListener.GuiEventType.RESTART);
     } else if (action.equalsIgnoreCase("toggle looping button")) {
-      fireAction(Listener.GuiEventType.TOGGLE_LOOPING);
+      fireAction(IListener.GuiEventType.TOGGLE_LOOPING);
     } else if (action.equalsIgnoreCase("export button")) {
-      fireAction(Listener.GuiEventType.EXPORT);
+      fireAction(IListener.GuiEventType.EXPORT);
     }
   }
 
@@ -102,7 +103,7 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
     JSlider source = (JSlider)changeEvent.getSource();
     if (!source.getValueIsAdjusting()) {
       int value = (int)source.getValue();
-      fireChange(Listener.GuiEventType.CHANGE_SPEED, value);
+      fireChange(IListener.GuiEventType.CHANGE_SPEED, value);
     }
   }
 }
