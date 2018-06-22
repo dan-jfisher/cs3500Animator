@@ -107,11 +107,6 @@ public class ViewText extends TextBasedView {
   }
 
   @Override
-  public void setFilename(String filename) {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
-  }
-
-  @Override
   public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
     return null;
   }
