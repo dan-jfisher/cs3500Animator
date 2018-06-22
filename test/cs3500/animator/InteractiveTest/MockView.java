@@ -101,7 +101,7 @@ public class MockView extends HybridView {
       int value = (int)source.getValue();
       fireChange(IListener.GuiEventType.CHANGE_SPEED, value);
       try {
-        out.append("Speed Changed to \n" + value);
+        out.append("Speed changed to " + value + "\n");
       } catch (IOException e) {
         e.printStackTrace();
       }

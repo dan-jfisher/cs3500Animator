@@ -54,7 +54,7 @@ public class InteractiveController extends ControllerGUI implements IListener {
   @Override
   public void change(GuiEventType type, int value) {
     if (type.equals(GuiEventType.CHANGE_SPEED)) {
-
+      frameRate = value;
       int delay = 1000 / frameRate;
       timer.setDelay(delay);
     } else {

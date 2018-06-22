@@ -7,25 +7,28 @@ import cs3500.animator.model.animation.IAnimationModel;
 import cs3500.animator.view.HybridView;
 
 /**
- *
+ * DummyController has basic outputs to prove correct functions are being called at right times.
  */
 public class DummyController extends HybridController {
 
   private Appendable output;
 
   /**
-   * Constructor for the GUI controller. Reads data from model and tells the view what to print.
+   * Constructor for a mock controller. Reads data from model and tells the view what to print.
    *
    * @param model           model to be used to get cs3500.animator.model.animation information.
    * @param hybridView View to display cs3500.animator.model.animation in a GUI.
-   * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public DummyController(IAnimationModel model, HybridView hybridView,
-                         int frameRatePerSec, Appendable output) {
-    this.guiView = hybridView;
-    this.model = model;
-    this.frameRate = frameRatePerSec;
+  public DummyController(IAnimationModel model, HybridView hybridView, Appendable output) {
+    this.hybridView = hybridView;
+
+    if (model != null) {
+      this.model = model;
+    }
+
     this.output = output;
+    setAsActionListener();
+    setAsChangeListener();
   }
 
   /**
@@ -36,7 +39,7 @@ public class DummyController extends HybridController {
     return output;
   }
 
-   public void setAsActionListener() {
+  public void setAsActionListener() {
     hybridView.setActionListener(this);
   }
 
@@ -48,18 +51,15 @@ public class DummyController extends HybridController {
   public void action(GuiEventType type) {
     recentEvent = type;
     if(type.equals(GuiEventType.START_STOP)) {
-      if (timer.isRunning()) {
-        try {
-          output.append("stopping");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      } else {
-        try {
-          output.append("starting");
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+      try {
+        output.append("stopping");
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      try {
+        output.append("starting");
+      } catch (IOException e) {
+        e.printStackTrace();
       }
     } else if (type.equals(GuiEventType.RESTART)) {
       try {
