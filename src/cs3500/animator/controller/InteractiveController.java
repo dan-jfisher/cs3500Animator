@@ -13,7 +13,9 @@ import cs3500.animator.view.IGuiView;
 import cs3500.animator.view.InteractiveViewGUI;
 
 public class InteractiveController extends ControllerGUI implements Listener {
+
   InteractiveViewGUI interactiveView;
+
   /**
    * Constructor for the GUI controller. Reads data from model and tells the view what to print.
    *

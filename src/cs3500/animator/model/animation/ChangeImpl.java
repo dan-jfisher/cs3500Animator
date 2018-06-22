@@ -9,7 +9,6 @@ public class ChangeImpl extends AbstractChange {
 
   /**
    * This is the constructor for the ChangeImpl class.
-   *
    * @param id    the id of the shape.
    * @param start the frame when the shape appears.
    * @param end   the frame when the shape disappears.

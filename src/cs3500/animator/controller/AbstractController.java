@@ -3,7 +3,8 @@ package cs3500.animator.controller;
 import cs3500.animator.model.animation.IAnimationModel;
 
 /**
- * Abstract controller class containing identical properties/methods for all controllers.
+ * Abstract controller class containing identical properties/methods for all animation
+ * controllers.
  */
 public abstract class AbstractController implements IController {
 

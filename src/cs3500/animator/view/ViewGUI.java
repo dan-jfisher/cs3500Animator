@@ -13,13 +13,14 @@ import cs3500.animator.util.DrawableGUIShape;
 
 /**
  * This class serves as both an IView object and a JFrame for cs3500.animator.model.animation.
+ * This will serve as a visual GUI display for animations.
  */
 public class ViewGUI extends JFrame implements IGuiView {
   private ShapePanel panel;
   private ViewType viewType;
 
   /**
-   * This is the default constructor.
+   * This is the default constructor. Creates a new GUI view.
    */
   public ViewGUI() {
     super();
