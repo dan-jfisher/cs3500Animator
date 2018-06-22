@@ -105,9 +105,4 @@ public class ViewText extends TextBasedView {
                                       double yRadius, Color color) {
     throw new UnsupportedOperationException("ViewText object does not support this function");
   }
-
-  @Override
-  public void setFilename(String filename) {
-    throw new UnsupportedOperationException("ViewText object does not support this function");
-  }
 }

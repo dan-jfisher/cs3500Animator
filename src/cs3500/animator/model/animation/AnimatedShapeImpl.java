@@ -243,13 +243,7 @@ public class AnimatedShapeImpl implements IAnimatedShape, Serializable {
    * @return the Shape object at that time.
    */
   protected IShape getLastValidShape(int time) {
-    /*if (timeline.get(time) == null) {
-      timeline.put(time, getLastValidShape(time - 1).clone());
-    }
-
-    return timeline.get(time);*/
-
-    for (int t = time; t >= 0; t = t-1) {
+    for (Integer t = time; t >= 0; t = t-1) {
       if (timeline.get(t) != null) {
         return timeline.get(t);
       }
