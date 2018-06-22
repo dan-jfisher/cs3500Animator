@@ -1,10 +1,6 @@
 package cs3500.animator.view;
 
-import java.util.ArrayList;
 import java.awt.Color;
-
-import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
 /**
  * This is the view interface for an animation. Different views displays animations in various
@@ -19,54 +15,43 @@ public interface IView {
   void display();
 
   /**
-   *
-   * @return
+   * Returns the type of view this object is.
+   * @return type of view as a ViewType.
    */
   ViewType getViewType();
 
   /**
-   *
-   * @param x
-   * @param y
-   * @param width
-   * @param height
-   * @param color
-   * @return
+   * Gets description of rectangle in the view to print into file or onto screen, depending
+   * on view type.
+   * @param x x-coordinate of rectangle.
+   * @param y y-coordinate of rectangle.
+   * @param width width of rectangle.
+   * @param height height of rectangle.
+   * @param color color of rectangle as a awt.Color object.
+   * @return String representing description of the rectangle.
    */
   String getRectDescription(double x, double y, double width, double height, Color color);
 
   /**
-   *
-   * @param x
-   * @param y
-   * @param xRadius
-   * @param yRadius
-   * @param color
-   * @return
+   * Gets description of ellipse in the view to print into file or onto screen, depending
+   * on view type
+   * @param x x-coordinate of ellipse.
+   * @param y y-coordinate of ellipse.
+   * @param xRadius x-radius of ellipse.
+   * @param yRadius y-radius of ellipse.
+   * @param color color of ellipse as a awt.Color object.
+   * @return String representing description of the ellipse.
    */
   String getEllipseDescription(double x, double y, double xRadius, double yRadius, Color color);
 
   /**
-   *
-   * @param filename
+   * Sets file for animation output equal to filename.
+   * @param filename file path of desired output location.
    */
   void setFilename(String filename);
 
   /**
-   *
-   * @param s
-   * @return
-   */
-  String printStartEndTimeSVGAnimations(DrawableTextShape s);
-
-  /**
-   *
-   * @return
-   */
-  String printSVGFromShapeList();
-
-  /**
-   *
+   * ViewType is a type of view. One of: GUI, SVG, or TEXT.
    */
   enum ViewType { GUI, SVG, TEXT}
 }

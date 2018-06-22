@@ -7,6 +7,9 @@ import cs3500.animator.view.InteractiveViewGUI;
 import cs3500.animator.view.TextBasedView;
 import cs3500.animator.view.ViewSVG;
 
+/**
+ * Hybrid Controller is an interacted controller than the user can interface with.
+ */
 public class HybridController extends InteractiveController {
   private IController fileOutputController;
   private String outputFile;

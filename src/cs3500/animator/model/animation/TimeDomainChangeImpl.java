@@ -6,20 +6,6 @@ package cs3500.animator.model.animation;
 public class TimeDomainChangeImpl extends AbstractChange {
 
   /**
-   * Constructs a change in time domain with times precalculated before they're passed.
-   * @param id id of shape to be modified.
-   * @param start start time in seconds of when the change begins.
-   * @param end start time in seconds of when the change is finished.
-   * @param type type of change.
-   */
-  public TimeDomainChangeImpl(String id, float start, float end, ChangeType type) {
-
-    super(id, type);
-    this.start = start;
-    this.end = end;
-  }
-
-  /**
    * This constructor allows frame based IChange instances to be converted into
    * time domain IChanges.
    * @param frameBasedChange This is the change to be converted.

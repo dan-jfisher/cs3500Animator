@@ -16,10 +16,18 @@ import cs3500.animator.model.shapes.Point2D;
 import cs3500.animator.model.shapes.Rectangle;
 import cs3500.animator.util.TweenModelBuilder;
 
+/**
+ * This class implements IAnimationModel. This is the model for animations and stores information
+ * on which shapes will be in the animation and what changes they may undergo.
+ */
 public class AnimationModelImpl implements IAnimationModel, Serializable {
   LinkedHashMap<String, IAnimatedShape> shapes;
   List<IChange> changes;
 
+  /**
+   * Default constructor creates a new model and instantiates private fields to store
+   * the changes and shapes of the animation.
+   */
   public AnimationModelImpl() {
     changes = new ArrayList<>();
     shapes = new LinkedHashMap<>();

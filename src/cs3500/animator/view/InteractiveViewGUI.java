@@ -10,6 +10,11 @@ import javax.swing.event.ChangeListener;
 
 import cs3500.animator.controller.IListener;
 
+/**
+ * InteractiveViewGUI is a ViewGUI that also has the ability for the end user watching the
+ * animation to change settings regarding the animation, such as speed, looping, restart, and
+ * start/stop.
+ */
 public class InteractiveViewGUI extends ViewGUI implements ActionListener, ChangeListener {
   private JSlider slider;
   private JButton stopStartButton;
@@ -23,6 +28,10 @@ public class InteractiveViewGUI extends ViewGUI implements ActionListener, Chang
   private final int FPS_MAX = 60;
   private final int FPS_INIT = 30;
 
+  /**
+   * Creates a new InteractiveViewGUI object. This type of view can display animations whose
+   * settings can be adjusted by the client.
+   */
   public InteractiveViewGUI() {
     super();
 

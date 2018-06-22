@@ -15,12 +15,46 @@ import cs3500.animator.util.IDrawableShape;
 public class ViewSVG extends TextBasedView {
 
   /**
-   * This is the defualt constructor.
+   * This is the default constructor.
    */
   public ViewSVG() {
     super();
     this.ap = null;
     viewType = ViewType.SVG;
+  }
+
+  @Override
+  public void display() {
+    try {
+      ap.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
+              "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
+
+      ap.append(printSVGFromShapeList());
+
+      ap.append("\n</svg>");
+
+      ap.close();
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Could not open file");
+    }
+  }
+
+   /**
+   * This method adds transformations for animating the appearance and disappearance of a shape.
+   * This must be done for every shape.
+   * @param s The shape being animated
+   * @return the svg description of the appearance/disappearance cs3500.animator.model.animation.
+   */
+  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
+    stringBuilder.append("to=\"1\"\nbegin=\"" + s.getStartTime() + "s\"/>\n");
+
+    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
+    stringBuilder.append("to=\"0\"\nbegin=\"" + s.getEndTime() + "s\"/>");
+
+    return stringBuilder.toString();
   }
 
   /**
@@ -50,7 +84,7 @@ public class ViewSVG extends TextBasedView {
    * @param xRadius the horizontal radius of the ellipse.
    * @param yRadius the vertical radius of the ellipse.
    * @param color the color of the ellipse.
-   * @return
+   * @return String of description of ellipse.
    */
   public String getEllipseDescription(double x, double y, double xRadius, double yRadius,
                                       Color color) {
@@ -62,26 +96,6 @@ public class ViewSVG extends TextBasedView {
             + " fill-opacity=\"0\">");
 
     return strBuilder.toString();
-  }
-
-
-  /**
-   * This method adds transformations for animating the appearance and disappearance of a shape.
-   * This must be done for every shape.
-   * @param s The shape being animated
-   * @return the svg description of the appearance/disappearance cs3500.animator.model.animation.
-   */
-  @Override
-  public String printStartEndTimeSVGAnimations(DrawableTextShape s) {
-    StringBuilder stringBuilder = new StringBuilder();
-
-    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
-    stringBuilder.append("to=\"1\"\nbegin=\"" + s.getStartTime() + "s\"/>\n");
-
-    stringBuilder.append("<set attributeName=\"fill-opacity\" attributeType=\"XML\"\n");
-    stringBuilder.append("to=\"0\"\nbegin=\"" + s.getEndTime() + "s\"/>");
-
-    return stringBuilder.toString();
   }
 
   /**
@@ -188,19 +202,5 @@ public class ViewSVG extends TextBasedView {
     return strBuilder.toString();
   }
 
-  @Override
-  public void display() {
-    try {
-      ap.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
-              "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
 
-      ap.append(printSVGFromShapeList());
-
-      ap.append("\n</svg>");
-
-      ap.close();
-    } catch (IOException e) {
-      throw new IllegalArgumentException("Could not open file");
-    }
-  }
 }

@@ -8,7 +8,7 @@ import cs3500.animator.view.ViewGUI;
 
 
 /**
- * This class is for creating instances of {@link IController}.
+ * This class is for creating instances of {@link IController} for animations.
  */
 public class ControllerFactory {
 
@@ -19,7 +19,7 @@ public class ControllerFactory {
    * @param model the Animation model.
    * @param fps the speed of the cs3500.animator.model.animation in frames per second.
    * @param outfile the output file location.  This is only used for view types text and svg
-   * @return
+   * @return a new, configured controller.
    */
   public static IController getController(String type, IView view, IAnimationModel model, int fps,
                                           String outfile) {

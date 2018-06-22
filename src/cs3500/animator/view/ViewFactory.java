@@ -6,7 +6,7 @@ package cs3500.animator.view;
 public class ViewFactory {
 
   /**
-   * THis method constructs a view based on the type provied. It accepts svg, text, or gui.
+   * This method constructs a view based on the type provided. It accepts svg, text, or gui.
    * @param type the view type.
    * @return the new {@link IView} object.
    */

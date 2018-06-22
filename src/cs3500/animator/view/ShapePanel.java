@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
@@ -17,7 +16,8 @@ public class ShapePanel extends JPanel {
   private ArrayList<DrawableGUIShape> shapes;
 
   /**
-   * This is the default constructor.
+   * This is the default constructor. Instantiates shapes arrayList and makes panel
+   * size of 1000,1000.
    */
   public ShapePanel() {
     super();

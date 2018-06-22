@@ -1,3 +1,15 @@
 The following changes were made to our code from the previous assignment:
     - Added functions of all views to IView and make unsupported functions throw
     UnsupportedOperationException's.
+    - Changed model to store shapes in LinkedHashMap rather than HashMap since draw order
+    wasn't conserved in HashMap.
+
+
+The following classes were added:
+    - IGuiBasedView
+    - InteractiveViewGUI
+    - HybridController
+    - InteractiveController
+    - Added looping functionality to ViewGUI
+    - set the Timer to be a member variable of ViewGUI so that it can be seen by classes that
+    extend it
