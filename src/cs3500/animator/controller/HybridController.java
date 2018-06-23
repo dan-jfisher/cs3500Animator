@@ -18,7 +18,8 @@ public class HybridController extends InteractiveController {
    * @param hybridView View to display cs3500.animator.model.animation in a GUI.
    * @param frameRatePerSec frame rate at which the cs3500.animator.model.animation will run.
    */
-  public HybridController(IAnimationModel model, HybridView hybridView, int frameRatePerSec, String outputFile) {
+  public HybridController(IAnimationModel model, HybridView hybridView,
+                          int frameRatePerSec, String outputFile) {
     super(model, hybridView, frameRatePerSec);
     this.outputFile = outputFile;
   }
@@ -27,6 +28,7 @@ public class HybridController extends InteractiveController {
    * Protected default constructor allows child classes to have their own constructors.
    */
   protected HybridController() {
+    //Empty constructor for child class implementations.
   }
 
   @Override
@@ -35,7 +37,8 @@ public class HybridController extends InteractiveController {
 
     if (type.equals(GuiEventType.EXPORT)) {
       ViewSVG v = new ViewSVG();
-      fileOutputController = ControllerFactory.getController("svg", v, model, frameRate, outputFile);
+      fileOutputController = ControllerFactory.getController("svg", v, model,
+              frameRate, outputFile);
       fileOutputController.run();
     }
   }

@@ -48,7 +48,9 @@ public class ControllerGUI extends AbstractController {
   /**
    * Protected default constructor so child classes can have their own constructors.
    */
-  protected ControllerGUI() {}
+  protected ControllerGUI() {
+    //Empty for child class implementations.
+  }
 
   @Override
   public void run() {

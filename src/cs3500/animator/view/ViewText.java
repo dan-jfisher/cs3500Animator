@@ -9,7 +9,6 @@ import java.awt.Color;
 import cs3500.animator.model.animation.IChange;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
 /**
  * This is the view for outputting a text description of the cs3500.animator.model.animation.

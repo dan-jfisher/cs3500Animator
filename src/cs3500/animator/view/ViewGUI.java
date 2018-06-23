@@ -1,6 +1,5 @@
 package cs3500.animator.view;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import cs3500.animator.util.DrawableTextShape;
 import cs3500.animator.util.DrawableGUIShape;
 
 /**
@@ -71,7 +69,8 @@ public class ViewGUI extends JFrame implements IGuiView {
   }
 
   @Override
-  public String getEllipseDescription(double x, double y, double xRadius, double yRadius, Color color) {
+  public String getEllipseDescription(double x, double y, double xRadius,
+                                      double yRadius, Color color) {
     throw new UnsupportedOperationException("ViewGUI object does not support this function");
   }
 

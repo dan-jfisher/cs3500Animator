@@ -6,7 +6,6 @@ import java.io.IOException;
 import cs3500.animator.model.animation.IChange;
 import cs3500.animator.model.shapes.ShapeType;
 import cs3500.animator.util.DrawableTextShape;
-import cs3500.animator.util.IDrawableShape;
 
 /**
  * This class uses a list of {@link DrawableTextShape}s to create an svg document which can be
@@ -26,8 +25,8 @@ public class ViewSVG extends TextBasedView {
   @Override
   public void display() {
     try {
-      ap.append("<svg xmlns=\"http://www.w3.org/2000/svg\" " +
-              "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
+      ap.append("<svg xmlns=\"http://www.w3.org/2000/svg\" "
+              + "xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n");
 
       ap.append(printSVGFromShapeList());
 
@@ -39,8 +38,8 @@ public class ViewSVG extends TextBasedView {
     }
   }
 
-   /**
-   * This method adds transformations for animating the appearance and disappearance of a shape.
+  /**
+   * * This method adds transformations for animating the appearance and disappearance of a shape.
    * This must be done for every shape.
    * @param s The shape being animated
    * @return the svg description of the appearance/disappearance cs3500.animator.model.animation.

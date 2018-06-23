@@ -1,4 +1,4 @@
-package cs3500.animator.InteractiveTest;
+package cs3500.animator.interactivetests;
 
 import cs3500.animator.view.HybridView;
 import cs3500.animator.controller.IListener;
@@ -28,6 +28,10 @@ public class MockView extends HybridView {
     out = output;
   }
 
+  /**
+   * Sets new listener for a change (i.e. speed).
+   * @param listener new listener that will be listening for the change.
+   */
   public void setActionListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
@@ -41,6 +45,10 @@ public class MockView extends HybridView {
     this.listener = listener;
   }
 
+  /**
+   * Sets new listener for a change (i.e. speed).
+   * @param listener new listener that will be listening for the change.
+   */
   public void setChangeListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
@@ -63,7 +71,7 @@ public class MockView extends HybridView {
   public void actionPerformed(ActionEvent actionEvent) {
     String action = actionEvent.getActionCommand();
 
-    if(action.equalsIgnoreCase("start stop button")) {
+    if (action.equalsIgnoreCase("start stop button")) {
       fireAction(IListener.GuiEventType.START_STOP);
       try {
         out.append("start/stop button clicked\n");

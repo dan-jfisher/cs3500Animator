@@ -56,6 +56,10 @@ public class HybridView extends ViewGUI implements ActionListener, ChangeListene
     this.add(panel, BorderLayout.EAST);
   }
 
+  /**
+   * Adds a new listener to each event object.
+   * @param listener new listener for the events.
+   */
   public void setActionListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
@@ -69,6 +73,10 @@ public class HybridView extends ViewGUI implements ActionListener, ChangeListene
     this.listener = listener;
   }
 
+  /**
+   * Sets new listener for a change (i.e. speed).
+   * @param listener new listener that will be listening for the change.
+   */
   public void setChangeListener(IListener listener) {
     if (listener == null) {
       throw new IllegalArgumentException("Invalid action listener");
@@ -91,7 +99,7 @@ public class HybridView extends ViewGUI implements ActionListener, ChangeListene
   public void actionPerformed(ActionEvent actionEvent) {
     String action = actionEvent.getActionCommand();
 
-    if(action.equalsIgnoreCase("start stop button")) {
+    if (action.equalsIgnoreCase("start stop button")) {
       fireAction(IListener.GuiEventType.START_STOP);
     } else if (action.equalsIgnoreCase("restart button")) {
       fireAction(IListener.GuiEventType.RESTART);

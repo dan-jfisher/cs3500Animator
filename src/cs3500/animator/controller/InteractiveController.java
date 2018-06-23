@@ -24,7 +24,9 @@ public class InteractiveController extends ControllerGUI implements IListener {
     setAsChangeListener();
   }
 
-  protected InteractiveController() {}
+  protected InteractiveController() {
+    //Empty for child class implementations.
+  }
 
   public void setAsActionListener() {
     hybridView.setActionListener(this);
@@ -37,7 +39,7 @@ public class InteractiveController extends ControllerGUI implements IListener {
   @Override
   public void action(GuiEventType type) {
     recentEvent = type;
-    if(type.equals(GuiEventType.START_STOP)) {
+    if (type.equals(GuiEventType.START_STOP)) {
       if (timer.isRunning()) {
         timer.stop();
       } else {

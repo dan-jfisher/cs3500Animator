@@ -7,7 +7,7 @@ package cs3500.animator.controller;
 public interface IListener {
 
   /**
-   * Enumeration of types of Gui events
+   * Enumeration of types of Gui events.
    */
   enum GuiEventType { RESTART, CHANGE_SPEED, START_STOP, TOGGLE_LOOPING, EXPORT }
 

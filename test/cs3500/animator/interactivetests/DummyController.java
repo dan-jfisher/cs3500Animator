@@ -1,4 +1,4 @@
-package cs3500.animator.InteractiveTest;
+package cs3500.animator.interactivetests;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class DummyController extends HybridController {
   /**
    * Constructor for a mock controller. Reads data from model and tells the view what to print.
    *
-   * @param model           model to be used to get cs3500.animator.model.animation information.
+   * @param model      model to be used to get cs3500.animator.model.animation information.
    * @param hybridView View to display cs3500.animator.model.animation in a GUI.
    */
   public DummyController(IAnimationModel model, HybridView hybridView, Appendable output) {
@@ -50,7 +50,7 @@ public class DummyController extends HybridController {
   @Override
   public void action(GuiEventType type) {
     recentEvent = type;
-    if(type.equals(GuiEventType.START_STOP)) {
+    if (type.equals(GuiEventType.START_STOP)) {
       try {
         output.append("stopping");
       } catch (IOException e) {

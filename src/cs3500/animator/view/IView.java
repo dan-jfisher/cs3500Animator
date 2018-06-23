@@ -4,7 +4,7 @@ import java.awt.Color;
 
 /**
  * This is the view interface for an animation. Different views displays animations in various
- * ways, like describing what the shapes do (text) and displaying the actual animation (GUI, SVG)
+ * ways, like describing what the shapes do (text) and displaying the actual animation (GUI, SVG).
  */
 public interface IView {
 
@@ -34,7 +34,7 @@ public interface IView {
 
   /**
    * Gets description of ellipse in the view to print into file or onto screen, depending
-   * on view type
+   * on view type.
    * @param x x-coordinate of ellipse.
    * @param y y-coordinate of ellipse.
    * @param xRadius x-radius of ellipse.
@@ -53,5 +53,5 @@ public interface IView {
   /**
    * ViewType is a type of view. One of: GUI, SVG, or TEXT.
    */
-  enum ViewType { GUI, SVG, TEXT}
+  enum ViewType { GUI, SVG, TEXT }
 }
